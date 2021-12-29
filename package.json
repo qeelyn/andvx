@@ -1,0 +1,23 @@
+{
+  "name": "andvx-qeelyn",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite"
+  },
+  "description": "基于 ant design vue 扩展一些组件",
+  "dependencies": {
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "ant-design-vue": "^3.0.0-beta.4",
+    "dayjs": "^1.10.7",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "vite": "^2.6.4",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
+  }
+}

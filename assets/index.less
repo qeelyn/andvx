@@ -1,0 +1,320 @@
+@import 'ant-design-vue/dist/antd.less';
+
+@primary-color: #1f5fff;
+@link-color   : #1f5fff;
+@info-color   : #00c8ff;
+@success-color: #30c080;
+@warning-color: #ff8030;
+@error-color  : #ff3030;
+
+#qLayout {
+
+    // 主题调整-黑色 
+    .ant-layout-sider-dark {
+
+        .deo-menu {
+            .ant-menu {
+                background: #001529;
+                box-shadow: none
+            }
+        }
+    }
+
+    .ant-layout-dark {
+        background: #001529;
+        height    : 100vh;
+        overflow  : auto;
+
+        .layoutHeader {
+            background: transparent;
+            color     : rgba(255, 255, 255, 0.65);
+
+            .ant-badge {
+                color: rgba(255, 255, 255, 0.65);
+            }
+        }
+
+        .ant-layout-content {
+            margin-top: 0;
+        }
+
+        .qlContent {
+            box-shadow: 0 0 12px #1e202c;
+        }
+    }
+
+    // 主题调整-黑色 end
+
+
+    // 主题调整-白色
+    .ant-layout-sider-light {
+
+        .deo-menu {
+            border-color: #ffffff;
+        }
+
+    }
+
+    .ant-layout-light {
+        height  : 100vh;
+        overflow: auto;
+
+        .layoutHeader {
+            background-color: #ffffff;
+        }
+    }
+
+    // 主题调整-白色end
+
+
+
+    // 主题调整-灰色
+    .ant-layout-sider-gray {
+        background: #f8f8fa;
+
+        .deo-menu {
+            border-color: #f8f8fa;
+            background  : #f8f8fa;
+
+            .ant-menu {
+                background: #f8f8fa;
+
+            }
+        }
+    }
+
+
+    .ant-layout-gray {
+        background: #f8f8fa;
+        height    : 100vh;
+        overflow  : auto;
+
+        .layoutHeader {
+            background-color: transparent;
+        }
+
+        .ant-layout-content {
+            margin-top: 0;
+        }
+
+        .qlContent {
+            box-shadow: 0 0 12px #e0e0e8;
+        }
+    }
+
+    // 主题调整-灰色  end
+
+
+
+    // 主题以外
+
+    .logo {
+        position   : absolute;
+        width      : 100%;
+        height     : 64px;
+        line-height: 64px;
+        text-align : center;
+        z-index    : 10;
+    }
+
+    .layoutHeader {
+        height       : 50px;
+        line-height  : 50px;
+        padding      : 0;
+        margin-bottom: 6px;
+
+        .trigger {
+            font-size  : 18px;
+            line-height: 50px;
+            padding    : 0 24px;
+            cursor     : pointer;
+            transition : color 0.3s;
+        }
+
+        .trigger:hover {
+            color: @primary-color;
+        }
+
+        i {
+            color: #a0a0a8;
+
+            &:hover {
+                color: @primary-color;
+            }
+        }
+    }
+
+    .layoutContent {
+        margin    : 24px 16px;
+        padding   : 0;
+        min-height: 280px;
+    }
+
+    .deo-menu {
+        padding-top: 50px;
+        height     : 100vh;
+        overflow-y : overlay;
+
+        &::-webkit-scrollbar {
+            width : 0;
+            height: 0;
+        }
+
+        .ant-menu-item-icon {
+            font-size: 16px;
+        }
+
+        i {
+            color: #a0a0a8;
+
+        }
+
+    }
+
+
+}
+
+
+// 根据框架情况调整css
+
+// 菜单处理
+
+.ant-menu-inline.ant-menu-root .ant-menu-item,
+.ant-menu-inline.ant-menu-root .ant-menu-submenu-title,
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+    transition: none
+}
+
+.ant-menu-item-selected {
+    border-radius: 40px;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: @primary-color;
+    color           : #ffffff;
+}
+
+.ant-menu-item-active {
+    color: @primary-color;
+}
+
+
+
+
+
+
+.menuItem {
+    i {
+        display: none;
+    }
+
+    &.ant-menu-item-active {
+        i {
+            display: inline-block;
+
+        }
+    }
+}
+
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+    border-right: 0 none;
+}
+
+// 菜单处理  end
+
+// 表格相关处理
+.tableFormHead {
+    .ant-form-item {
+        margin-bottom: 10px;
+    }
+}
+
+.tableFormItem {
+    margin: 0;
+
+    .ant-form-item-explain {
+        display: none;
+    }
+}
+
+// 表格相关处理 end
+
+
+
+
+// 根据框架情况调整css  end
+
+
+// flex
+.flexBox {
+    display: flex;
+
+    .flexAuto {
+        flex: auto;
+    }
+}
+
+// flex end
+
+// 布局
+.qlForm {
+    .ant-picker {
+        width: 100%;
+    }
+}
+
+.qlContent {
+    border-radius: 10px;
+    background   : #ffffff;
+    box-shadow   : 0 0 12px #1e202c;
+
+    .qlContent-head {
+        border-bottom: solid 1px #e0e0e8;
+        padding      : 0 16px;
+        height       : 46px;
+        line-height  : 46px;
+
+        .ant-breadcrumb {
+            font-size  : 16px;
+            height     : 46px;
+            line-height: 46px;
+
+            &>span:last-child {
+                font-weight: 700;
+                color      : #515a6e;
+            }
+        }
+    }
+
+    .qlContent-body {
+        padding: 10px 16px;
+    }
+
+    .ant-descriptions-view {
+        .describe-key {
+            color: #6c7080;
+        }
+    }
+
+    &.ant-collapse {
+        overflow: hidden;
+    }
+}
+
+.qlContent-tabsHeader {
+    position: relative;
+    top     : -46px;
+
+    .ant-tabs-nav {
+        margin-left : 16px;
+        margin-right: 16px;
+    }
+}
+
+// 提供一些布局
