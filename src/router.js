@@ -20,7 +20,7 @@ const route = createRouter({
                     children: [
                         {
                             path: "",
-                            meta: { authentication: true, title: '首页' },
+                            meta: { title: '首页' },
                             component: () => import("./views/home.vue")
                         }
                     ]
@@ -30,11 +30,11 @@ const route = createRouter({
                     component: Layout,
                     children: [{
                         path: 'header',
-                        meta: { identity: true, title: '表格自定义头部', },
+                        meta: { title: '表格自定义头部', },
                         component: () => import('./views/table/header.vue')
                     }, {
                         path: 'form',
-                        meta: { identity: true, title: '表格编辑', },
+                        meta: { title: '表格编辑', },
                         component: () => import('./views/table/form.vue')
                     }]
                 },
@@ -43,17 +43,12 @@ const route = createRouter({
                     component: Layout,
                     children: [{
                         path: 'index',
-                        meta: { identity: true, title: '表单', },
+                        meta: { title: '表单', },
                         component: () => import('./views/form/index.vue')
-                    }]
-                },
-                {
-                    path: 'search',
-                    component: Layout,
-                    children: [{
-                        path: 'index',
-                        meta: { identity: true, title: '搜索', },
-                        component: () => import('./views/search/index.vue')
+                    }, {
+                        path: 'cascader',
+                        meta: { title: '级联选择', },
+                        component: () => import('./views/form/cascader.vue')
                     }]
                 },
                 {
@@ -75,7 +70,8 @@ route.beforeEach((to, from, next) => {
         next();
     } else {
         // 不在路由里
-        location.href = to.href
+        // location.href = to.href
+        next('/404');
     }
 })
 

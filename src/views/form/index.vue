@@ -4,82 +4,27 @@
             <Breadcrumb />
         </div>
         <div class="qlContent-body">
-            <a-cascader
-                v-model:value="data"
-                :options="options"
-                :load-data="loadData"
-                placeholder="Please select"
-            />
-            {{ data }}
+            <p>一个认为是目前标准表单提交示例:</p>
+            <p>1.在未修改数据的时候不允许提交</p>
+            <p>2.有数据修改时候有小红点提醒</p>
+            <p>3.表单有变更但未保存,在离开页面或者关闭浏览器的时候需拦截提醒</p>
+            <p>4.前端验证提交后,后端再保存数据前,验证字段异常返回给前端的展示处理</p>
+            <StandardFrom ref="standardFromRef" />
         </div>
     </div>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
 import Breadcrumb from "../../../components/breadcrumb";
+import leavePageDetection from "../../../mixins/leavePageDetection";
+import StandardFrom from "./standard.vue";
 
 export default defineComponent({
-    components: {Breadcrumb},
+    components: { Breadcrumb, StandardFrom },
+    mixins: [leavePageDetection],
     setup() {
-        const data = ref(["1", "1-1", "1-1-1"]),
-            options = ref([
-                {
-                    zIndex: 0,
-                    value: '1',
-                    label: 'Zhejiang1',
-                    isLeaf: false,
-                    loading: false,
-                }
-            ]);
-        const loadData = (selectedOptions, callback) => {
-            const targetOption = selectedOptions[selectedOptions.length - 1];
-            targetOption.loading = true;
-            console.log(selectedOptions.length > 1)
-            setTimeout(() => {
-                targetOption.loading = false;
-                let zIndex = targetOption.zIndex + 1;
-                console.log(zIndex)
-                targetOption.children = [{
-                    zIndex: zIndex,
-                    value: `${targetOption.value}-1`,
-                    label: `${targetOption.label}-下级1`,
-                    isLeaf: zIndex > 1,
-                }, {
-                    zIndex: zIndex,
-                    value: `${targetOption.value}-2`,
-                    label: `${targetOption.label}-下级2`,
-                    isLeaf: zIndex > 1,
-                }];
-                callback && callback()
-            }, 1000);
-
-        }, getInit = (index = 0, ary) => {
-            if (data.value && data.value.length) {
-                let idx = null,
-                    callback = () => {
-                        let nextIndex = index + 1;
-                        if (nextIndex < data.value.length - 1 && idx > -1) {
-                            if (options.value[idx] && options.value[idx].children) {
-                                getInit(nextIndex, options.value[idx].children)
-                            }
-                        }
-                    };
-                if (ary) {
-                    idx = ary.findIndex(item => item.value === data.value[index])
-                    loadData([ary[idx]], callback)
-                } else {
-                    idx = options.value.findIndex(item => item.value === data.value[index]);
-                    loadData([options.value[idx]], callback)
-                }
-            }
-        }
-
-        getInit();
 
         return {
-            options,
-            data,
-            loadData,
         };
     },
 });

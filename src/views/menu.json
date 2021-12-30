@@ -1,0 +1,30 @@
+[
+    {
+        "name": "测试用例",
+        "icon": "iconfont icon-icon_kehuzhanghu2",
+        "children": [
+            {
+                "name": "表格自定义头部",
+                "router": "/table/header"
+            },
+            {
+                "name": "表格编辑",
+                "router": "/table/form"
+            },
+            {
+                "name": "表单示例",
+                "router": "/form/index"
+            }
+        ]
+    },
+    {
+        "name": "一些处理",
+        "icon": "iconfont icon-icon_kehuzhanghu2",
+        "children": [
+            {
+                "name": "Cascader 级联选择",
+                "router": "/form/cascader"
+            }
+        ]
+    }
+]

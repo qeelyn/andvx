@@ -34,6 +34,7 @@ import { defineComponent, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import LayoutHeader from "../../components/layout/header.vue";
 import LayoutMenu from "../../components/layout/menu.vue";
+import menuJson from "./menu.json";
 
 export default defineComponent({
     components: { LayoutHeader, LayoutMenu },
@@ -44,30 +45,7 @@ export default defineComponent({
             backTopTarget = ref(window);
 
         setTimeout(() => {
-            store.dispatch('andvx/setMenuList', [
-                {
-                    "name": "测试用例",
-                    "icon": "iconfont icon-icon_kehuzhanghu2",
-                    "children": [
-                        {
-                            "name": "表格自定义头部",
-                            "router": "/table/header"
-                        },
-                        {
-                            "name": "表格编辑",
-                            "router": "/table/form"
-                        },
-                        {
-                            "name": "表单",
-                            "router": "/form/index"
-                        },
-                        {
-                            "name": "搜索控件",
-                            "router": "/search/index"
-                        }
-                    ]
-                },
-            ])
+            store.dispatch('andvx/setMenuList', menuJson)
         }, 1000)
 
 
