@@ -14,6 +14,10 @@
             {
                 "name": "表单示例",
                 "router": "/form/index"
+            },
+            {
+                "name": "动态表单编辑",
+                "router": "/form/fc-designer"
             }
         ]
     },

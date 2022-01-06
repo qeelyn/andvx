@@ -49,6 +49,10 @@ const route = createRouter({
                         path: 'cascader',
                         meta: { title: '级联选择', },
                         component: () => import('./views/form/cascader.vue')
+                    }, {
+                        path: 'fc-designer',
+                        meta: { title: '动态表单编辑', },
+                        component: () => import('./views/form/fcDesigner.vue')
                     }]
                 },
                 {
