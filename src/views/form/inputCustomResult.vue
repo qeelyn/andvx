@@ -5,10 +5,10 @@
         </div>
         <div class="qlContent-body">
             <p>自定义结果处理:</p>
-            <InputCustomResult
-                v-model="testValue"
-                :valueTypes="['object', 'boolean', 'array', 'number', 'string']"
-            />
+            <a-select ref="select" v-model:value="typeValue">
+                <a-select-option v-for="item in typeList" :value="item">{{ item }}</a-select-option>
+            </a-select>
+            <InputCustomResult v-model="testValue" :valueType="typeValue" />
             <div>
                 值
                 {{ testValue }}
@@ -25,7 +25,9 @@ import InputCustomResult from "../../../components/doFCDesigner/components/Input
 export default defineComponent({
     components: { Breadcrumb, InputCustomResult },
     setup() {
-        const testValue = ref({ a: 1 });
+        const testValue = ref({ a: 1 }),
+            typeValue = ref('object'),
+            typeList = ref(['object', 'boolean', 'array', 'number', 'string']);
 
         const getTypeName = () => {
             let name = '';
@@ -43,6 +45,8 @@ export default defineComponent({
 
         return {
             testValue,
+            typeValue,
+            typeList,
             getTypeName
         };
     },

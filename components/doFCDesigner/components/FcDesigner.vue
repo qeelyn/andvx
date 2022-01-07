@@ -289,11 +289,7 @@ export default defineComponent({
         },
         value: {
           form: {
-            inline: false,
-            hideRequiredAsterisk: false,
-            labelPosition: "top",
-            size: "mini",
-            labelWidth: "125px",
+            layout: "vertical",
           },
           submitBtn: false,
         },

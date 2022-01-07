@@ -1,14 +1,6 @@
 <template>
     <a-input v-model:value="dValue" :placeholder="placeholder" allowClear :disabled="disabled">
-        <template #addonAfter>
-            <a-select
-                v-model:value="resultType"
-                :disabled="disabled || valueTypes.length <= 1"
-                style="width: 100px"
-            >
-                <a-select-option v-for="item in valueTypes" :value="item" :key="item">{{ item }}</a-select-option>
-            </a-select>
-        </template>
+        <template #addonAfter>{{ valueType }}</template>
     </a-input>
 </template>
 <script>
@@ -23,37 +15,21 @@ export default defineComponent({
         modelValue: { default: null },
         disabled: { type: Boolean },
         placeholder: { type: String },
-        // 转换结果值
-        valueTypes: {
-            type: Array,
+        valueType: {
+            type: String,
             required: true,
-            validator(values) {
-                // 现支持类型
-                const supportTypes = ['object', 'boolean', 'array', 'number', 'string'];
-                let isTrue = true
-                if (values.length) {
-                    values.forEach(item => {
-                        isTrue = supportTypes.includes(item);
-                        if (!isTrue) {
-                            return;
-                        }
-                    })
-                } else {
-                    isTrue = false
-                }
-                return isTrue
+            default: 'string',
+            validator(value) {
+                return ['object', 'boolean', 'array', 'number', 'string'].includes(value)
             }
-        }
+        },
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-        const { modelValue, valueTypes } = toRefs(props),
-            resultType = ref(),
+        const { modelValue, valueType } = toRefs(props),
             dValue = ref();
 
-        if (valueTypes.value) {
-            resultType.value = valueTypes.value[0]
-        }
+
 
         const setDValue = () => {
             // 设置展示的值
@@ -73,7 +49,7 @@ export default defineComponent({
             // 设置真实拿到的值
             let value = null, isUpdate = false;
             if (dValue.value) {
-                switch (resultType.value) {
+                switch (valueType.value) {
                     case 'object':
                         try {
                             if (dValue.value[0] === '{') {
@@ -134,7 +110,7 @@ export default defineComponent({
             deep: true
         })
 
-        watch(resultType, () => {
+        watch(valueType, () => {
             resultValue(true)
 
         }, {
@@ -147,7 +123,7 @@ export default defineComponent({
 
         return {
             dValue,
-            resultType
+
         }
     }
 });

@@ -1,5 +1,6 @@
 import FcDesigner from './components/FcDesigner.vue';
 import DragTool from './components/DragTool.vue';
+import InputCustomResult from './components/InputCustomResult.vue';
 // import Fetch from './components/Fetch.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
@@ -8,12 +9,13 @@ import formCreate from '@form-create/ant-design-vue';
 import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
-import { makeOptionsRule } from './utils/index';
+// import { makeOptionsRule } from './utils/index';
 
 formCreate.component('draggable', draggable);
 formCreate.component(DragTool.name, DragTool);
 formCreate.component(DragBox.name, DragBox);
-formCreate.component('Validate', Validate);
+formCreate.component(Validate.name, Validate);
+formCreate.component(InputCustomResult.name, InputCustomResult);
 // formCreate.component('Fetch', Fetch);
 // formCreate.component('FcEditor', FcEditor);
 
