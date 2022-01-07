@@ -147,6 +147,10 @@
 .div-tools + .div-tools {
   margin-top: 5px;
 }
+
+.ant-layout-sider-children {
+  overflow: auto;
+}
 </style>
 
 <template>
@@ -182,7 +186,7 @@
       </div>
     </a-layout-content>
     <a-layout-sider hide-trigger class="_fc-r" width="320" style="background: #ffffff">
-      <div style="height: 100%;">
+      <div style="height: 100%;overflow: auto;">
         <div height="40px" class="_fc-r-tabs">
           <div
             class="_fc-r-tab"

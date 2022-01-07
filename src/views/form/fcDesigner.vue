@@ -4,16 +4,18 @@
             <Breadcrumb />
         </div>
         <div class="qlContent-body">
-            <DoFCDesigner ref="fcDesignerRef">
-                <template #btns>
-                    <a-space>
-                        <a-button type="primary" @click="viewer($refs.fcDesignerRef)">预览</a-button>
-                        <a-button @click="addRuleRule($refs.fcDesignerRef)">添加默认值</a-button>
-                        <a-button @click="consoleLog($refs.fcDesignerRef)">控制台打印</a-button>
-                        <a-button @click="clear($refs.fcDesignerRef)">清空</a-button>
-                    </a-space>
-                </template>
-            </DoFCDesigner>
+            <div style="height: 80vh;">
+                <DoFCDesigner ref="fcDesignerRef">
+                    <template #btns>
+                        <a-space>
+                            <a-button type="primary" @click="viewer($refs.fcDesignerRef)">预览</a-button>
+                            <a-button @click="addRuleRule($refs.fcDesignerRef)">添加默认值</a-button>
+                            <a-button @click="consoleLog($refs.fcDesignerRef)">控制台打印</a-button>
+                            <a-button @click="clear($refs.fcDesignerRef)">清空</a-button>
+                        </a-space>
+                    </template>
+                </DoFCDesigner>
+            </div>
 
             <a-modal v-model:visible="modal.show" :width="800" title="预览">
                 <FormCreate
