@@ -413,10 +413,10 @@ export default defineComponent({
       moveRule.value = null;
       addRule.value = null;
       added.value = false;
-    }, dragStart = (children, evt, isChild) => {
+    }, dragStart = (children, evt) => {
       moveRule.value = children;
       added.value = false;
-    }, dragUnchoose = (children, evt, isChild) => {
+    }, dragUnchoose = (children, evt) => {
       addRule.value = {
         children,
         oldIndex: evt.oldIndex,
@@ -427,9 +427,6 @@ export default defineComponent({
       });
 
       activeRule.value = rule;
-      propsForm.value.api.activeRule = rule;
-      baseForm.value.api.activeRule = rule;
-      validateForm.value.api.activeRule = rule;
 
       propsForm.value.rule = rule.config.config.props();
       const formData = { ...rule.props, formCreateChild: rule.children[0] };
@@ -444,7 +441,7 @@ export default defineComponent({
           });
       });
 
-      propsForm.value.value = formData;
+      propsForm.value.value = deepCopy(formData);
 
       showBaseRule.value = !!rule.field;
 
