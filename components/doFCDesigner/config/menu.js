@@ -8,8 +8,6 @@ import slider from './rule/slider';
 import time from './rule/time';
 import date from './rule/date';
 import rate from './rule/rate';
-// ant 无这个组件
-// import color from './rule/color';
 import row from './rule/row';
 import divider from './rule/divider';
 import cascader from './rule/cascader';
@@ -29,7 +27,7 @@ export default function createMenu() {
             name: 'main',
             title: '表单组件',
             list: [
-                input, number, radio, checkbox, select, _switch, time, date, slider, rate,  cascader, transfer, tree
+                input, number, radio, checkbox, select, _switch, time, date, slider, rate, cascader, transfer, tree
             ]
         },
         {
@@ -43,7 +41,7 @@ export default function createMenu() {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, /*tab,*/ space
+                row, space,  // tab
             ]
         },
     ];

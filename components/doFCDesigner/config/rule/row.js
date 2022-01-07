@@ -1,5 +1,5 @@
 const label = '栅格布局';
-const name = 'a-row';
+const name = 'row';
 
 export default {
     icon: 'icon-row',
@@ -12,7 +12,7 @@ export default {
             children: []
         };
     },
-    children: 'a-col',
+    children: 'col',
     props() {
         return [
             {

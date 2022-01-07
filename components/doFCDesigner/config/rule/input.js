@@ -44,6 +44,7 @@ export default {
                     { label: 'textarea', value: 'textarea' },
                     { label: 'number', value: 'number' },
                     { label: 'password', value: 'password' },
+                    { label: 'hidden', value: 'hidden' },
                 ],
             },
 

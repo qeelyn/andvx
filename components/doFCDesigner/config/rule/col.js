@@ -1,4 +1,4 @@
-const name = 'a-col';
+const name = 'col';
 
 export default {
     name,

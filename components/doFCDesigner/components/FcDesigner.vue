@@ -363,7 +363,6 @@ export default defineComponent({
         props: {
           rule: {
             props: {
-              tag: "a-col",
               group: group === true ? "default" : group,
               ghostClass: "ghost",
               animation: 150,
@@ -783,12 +782,11 @@ export default defineComponent({
       delete option.submitBtn;
       return option;
     }, setRule = (rules) => {
-      const children = loadRule(
+      children.value = loadRule(
         is.String(rules) ? formCreate.parseJson(rules) : rules
       );
-      children.value = children;
       clearActiveRule();
-      dragForm.value.rule = makeDragRule(children);
+      dragForm.value.rule = makeDragRule(children.value);
     }, clearActiveRule = () => {
       activeRule.value = null;
       activeTab.value = "form";
@@ -798,7 +796,6 @@ export default defineComponent({
       delete _.resetBtn;
       form.value.value = _;
     };
-
 
     dragForm.value.rule = makeDragRule(children.value)
     form.value.rule = configForm()
