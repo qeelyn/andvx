@@ -18,6 +18,10 @@
             {
                 "name": "动态表单编辑",
                 "router": "/form/fc-designer"
+            },
+            {
+                "name": "自定义结果输入框",
+                "router": "/form/input-custom-result"
             }
         ]
     },

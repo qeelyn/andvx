@@ -50,6 +50,10 @@ const route = createRouter({
                         meta: { title: '级联选择', },
                         component: () => import('./views/form/cascader.vue')
                     }, {
+                        path: 'input-custom-result',
+                        meta: { title: '自定义结果输入框', },
+                        component: () => import('./views/form/inputCustomResult.vue')
+                    }, {
                         path: 'fc-designer',
                         meta: { title: '动态表单编辑', },
                         component: () => import('./views/form/fcDesigner.vue')
