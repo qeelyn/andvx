@@ -1,6 +1,8 @@
 import radio from './rule/radio';
 import checkbox from './rule/checkbox';
 import input from './rule/input';
+import inputPassword from './rule/inputPassword';
+import inputTextArea from './rule/inputTextArea';
 import number from './rule/number';
 import select from './rule/select';
 import _switch from './rule/switch';
@@ -27,7 +29,7 @@ export default function createMenu() {
             name: 'main',
             title: '表单组件',
             list: [
-                input, number, radio, checkbox, select, _switch, time, date, slider, rate, cascader, transfer, tree
+                input, inputPassword, inputTextArea, number, radio, checkbox, select, _switch, time, date, slider, rate, cascader, transfer, tree
             ]
         },
         {

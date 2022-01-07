@@ -1,6 +1,8 @@
 import radio from './radio';
 import checkbox from './checkbox';
 import input from './input';
+import inputPassword from './inputPassword';
+import inputTextArea from './inputTextArea';
 import number from './number';
 import select from './select';
 import _switch from './switch';
@@ -29,6 +31,8 @@ const ruleList = {
     [radio.name]: radio,
     [checkbox.name]: checkbox,
     [input.name]: input,
+    [inputPassword.name]: inputPassword,
+    [inputTextArea.name]: inputTextArea,
     [number.name]: number,
     [select.name]: select,
     [_switch.name]: _switch,

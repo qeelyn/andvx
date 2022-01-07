@@ -12,7 +12,6 @@ export default {
             type: name,
             field: uniqueId(),
             title: label,
-            info: '',
             props: {},
         };
     },
@@ -33,8 +32,8 @@ export default {
             },
             { type: 'input', field: 'checkedChildren', title: '选中时的内容' },
             { type: 'input', field: 'unCheckedChildren', title: '非选中时的内容' },
-            // { type: 'input', field: 'checkedValue', title: '选中时的值' },
-            // { type: 'input', field: 'unCheckedValue', title: '非选中时的值' },
+            // { type: 'input', field: 'checkedValue', title: '选中时的值' ,value:true},
+            // { type: 'input', field: 'unCheckedValue', title: '非选中时的值',value:false },
         ];
     }
 };
