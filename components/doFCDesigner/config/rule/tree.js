@@ -9,52 +9,43 @@ export default {
     name,
     rule() {
         return {
-            type: name,
+            type: 'a-tree',
             field: uniqueId(),
             title: label,
-            info: '',
-            effect: {
-                fetch: ''
-            },
             props: {
-                props: {
-                    label: 'label',
-                },
-                showCheckbox: true,
-                nodeKey: 'id',
-                data: [{
-                    id: 1,
-                    label: '一级 1',
+                treeData: [{
+                    key: 1,
+                    title: '一级 1',
                     children: [{
-                        id: 4,
-                        label: '二级 1-1',
+                        key: 4,
+                        title: '二级 1-1',
                         children: [{
-                            id: 9,
-                            label: '三级 1-1-1'
+                            key: 9,
+                            title: '三级 1-1-1'
                         }, {
-                            id: 10,
-                            label: '三级 1-1-2'
+                            key: 10,
+                            title: '三级 1-1-2'
                         }]
                     }]
                 }, {
-                    id: 2,
-                    label: '一级 2',
+                    key: 2,
+                    title: '一级 2',
                     children: [{
-                        id: 5,
-                        label: '二级 2-1'
+                        key: 5,
+                        title: '二级 2-1'
                     }, {
-                        id: 6,
-                        label: '二级 2-2'
+                        key: 6,
+                        title: '二级 2-2'
                     }]
                 }, {
-                    id: 3,
-                    label: '一级 3',
+                    key: 3,
+                    title: '一级 3',
                     children: [{
-                        id: 7,
-                        label: '二级 3-1'
+                        key: 7,
+                        title: '二级 3-1'
                     }, {
-                        id: 8,
-                        label: '二级 3-2'
+                        key: 8,
+                        title: '二级 3-2'
                     }]
                 }]
             },
@@ -70,7 +61,13 @@ export default {
                         { type: 'input', field: 'children', title: '子节点children', value: "children" },
                         { type: 'input', field: 'title', title: '标题title', value: "title" },
                         { type: 'input', field: 'key', title: '唯一标识key', value: "key" },
-                    ]
+                    ],
+                    options: {
+                        form: {
+                            layout: "vertical",
+                        },
+                        submitBtn: false,
+                    },
                 }
             },
             { type: 'switch', field: 'autoExpandParent', title: '是否自动展开父节点', value: true },

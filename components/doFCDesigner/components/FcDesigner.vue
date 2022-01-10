@@ -566,7 +566,7 @@ export default defineComponent({
                 makeRule(self.children[0].config.config)
               );
             },
-            addChild: ({ self }) => {
+            addChild: ({ self }) => {                
               const config = self.children[0].config.config;
               const item = ruleList[config.children];
               if (!item) return;

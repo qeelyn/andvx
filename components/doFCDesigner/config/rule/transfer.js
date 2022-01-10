@@ -7,8 +7,9 @@ const generateData = _ => {
     const data = [];
     for (let i = 1; i <= 15; i++) {
         data.push({
-            key: i,
+            key: `${i}`,
             title: `备选项 ${i}`,
+            description: `description ${i}`,
             disabled: i % 4 === 0
         });
     }
@@ -21,10 +22,9 @@ export default {
     name,
     rule() {
         return {
-            type: name,
+            type: 'a-transfer',
             field: uniqueId(),
             title: label,
-            info: '',
             props: {
                 dataSource: generateData()
             }

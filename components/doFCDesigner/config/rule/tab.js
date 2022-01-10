@@ -8,7 +8,7 @@ export default {
     children: 'tab-pane',
     rule() {
         return {
-            type: 'tabs',
+            type: 'a-tabs',
             children: []
         };
     },

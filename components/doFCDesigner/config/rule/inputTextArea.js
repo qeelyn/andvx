@@ -67,6 +67,7 @@ export default {
                                         form: {
                                             layout: "vertical",
                                         },
+                                        submitBtn: false,
                                     },
                                 }
                             },

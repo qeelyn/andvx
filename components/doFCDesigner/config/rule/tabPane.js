@@ -12,9 +12,9 @@ export default {
     dragBtn: false,
     rule() {
         return {
-            type: 'tab-pane',
+            type: 'a-tab-pane',
             props: { tab: '新标签页', key: uniqueIdValue },
-            children: []
+            children: ['xxx']
         };
     },
     props() {
