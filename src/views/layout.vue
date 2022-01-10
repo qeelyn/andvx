@@ -16,7 +16,32 @@
             </div>
         </a-layout-sider>
         <a-layout id="layoutBody" ref="layoutBody" :class="`ant-layout-${theme}`">
-            <LayoutHeader v-model:collapsed="collapsed"></LayoutHeader>
+            <LayoutHeader v-model:collapsed="collapsed">
+                <template #left>
+                    <HeaderSystem
+                        :list="[
+                            {
+                                id: 1, name: 'xxx', children: [
+                                    { id: 2, name: 'xxx-1' },
+                                    { id: 2, name: 'xxx-2' },
+                                ]
+                            }
+                        ]"
+                        @menuClick="systemMenuClick"
+                    />
+                </template>
+                <template #right>
+                    <a-space :size="20">
+                        <HeaderOrg
+                            orgId="1000"
+                            :list="[{ id: '1000', name: 'org1000' }, { id: '1001', name: 'org1001' }]"
+                            @menuClick="orgMenuClick"
+                        />
+                        <HeaderUser :user="{ id: 1, nickname: 'xxxx' }" @menuClick="userMenuClick" />
+                        <span></span>
+                    </a-space>
+                </template>
+            </LayoutHeader>
             <a-layout-content class="layoutContent">
                 <router-view v-slot="{ Component, route }">
                     <keep-alive>
@@ -33,11 +58,14 @@
 import { defineComponent, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import LayoutHeader from "../../components/layout/header.vue";
+import HeaderUser from "../../components/layout/header/user.vue";
+import HeaderOrg from "../../components/layout/header/org.vue";
+import HeaderSystem from "../../components/layout/header/system.vue";
 import LayoutMenu from "../../components/layout/menu.vue";
 import menuJson from "./menu.json";
 
 export default defineComponent({
-    components: { LayoutHeader, LayoutMenu },
+    components: { LayoutHeader, LayoutMenu, HeaderSystem, HeaderUser, HeaderOrg },
     setup() {
         const store = useStore(),
             collapsed = ref(false),
@@ -47,6 +75,14 @@ export default defineComponent({
         setTimeout(() => {
             store.dispatch('andvx/setMenuList', menuJson)
         }, 1000)
+
+        const userMenuClick = (key) => {
+            console.log(key)
+        }, orgMenuClick = (id) => {
+            console.log(id)
+        }, systemMenuClick = (item, isOpen) => {
+            console.log(item, isOpen)
+        }
 
 
         onMounted(() => {
@@ -58,6 +94,9 @@ export default defineComponent({
             collapsed,
             theme,
             backTopTarget,
+            systemMenuClick,
+            userMenuClick,
+            orgMenuClick,
         }
     }
 });
