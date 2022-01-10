@@ -1,0 +1,4 @@
+src/
+index.html
+vite.config.js
+.env.local
