@@ -2,11 +2,12 @@
   "name": "andvx-qeelyn",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "dev-f": "vite --force"
   },
   "description": "基于 ant design vue 扩展一些组件",
   "dependencies": {
-    "@form-create/ant-design-vue": "^3.0.0-alpha.3",
+    "@form-create/ant-design-vue": "^3.0.0-alpha.4",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {

@@ -35,54 +35,46 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
+            // 一样存在 watchCtx找不到
             {
                 type: 'select',
-                field: 'type',
-                title: '类型',
-                value: 'text',
+                field: 'autosizeValueType',
+                title: 'autosize值类型',
+                value: 'boolean',
                 options: [
-                    { label: 'text', value: 'text' },
-                    { label: 'textarea', value: 'textarea' },
-                    { label: 'number', value: 'number' },
-                    { label: 'password', value: 'password' },
-                    { label: 'hidden', value: 'hidden' },
+                    { label: 'boolean', value: 'boolean' },
+                    { label: 'object', value: 'object' },
                 ],
-            },
-            // 一样存在 watchCtx找不到
-            // {
-            //     type: 'select',
-            //     field: 'autosizeValueType',
-            //     title: 'autosize值类型',
-            //     value: 'boolean',
-            //     options: [
-            //         { label: 'boolean', value: 'boolean' },
-            //         { label: 'object', value: 'object' },
-            //     ],
-            //     control: [
-            //         {
-            //             value: 'boolean',
-            //             rule: [
-            //                 { type: 'switch', field: 'autosize', title: '自适应内容高度', value: false },
-            //             ]
-            //         },
-            //         {
-            //             value: 'object',
-            //             rule: [
-            //                 {
-            //                     type: 'object', field: 'autosize', title: '自适应内容高度',
-            //                     value: { minRows: 2, maxRows: 6 },
-            //                     props: {
-            //                         rule: [
-            //                             { type: 'inputNumber', field: 'minRows', title: '最小Rows' },
-            //                             { type: 'inputNumber', field: 'maxRows', title: '最大Rows' },
-            //                         ]
-            //                     }
-            //                 },
-            //             ]
-            //         }
-            //     ]
-            // },
+                control: [
+                    {
+                        value: 'boolean',
+                        rule: [
+                            { type: 'switch', field: 'autosize', title: '自适应内容高度', value: false },
+                        ]
+                    },
+                    {
+                        value: 'object',
+                        rule: [
+                            {
+                                type: 'object', field: 'autosize', title: '自适应内容高度',
+                                value: { minRows: 2, maxRows: 6 },
+                                props: {
+                                    rule: [
+                                        { type: 'inputNumber', field: 'minRows', title: '最小Rows' },
+                                        { type: 'inputNumber', field: 'maxRows', title: '最大Rows' },
+                                    ],
+                                    options: {
+                                        form: {
+                                            layout: "vertical",
+                                        },
+                                    },
+                                }
+                            },
+                        ],
 
+                    }
+                ]
+            },
         ];
     }
 };

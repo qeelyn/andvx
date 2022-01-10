@@ -35,20 +35,6 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
-            {
-                type: 'select',
-                field: 'type',
-                title: '类型',
-                value: 'text',
-                options: [
-                    { label: 'text', value: 'text' },
-                    { label: 'textarea', value: 'textarea' },
-                    { label: 'number', value: 'number' },
-                    { label: 'password', value: 'password' },
-                    { label: 'hidden', value: 'hidden' },
-                ],
-            },
-
         ];
     }
 };

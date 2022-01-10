@@ -55,9 +55,7 @@ export default defineComponent({
                                     field: 'validateGroup',
                                     value: [],
                                     props: {
-                                        // 这个默认值1的时候 出现异常 TypeError: Cannot read properties of undefined (reading 'watchCtx')
-                                        // 出现异常后  字段类型的选择就无选择了
-                                        // expand: 1,
+                                        expand: 1,
                                         rule: [
                                             {
                                                 type: 'select',
@@ -143,7 +141,6 @@ export default defineComponent({
                                             }
                                         ],
                                         options: {
-                                            // 外层的设置对里层不生效 应该是个bug
                                             form: {
                                                 layout: "vertical",
                                             },
