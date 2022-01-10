@@ -1,9 +1,19 @@
 import { onBeforeRouteLeave } from "vue-router";
 
 /**
- *  使用 mixins 引入 
- *  由于vue3去掉了$children 所以改为$refs来代替 因此需要列入检测的组件需要增加ref
- *  mixins: [leavePageDetection], 
+ *  说明：
+ *      本功能检测的是 save.disabled === false
+ * 
+ *  使用要点：
+ *      1.组件必须暴露save.disabled给与判断
+ *      2.由于vue3去掉了$children所以改为$refs来代替引入组件的下级查找判断
+ * 
+ *  使用方式： 
+ *      mixins: [leavePageDetection]
+ * 
+ *  demo：
+ *      src/views/form/index.vue
+ * 
  */
 
 const tipStr = '还有未保存内容，是否离开！';
