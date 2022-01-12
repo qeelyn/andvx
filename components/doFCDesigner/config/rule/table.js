@@ -12,7 +12,7 @@ export default {
             props: {
                 columns: []
             },
-            children: []
+            modelField: 'dataSource',
         };
     },
     props() {

@@ -32,6 +32,7 @@
 import { defineComponent, ref } from "vue";
 import Breadcrumb from "../../../components/breadcrumb";
 import DoFCDesigner from "../../../components/doFCDesigner";
+import { initRules } from "../../../components/doFCDesigner/utils/parse";
 import formCreate from '@form-create/ant-design-vue';
 
 
@@ -51,120 +52,28 @@ export default defineComponent({
                 },
                 submitBtn: false,
             }
-        })
+        }), dictionary = ref({
+            'XYG': [
+                { name: 'XYG1', code: '1' },
+                { name: 'XYG2', code: '2' },
+                { name: 'XYG3', code: '3' },
+            ]
+        }), cooyObj = ref();
 
-        const cooyObj = [
-            {
-                "type": "row",
-                "props": {
-                    "gutter": 20
-                },
-                "children": [
-                    {
-                        "type": "col",
-                        "props": {
-                            "span": 6
-                        },
-                        "children": [
-                            {
-                                "type": "input",
-                                "field": "customerNo",
-                                "title": "客户号",
-                                "props": {
-                                    "placeholder": "可不填写,由系统生成客户号"
-                                },
-                                "_fc_drag_tag": "input",
-                                "hidden": false,
-                                "display": true,
-                                "info": ""
-                            }
-                        ],
-                        "_fc_drag_tag": "col",
-                        "hidden": false,
-                        "display": true
-                    },
-                    {
-                        "type": "col",
-                        "props": {
-                            "span": 6
-                        },
-                        "children": [
-                            {
-                                "type": "input",
-                                "field": "name",
-                                "title": "客户全称",
-                                "_fc_drag_tag": "input",
-                                "hidden": false,
-                                "display": true
-                            }
-                        ],
-                        "_fc_drag_tag": "col",
-                        "hidden": false,
-                        "display": true
-                    },
-                    {
-                        "type": "col",
-                        "props": {
-                            "span": 6
-                        },
-                        "children": [
-                            {
-                                "type": "input",
-                                "field": "nameEn",
-                                "title": "客户全称2",
-                                "_fc_drag_tag": "input",
-                                "hidden": false,
-                                "display": true
-                            }
-                        ],
-                        "_fc_drag_tag": "col",
-                        "hidden": false,
-                        "display": true
-                    },
-                    {
-                        "type": "col",
-                        "props": {
-                            "span": 6
-                        },
-                        "children": [
-                            {
-                                "type": "select",
-                                "field": "countryId",
-                                "title": "国家/地区",
-                                "options": [
-                                    {
-                                        "value": "1",
-                                        "label": "选项1"
-                                    },
-                                    {
-                                        "value": "2",
-                                        "label": "选项2"
-                                    }
-                                ],
-                                "_fc_drag_tag": "select",
-                                "hidden": false,
-                                "display": true
-                            }
-                        ],
-                        "_fc_drag_tag": "col",
-                        "hidden": false,
-                        "display": true
-                    }
-                ],
-                "_fc_drag_tag": "row",
-                "hidden": false,
-                "display": true
-            }
-        ]
+        cooyObj.value = []
 
         const consoleLog = (ref) => {
-            console.log('rule', ref.getRule())
+            let rule = ref.getRule();
+            initRules(rule, dictionary.value)
+            console.log('initRules', rule)
         }, viewer = (ref) => {
-            const rule = ref.getRule()
-            form.value.rule = rule
+            const rule = ref.getRule();
+            initRules(rule, dictionary.value);
+            console.log('initRules', rule)
             modal.value.show = true;
+            form.value.rule = rule
         }, addRuleRule = (ref) => {
-            ref.setRule(cooyObj)
+            ref.setRule(cooyObj.value)
         }, clear = (ref) => {
             ref.setRule([])
         };
