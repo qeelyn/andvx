@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import { makeOptionsRule } from '../../utils/index';
+import { dataSourceConfig } from '../../utils/index';
 
 const label = '选择器';
 const name = 'select';
@@ -13,8 +13,6 @@ export default {
             type: name,
             field: uniqueId(),
             title: label,
-            props: {
-            },
             options: [
                 { value: '1', label: '选项1' },
                 { value: '2', label: '选项2' },
@@ -63,6 +61,7 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
+            ...dataSourceConfig()
         ];
     }
 };

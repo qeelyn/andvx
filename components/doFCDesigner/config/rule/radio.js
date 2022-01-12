@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import { makeOptionsRule } from '../../utils/index';
+import { dataSourceConfig } from '../../utils/index';
 
 const label = '单选框';
 const name = 'radio';
@@ -14,10 +14,6 @@ export default {
             field: uniqueId(),
             title: label,
             info: '',
-            effect: {
-                fetch: ''
-            },
-            props: {},
             options: [
                 { value: '1', label: '选项1' },
                 { value: '2', label: '选项2' },
@@ -49,6 +45,7 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
+            ...dataSourceConfig(),
         ];
     }
 };

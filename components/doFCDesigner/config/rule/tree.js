@@ -2,6 +2,41 @@ import uniqueId from '@form-create/utils/lib/unique';
 
 const label = '树形控件';
 const name = 'tree';
+const dataSource = [{
+    key: 1,
+    title: '一级 1',
+    children: [{
+        key: 4,
+        title: '二级 1-1',
+        children: [{
+            key: 9,
+            title: '三级 1-1-1'
+        }, {
+            key: 10,
+            title: '三级 1-1-2'
+        }]
+    }]
+}, {
+    key: 2,
+    title: '一级 2',
+    children: [{
+        key: 5,
+        title: '二级 2-1'
+    }, {
+        key: 6,
+        title: '二级 2-2'
+    }]
+}, {
+    key: 3,
+    title: '一级 3',
+    children: [{
+        key: 7,
+        title: '二级 3-1'
+    }, {
+        key: 8,
+        title: '二级 3-2'
+    }]
+}]
 
 export default {
     icon: 'icon-tree',
@@ -12,43 +47,8 @@ export default {
             type: 'a-tree',
             field: uniqueId(),
             title: label,
-            props: {
-                treeData: [{
-                    key: 1,
-                    title: '一级 1',
-                    children: [{
-                        key: 4,
-                        title: '二级 1-1',
-                        children: [{
-                            key: 9,
-                            title: '三级 1-1-1'
-                        }, {
-                            key: 10,
-                            title: '三级 1-1-2'
-                        }]
-                    }]
-                }, {
-                    key: 2,
-                    title: '一级 2',
-                    children: [{
-                        key: 5,
-                        title: '二级 2-1'
-                    }, {
-                        key: 6,
-                        title: '二级 2-2'
-                    }]
-                }, {
-                    key: 3,
-                    title: '一级 3',
-                    children: [{
-                        key: 7,
-                        title: '二级 3-1'
-                    }, {
-                        key: 8,
-                        title: '二级 3-2'
-                    }]
-                }]
-            },
+            options: dataSource,
+            optionsTo: 'props.treeData'
         };
     },
     props() {
