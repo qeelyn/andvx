@@ -1,7 +1,7 @@
 import uniqueId from '@form-create/utils/lib/unique';
 
-const label = '时间选择器';
-const name = 'timePicker';
+const label = '范围时间选择';
+const name = 'timeRangePicker';
 
 export default {
     icon: 'icon-time',
@@ -9,16 +9,15 @@ export default {
     name,
     rule() {
         return {
-            type: name,
+            type: 'a-time-range-picker',
             field: uniqueId(),
             title: label,
-            style: 'width:100%'
+            modelField: 'value',
+            style: 'width:100%',
         };
     },
     props() {
         return [
-            { type: 'switch', field: 'allowClear', title: '是否展示清除按钮', value: true },
-            { type: 'switch', field: 'autofocus', title: '自动获取焦点' },
             { type: 'switch', field: 'bordered', title: '是否有边框', value: true },
             { type: 'input', field: 'clearText', title: '清除按钮的提示文案', value: 'clear' },
             { type: 'switch', field: 'disabled', title: '禁用' },

@@ -12,9 +12,7 @@ export default {
             type: name,
             field: uniqueId(),
             title: label,
-            info: '',
-            props: {
-            },
+            style: 'width:100%'
         };
     },
     props() {

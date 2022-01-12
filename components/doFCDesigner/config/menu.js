@@ -8,7 +8,9 @@ import select from './rule/select';
 import _switch from './rule/switch';
 import slider from './rule/slider';
 import time from './rule/time';
+import timeRangePicker from './rule/timeRangePicker';
 import date from './rule/date';
+import dateRangePicker from './rule/dateRangePicker';
 import rate from './rule/rate';
 import row from './rule/row';
 import divider from './rule/divider';
@@ -22,6 +24,7 @@ import space from './rule/space';
 import button from './rule/button';
 // import editor from './rule/editor';
 import tab from './rule/tab';
+import table from './rule/table';
 
 export default function createMenu() {
     return [
@@ -29,21 +32,26 @@ export default function createMenu() {
             name: 'main',
             title: '表单组件',
             list: [
-                input, inputPassword, inputTextArea, number, radio, checkbox, select, _switch, time, date, slider, rate, cascader, transfer, tree
+                input, inputPassword, inputTextArea,
+                number, radio, checkbox,
+                date, dateRangePicker, select,
+                time, timeRangePicker, _switch,
+                slider, rate, cascader,
+                transfer, tree
             ]
         },
         {
             name: 'aide',
             title: '辅助组件',
             list: [
-                alert, button, span, divider
+                alert, button, span, divider, table,
             ]
         },
         {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space, //tab
+                row, space,  //tab
             ]
         },
     ];

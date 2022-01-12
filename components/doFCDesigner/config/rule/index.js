@@ -8,7 +8,9 @@ import select from './select';
 import _switch from './switch';
 import slider from './slider';
 import time from './time';
+import timeRangePicker from './timeRangePicker';
 import date from './date';
+import dateRangePicker from './dateRangePicker';
 import rate from './rate';
 import color from './color';
 import row from './row';
@@ -19,6 +21,7 @@ import cascader from './cascader';
 import upload from './upload';
 import transfer from './transfer';
 import tree from './tree';
+import table from './table';
 import alert from './alert';
 import span from './span';
 import space from './space';
@@ -38,7 +41,9 @@ const ruleList = {
     [_switch.name]: _switch,
     [slider.name]: slider,
     [time.name]: time,
+    [timeRangePicker.name]: timeRangePicker,
     [date.name]: date,
+    [dateRangePicker.name]: dateRangePicker,
     [rate.name]: rate,
     [color.name]: color,
     [row.name]: row,
@@ -50,6 +55,7 @@ const ruleList = {
     [upload.name]: upload,
     [transfer.name]: transfer,
     [tree.name]: tree,
+    [table.name]: table,
     [alert.name]: alert,
     [span.name]: span,
     [space.name]: space,

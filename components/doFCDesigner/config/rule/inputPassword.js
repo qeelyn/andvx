@@ -12,7 +12,7 @@ export default {
             type: name,
             field: uniqueId(),
             title: label,
-            props: {}
+            modelField: 'value',
         };
     },
     props() {
