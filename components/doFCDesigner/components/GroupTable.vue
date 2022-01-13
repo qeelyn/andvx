@@ -1,35 +1,37 @@
 <template>
     <div style="width:100%">
-        <a-table
-            :columns="columns"
-            :dataSource="dataSource"
-            :scroll="{ x: 100, y: 500 }"
-            :pagination="false"
-            :rowKey="rowKey"
-            :bordered="bordered"
-            :showHeader="showHeader"
-            :size="size"
-            :setting="false"
-        >
-            <template #headerCell="{ column }">
-                <template v-if="column.dataIndex === 'actions'">
-                    <a @click="addRow">添加</a>
+        <a-form-item-rest>
+            <a-table
+                :columns="columns"
+                :dataSource="dataSource"
+                :scroll="{ x: 100, y: 500 }"
+                :pagination="false"
+                :rowKey="rowKey"
+                :bordered="bordered"
+                :showHeader="showHeader"
+                :size="size"
+                :setting="false"
+            >
+                <template #headerCell="{ column }">
+                    <template v-if="column.dataIndex === 'actions'">
+                        <a @click="addRow">添加</a>
+                    </template>
                 </template>
-            </template>
-            <template #bodyCell="{ column, record, index }">
-                <template v-if="column.dataIndex === 'serialNumber'">{{ index + 1 }}</template>
-                <template v-else-if="column.dataIndex === 'actions'">
-                    <a @click="delRow(index)">删除</a>
+                <template #bodyCell="{ column, record, index }">
+                    <template v-if="column.dataIndex === 'serialNumber'">{{ index + 1 }}</template>
+                    <template v-else-if="column.dataIndex === 'actions'">
+                        <a @click="delRow(index)">删除</a>
+                    </template>
+                    <template v-else-if="column.dataIndex">
+                        <FormCreate
+                            :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
+                            :option="fOption"
+                            @change="(field, value) => setValue(field, value, index)"
+                        />
+                    </template>
                 </template>
-                <template v-else-if="column.dataIndex">
-                    <FormCreate
-                        :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
-                        :option="fOption"
-                        @change="(field, value) => setValue(field, value, index)"
-                    />
-                </template>
-            </template>
-        </a-table>
+            </a-table>
+        </a-form-item-rest>
     </div>
 </template>
 
