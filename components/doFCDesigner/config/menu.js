@@ -44,14 +44,14 @@ export default function createMenu() {
             name: 'aide',
             title: '辅助组件',
             list: [
-                alert, button, span, divider, table,
+                alert, button, span, divider,
             ]
         },
         {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space,  //tab
+                row, space, table, //tab
             ]
         },
     ];

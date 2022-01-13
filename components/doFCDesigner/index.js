@@ -9,6 +9,7 @@ import formCreate from '@form-create/ant-design-vue';
 import './style/index.css';
 import draggable from 'vuedraggable';
 import unique from '@form-create/utils/lib/unique';
+import GroupTable from './components/GroupTable.vue';
 
 formCreate.component('draggable', draggable);
 formCreate.component(DragTool.name, DragTool);
@@ -17,6 +18,7 @@ formCreate.component(Validate.name, Validate);
 formCreate.component(InputCustomResult.name, InputCustomResult);
 // formCreate.component('Fetch', Fetch);
 // formCreate.component('FcEditor', FcEditor);
+formCreate.component(GroupTable.name, GroupTable);
 
 formCreate.register('_fc', {
     init(fc, rule) {

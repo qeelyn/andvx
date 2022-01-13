@@ -24,6 +24,9 @@
                     :rule="form.rule"
                     :option="form.options"
                 />
+                <a-space>
+                    <a-button @click="consoleLogRule">控制台打印</a-button>
+                </a-space>
             </a-modal>
         </div>
     </div>
@@ -60,23 +63,59 @@ export default defineComponent({
             ]
         }), cooyObj = ref();
 
-        cooyObj.value = []
+        cooyObj.value = [
+            {
+                "class": "group-table",
+                "realType": "group-table",
+                "type": "div",
+                "field": "pbx5tjhwq0e0",
+                "title": "表格",
+                "native": true,
+                value: [{ saa5tjhwqclt: '1', bff5tjhwqkh8: 2 }],
+                "children": [
+                    {
+                        "type": "input",
+                        "field": "saa5tjhwqclt",
+                        "title": "输入框",
+                        "_fc_drag_tag": "input",
+                        "hidden": false,
+                        "display": true
+                    },
+                    {
+                        "type": "inputNumber",
+                        "field": "bff5tjhwqkh8",
+                        "title": "计数器",
+                        "style": "width:100%",
+                        "_fc_drag_tag": "inputNumber",
+                        "hidden": false,
+                        "display": true
+                    }
+                ],
+                "_fc_drag_tag": "group-table",
+                "hidden": false,
+                "display": true
+            }
+        ]
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();
-            initRules(rule, dictionary.value)
-            console.log('initRules', rule)
+            console.log('rule', rule)
+            // initRules(rule, dictionary.value)
         }, viewer = (ref) => {
             const rule = ref.getRule();
             initRules(rule, dictionary.value);
-            console.log('initRules', rule)
+            // console.log('initRules', rule)
             modal.value.show = true;
             form.value.rule = rule
         }, addRuleRule = (ref) => {
             ref.setRule(cooyObj.value)
         }, clear = (ref) => {
             ref.setRule([])
+        }, consoleLogRule = () => {
+            console.log('form.rule', form.value.rule)
+            console.log('form.value', form.value.value)
         };
+
         return {
             modal,
             form,
@@ -84,6 +123,7 @@ export default defineComponent({
             addRuleRule,
             consoleLog,
             clear,
+            consoleLogRule,
         };
     },
 });

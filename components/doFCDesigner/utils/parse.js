@@ -23,6 +23,19 @@ export function initRules(rules, dictionary) {
                     initRules(dataItem.children, dictionary)
                 }
 
+                //处理成table
+                if (dataItem.realType) {
+                    dataItem.type = dataItem.realType
+
+                    if (dataItem.realType === 'group-table') {
+                        if (!dataItem.props) {
+                            dataItem.props = {}
+                        }
+                        dataItem.props.childRule = [...dataItem.children];
+                        delete dataItem.children
+                    }
+                }
+
                 // 对数组配置处理
                 if (dataItem.isGroup) {
                     const newData = JSON.parse(JSON.stringify(dataItem)),

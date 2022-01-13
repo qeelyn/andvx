@@ -18,7 +18,7 @@ export default defineComponent({
         return () => h(draggable, ruleProps.value, {
             item: ({ element, index }) => {
                 return h('div', {
-                    class:'div-tools'
+                    class: 'div-tools'
                 }, {
                     default: slots[element.slot]
                 })
@@ -28,3 +28,16 @@ export default defineComponent({
     },
 });
 </script>
+<style>
+.group-table .div-tools,
+.group-table ._fc-l-item {
+    max-width: 100px;
+    display: inline-block;
+}
+.group-table .div-drag {
+    outline: 1px dashed #2e73ff;
+    overflow-x: auto;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+</style>
