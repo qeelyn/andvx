@@ -1,5 +1,6 @@
 import radio from './rule/radio';
 import checkbox from './rule/checkbox';
+import card from './rule/card';
 import input from './rule/input';
 import inputPassword from './rule/inputPassword';
 import inputTextArea from './rule/inputTextArea';
@@ -51,7 +52,7 @@ export default function createMenu() {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space, table, tab
+                row, space, table, card, tab
             ]
         },
     ];

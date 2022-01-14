@@ -1,5 +1,6 @@
 import radio from './radio';
 import checkbox from './checkbox';
+import card from './card';
 import input from './input';
 import inputPassword from './inputPassword';
 import inputTextArea from './inputTextArea';
@@ -33,6 +34,7 @@ const ruleList = {
     [radio.name]: radio,
     [checkbox.name]: checkbox,
     [input.name]: input,
+    [card.name]: card,
     [inputPassword.name]: inputPassword,
     [inputTextArea.name]: inputTextArea,
     [number.name]: number,
