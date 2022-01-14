@@ -14,14 +14,15 @@ export default {
         return {
             type: 'a-tab-pane',
             props: { tab: '新标签页', key: uniqueIdValue },
-            children: ['xxx']
+            children: []
         };
     },
     props() {
         return [
-            { type: 'input', field: 'tab', title: '选项卡头显示文字', value: '新标签页' },
-            { type: 'input', field: 'key', title: '对应 activeKey', value: uniqueIdValue },
+            { type: 'input', field: 'tab', title: '选项卡头显示文字' },
+            { type: 'input', field: 'key', title: '对应 activeKey' },
             { type: 'switch', field: 'forceRender', title: '被隐藏时是否渲染 DOM 结构' },
+            { type: 'switch', field: 'closable', title: '增加关闭选项' },
 
         ];
     }

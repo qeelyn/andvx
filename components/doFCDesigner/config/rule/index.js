@@ -12,7 +12,6 @@ import timeRangePicker from './timeRangePicker';
 import date from './date';
 import dateRangePicker from './dateRangePicker';
 import rate from './rate';
-import color from './color';
 import row from './row';
 import col from './col';
 import tabPane from './tabPane';
@@ -45,7 +44,6 @@ const ruleList = {
     [date.name]: date,
     [dateRangePicker.name]: dateRangePicker,
     [rate.name]: rate,
-    [color.name]: color,
     [row.name]: row,
     [col.name]: col,
     [tab.name]: tab,

@@ -63,39 +63,62 @@ export default defineComponent({
             ]
         }), cooyObj = ref();
 
+        // 测试 a-tabs
         cooyObj.value = [
             {
-                "class": "group-table",
-                "realType": "group-table",
-                "type": "div",
-                "field": "pbx5tjhwq0e0",
-                "title": "表格",
-                "native": true,
-                value: [{ saa5tjhwqclt: '1', bff5tjhwqkh8: 2 }],
+                "type": "a-tabs",
                 "children": [
                     {
-                        "type": "input",
-                        "field": "saa5tjhwqclt",
-                        "title": "输入框",
-                        "_fc_drag_tag": "input",
-                        "hidden": false,
-                        "display": true
-                    },
-                    {
-                        "type": "inputNumber",
-                        "field": "bff5tjhwqkh8",
-                        "title": "计数器",
-                        "style": "width:100%",
-                        "_fc_drag_tag": "inputNumber",
+                        "type": "a-tab-pane",
+                        "props": {
+                            "tab": "新标签页",
+                            "key": "q2f5tjvv7qmb"
+                        },
+                        "_fc_drag_tag": "tab-pane",
                         "hidden": false,
                         "display": true
                     }
                 ],
-                "_fc_drag_tag": "group-table",
+                "_fc_drag_tag": "tabs",
                 "hidden": false,
                 "display": true
             }
         ]
+
+        // 测试 group-table
+        // cooyObj.value = [
+        //     {
+        //         "class": "group-table",
+        //         "realType": "group-table",
+        //         "type": "div",
+        //         "field": "pbx5tjhwq0e0",
+        //         "title": "表格",
+        //         "native": true,
+        //         value: [{ saa5tjhwqclt: '1', bff5tjhwqkh8: 2 }],
+        //         "children": [
+        //             {
+        //                 "type": "input",
+        //                 "field": "saa5tjhwqclt",
+        //                 "title": "输入框",
+        //                 "_fc_drag_tag": "input",
+        //                 "hidden": false,
+        //                 "display": true
+        //             },
+        //             {
+        //                 "type": "inputNumber",
+        //                 "field": "bff5tjhwqkh8",
+        //                 "title": "计数器",
+        //                 "style": "width:100%",
+        //                 "_fc_drag_tag": "inputNumber",
+        //                 "hidden": false,
+        //                 "display": true
+        //             }
+        //         ],
+        //         "_fc_drag_tag": "group-table",
+        //         "hidden": false,
+        //         "display": true
+        //     }
+        // ]
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();

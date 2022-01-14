@@ -51,7 +51,7 @@ export default function createMenu() {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space, table, //tab
+                row, space, table, tab
             ]
         },
     ];

@@ -1,17 +1,19 @@
 const label = '标签页';
-const name = 'tab';
+const name = 'tabs';
 
 export default {
     icon: 'icon-tab',
     label,
     name,
-    children: 'tab-pane',
+    drag: true,
     rule() {
         return {
             type: 'a-tabs',
+            props: {},
             children: []
         };
     },
+    children: 'tab-pane',
     props() {
         return [
             { type: 'switch', field: 'animated', title: '是否使用动画切换', info: '当 type="card" 时为 false', value: true },
@@ -53,8 +55,6 @@ export default {
                 ]
             },
             { type: 'inputNumber', field: 'tabBarGutter', title: 'tabs 之间的间隙' },
-
-
         ];
     }
 };
