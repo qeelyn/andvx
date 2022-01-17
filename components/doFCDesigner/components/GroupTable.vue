@@ -25,7 +25,6 @@
                     <template v-else-if="column.dataIndex">
                         <FormCreate
                             :key="`${column.dataIndex}-${index}`"
-                            :ref="`${column.dataIndex}-${index}`"
                             :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
                             :option="fOption"
                             @update:api="($f) => add$f(column.dataIndex, index, $f)"
@@ -57,7 +56,7 @@ export default defineComponent({
         showHeader: { type: Boolean, default: true },
         size: { type: String, default: 'default' },
     },
-    emits: ['update:modelValue', 'change'],
+    emits: ['update:modelValue'],
     setup(props, { emit }) {
         const formCreateInject = inject('formCreateInject'),
             { rule, modelValue } = toRefs(props),
@@ -108,16 +107,13 @@ export default defineComponent({
             subForms.value[index][field] = $f;
             subForm();
         }, subForm = () => {
-            formCreateInject.subForm([]);
-            nextTick(() => {
-                let allSubForm = [];
-                subForms.value.forEach(item => {
-                    Object.keys(item).forEach(itemKey => {
-                        allSubForm.push(item[itemKey]);
-                    })
+            let allSubForm = [];
+            subForms.value.forEach(item => {
+                Object.keys(item).forEach(itemKey => {
+                    allSubForm.push(item[itemKey]);
                 })
-                formCreateInject.subForm(allSubForm);
             })
+            formCreateInject.subForm(allSubForm);
         };
 
         updateDataSource()
@@ -130,7 +126,6 @@ export default defineComponent({
 
         watch(modelValueSource, () => {
             emit('update:modelValue', modelValueSource.value);
-            emit('change', modelValueSource.value);
         }, {
             deep: true
         })
