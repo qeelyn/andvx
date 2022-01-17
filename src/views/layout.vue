@@ -34,7 +34,8 @@
                     <a-space :size="20">
                         <HeaderOrg
                             orgId="1000"
-                            :list="[{ id: '1000', name: 'org1000' }, { id: '1001', name: 'org1001' }]"
+                            loginOrgId="1000"
+                            :list="orgList"
                             @menuClick="orgMenuClick"
                         />
                         <HeaderUser :user="{ id: 1, nickname: 'xxxx' }" @menuClick="userMenuClick" />
@@ -70,9 +71,48 @@ export default defineComponent({
         const store = useStore(),
             collapsed = ref(false),
             theme = ref('dark'),
-            backTopTarget = ref(window);
+            backTopTarget = ref(window),
+            orgList = ref();
 
         setTimeout(() => {
+            orgList.value = [
+                {
+                    "timezone": "Asia/Hong_Kong",
+                    "name": "Qeelyn 1000",
+                    "id": 1000,
+                    "baseCurrency": "HKD",
+                    "opOrg": {
+                        "timezone": "Asia/Hong_Kong",
+                        "name": "Qeelyn Analytics",
+                        "id": 1000,
+                        "baseCurrency": "HKD",
+                    }
+                },
+                {
+                    "timezone": "Asia/Hong_Kong",
+                    "name": "Qeelyn 1001",
+                    "id": 1001,
+                    "baseCurrency": "HKD",
+                    "opOrg": {
+                        "timezone": "Asia/Hong_Kong",
+                        "name": "Qeelyn Analytics",
+                        "id": 1000,
+                        "baseCurrency": "HKD",
+                    }
+                },
+                {
+                    "timezone": "Asia/Hong_Kong",
+                    "name": "xx 1003",
+                    "id": 1003,
+                    "baseCurrency": "HKD",
+                    "opOrg": {
+                        "timezone": "Asia/Hong_Kong",
+                        "name": "Qeelyn 1002",
+                        "id": 1002,
+                        "baseCurrency": "HKD",
+                    }
+                }
+            ]
             store.dispatch('andvx/setMenuList', menuJson)
         }, 1000)
 
@@ -93,6 +133,7 @@ export default defineComponent({
         return {
             collapsed,
             theme,
+            orgList,
             backTopTarget,
             systemMenuClick,
             userMenuClick,
