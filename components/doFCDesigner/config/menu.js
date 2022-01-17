@@ -25,6 +25,7 @@ import space from './rule/space';
 import button from './rule/button';
 // import editor from './rule/editor';
 import tab from './rule/tab';
+import group from './rule/group';
 import table from './rule/table';
 
 export default function createMenu() {
@@ -52,7 +53,7 @@ export default function createMenu() {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space, table, card, tab
+                row, space, group, table, card, tab
             ]
         },
     ];

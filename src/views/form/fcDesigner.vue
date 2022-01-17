@@ -23,10 +23,8 @@
                     v-model="form.value"
                     :rule="form.rule"
                     :option="form.options"
+                    @submit="getResult"
                 />
-                <a-space>
-                    <a-button @click="consoleLogRule">控制台打印</a-button>
-                </a-space>
             </a-modal>
         </div>
     </div>
@@ -53,7 +51,7 @@ export default defineComponent({
                 form: {
                     layout: "vertical",
                 },
-                submitBtn: false,
+                // submitBtn: false,
             }
         }), dictionary = ref({
             'XYG': [
@@ -63,27 +61,27 @@ export default defineComponent({
             ]
         }), cooyObj = ref();
 
-        // 测试 a-tabs
-        cooyObj.value = [
-            {
-                "type": "a-tabs",
-                "children": [
-                    {
-                        "type": "a-tab-pane",
-                        "props": {
-                            "tab": "新标签页",
-                            "key": "q2f5tjvv7qmb"
-                        },
-                        "_fc_drag_tag": "tab-pane",
-                        "hidden": false,
-                        "display": true
-                    }
-                ],
-                "_fc_drag_tag": "tabs",
-                "hidden": false,
-                "display": true
-            }
-        ]
+        // 测试 a-tabs  a-tabs存在无法渲染问题
+        // cooyObj.value = [
+        //     {
+        //         "type": "a-tabs",
+        //         "children": [
+        //             {
+        //                 "type": "a-tab-pane",
+        //                 "props": {
+        //                     "tab": "新标签页",
+        //                     "key": "q2f5tjvv7qmb"
+        //                 },
+        //                 "_fc_drag_tag": "tab-pane",
+        //                 "hidden": false,
+        //                 "display": true
+        //             }
+        //         ],
+        //         "_fc_drag_tag": "tabs",
+        //         "hidden": false,
+        //         "display": true
+        //     }
+        // ]
 
         // 测试 group-table
         // cooyObj.value = [
@@ -91,27 +89,25 @@ export default defineComponent({
         //         "class": "group-table",
         //         "realType": "group-table",
         //         "type": "div",
-        //         "field": "pbx5tjhwq0e0",
+        //         "field": "4v45tjwjpse6",
         //         "title": "表格",
-        //         "native": true,
-        //         value: [{ saa5tjhwqclt: '1', bff5tjhwqkh8: 2 }],
         //         "children": [
         //             {
         //                 "type": "input",
-        //                 "field": "saa5tjhwqclt",
+        //                 "field": "bca5tjwjq9kb",
         //                 "title": "输入框",
         //                 "_fc_drag_tag": "input",
         //                 "hidden": false,
-        //                 "display": true
-        //             },
-        //             {
-        //                 "type": "inputNumber",
-        //                 "field": "bff5tjhwqkh8",
-        //                 "title": "计数器",
-        //                 "style": "width:100%",
-        //                 "_fc_drag_tag": "inputNumber",
-        //                 "hidden": false,
-        //                 "display": true
+        //                 "display": true,
+        //                 "validate": [
+        //                     {
+        //                         "type": "string",
+        //                         "trigger": "change",
+        //                         "mode": "required",
+        //                         "message": "2323",
+        //                         "required": true
+        //                     }
+        //                 ]
         //             }
         //         ],
         //         "_fc_drag_tag": "group-table",
@@ -120,6 +116,46 @@ export default defineComponent({
         //     }
         // ]
 
+
+        cooyObj.value = [
+            {
+                "type": "div",
+                "realType": "group",
+                "field": "3xk5tl0evzfi",
+                "title": "数组",
+                "props": {
+                    "options": {
+                        "form": {
+                            "layout": "vertical"
+                        },
+                        "submitBtn": false
+                    }
+                },
+                "children": [
+                    {
+                        "type": "input",
+                        "field": "ke41m7u454qmf",
+                        "title": "输入框",
+                        "_fc_drag_tag": "input",
+                        "hidden": false,
+                        "display": true,
+                        "validate": [
+                            {
+                                "type": "string",
+                                "trigger": "change",
+                                "mode": "required",
+                                "message": "12",
+                                "required": true
+                            }
+                        ]
+                    }
+                ],
+                "_fc_drag_tag": "group",
+                "hidden": false,
+                "display": true
+            }
+        ]
+
         const consoleLog = (ref) => {
             let rule = ref.getRule();
             console.log('rule', rule)
@@ -127,16 +163,15 @@ export default defineComponent({
         }, viewer = (ref) => {
             const rule = ref.getRule();
             initRules(rule, dictionary.value);
-            // console.log('initRules', rule)
+            console.log('initRules', rule)
             modal.value.show = true;
             form.value.rule = rule
         }, addRuleRule = (ref) => {
             ref.setRule(cooyObj.value)
         }, clear = (ref) => {
             ref.setRule([])
-        }, consoleLogRule = () => {
-            console.log('form.rule', form.value.rule)
-            console.log('form.value', form.value.value)
+        }, getResult = (formData) => {
+            console.log('result:', formData)
         };
 
         return {
@@ -146,7 +181,7 @@ export default defineComponent({
             addRuleRule,
             consoleLog,
             clear,
-            consoleLogRule,
+            getResult,
         };
     },
 });

@@ -23,7 +23,7 @@ export function initRules(rules, dictionary) {
                     initRules(dataItem.children, dictionary)
                 }
 
-                //处理成table
+                //对真实的类型进行处理
                 if (dataItem.realType) {
                     dataItem.type = dataItem.realType
 
@@ -32,25 +32,16 @@ export function initRules(rules, dictionary) {
                             dataItem.props = {}
                         }
                         dataItem.props.childRule = [...dataItem.children];
+                        delete dataItem.realType
+                        delete dataItem.children
+                    } else if (dataItem.realType === 'group') {
+                        if (!dataItem.props) {
+                            dataItem.props = {}
+                        }
+                        dataItem.props.rule = [...dataItem.children];
+                        delete dataItem.realType
                         delete dataItem.children
                     }
-                }
-
-                // 对数组配置处理
-                if (dataItem.isGroup) {
-                    const newData = JSON.parse(JSON.stringify(dataItem)),
-                        groupConfig = newData.groupConfig ? JSON.parse(JSON.stringify(newData.groupConfig)) : null;
-                    rules.splice(dataIndex, 1);
-                    delete newData.isGroup;
-                    delete newData.groupConfig;
-                    const groupRule = {
-                        type: 'group',
-                        props: {
-                        },
-                        ...groupConfig
-                    }
-                    groupRule.props.rule = [newData];
-                    rules.splice(dataIndex, 0, groupRule);
                 }
             })
         } else {
