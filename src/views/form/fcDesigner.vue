@@ -104,7 +104,24 @@ export default defineComponent({
                                 "type": "string",
                                 "trigger": "change",
                                 "mode": "required",
-                                "message": "2323",
+                                "message": "1111",
+                                "required": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "input",
+                        "field": "cct",
+                        "title": "输入框",
+                        "_fc_drag_tag": "input",
+                        "hidden": false,
+                        "display": true,
+                        "validate": [
+                            {
+                                "type": "string",
+                                "trigger": "change",
+                                "mode": "required",
+                                "message": "ccct",
                                 "required": true
                             }
                         ]
@@ -115,9 +132,6 @@ export default defineComponent({
                 "display": true
             }
         ]
-
-
-
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();

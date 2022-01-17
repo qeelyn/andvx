@@ -24,9 +24,11 @@
                     </template>
                     <template v-else-if="column.dataIndex">
                         <FormCreate
+                            :key="`${column.dataIndex}-${index}`"
+                            :ref="`${column.dataIndex}-${index}`"
                             :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
                             :option="fOption"
-                            @update:api="add$f"
+                            @update:api="($f) => add$f(column.dataIndex, index, $f)"
                             @change="(field, value) => setValue(field, value, index)"
                         />
                     </template>
@@ -37,8 +39,9 @@
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, nextTick, watch, inject } from 'vue'
+import { defineComponent, ref, toRefs, nextTick, watch, inject, h } from 'vue'
 import { deepCopy } from "@form-create/utils/lib/deepextend";
+import formCreate from "@form-create/ant-design-vue";
 
 export default defineComponent({
     components: {
@@ -59,6 +62,7 @@ export default defineComponent({
         const formCreateInject = inject('formCreateInject'),
             { rule, modelValue } = toRefs(props),
             columns = ref([]),
+            subForms = ref([]),
             fOption = ref({ form: { layout: 'vertical' }, submitBtn: false }),
             // 在初始化、列变更的时候处理
             dataSource = ref([]),
@@ -77,7 +81,6 @@ export default defineComponent({
 
         const getRowRule = (field, value) => {
             const copyRule = deepCopy(rule.value.find(item => item.field === field));
-            // copyRule.native = true;
             copyRule.title = null;
             copyRule.value = value
             return copyRule ? [copyRule] : [];
@@ -86,6 +89,11 @@ export default defineComponent({
             updateDataSource();
         }, delRow = (index) => {
             modelValueSource.value.splice(index, 1);
+            Object.keys(subForms.value[index]).forEach(item => {
+                delete subForms.value[index][item]
+            })
+            subForms.value.splice(index, 1);
+            subForm();
             updateDataSource();
         }, setValue = (field, value, index) => {
             modelValueSource.value[index][field] = value;
@@ -93,9 +101,24 @@ export default defineComponent({
             nextTick(() => {
                 dataSource.value = modelValue.value ? deepCopy(modelValue.value) : [];
             })
-        }, add$f = ($f) => {
-            formCreateInject.subForm($f);
-        }
+        }, add$f = (field, index, $f) => {
+            if (!subForms.value[index]) {
+                subForms.value[index] = {};
+            }
+            subForms.value[index][field] = $f;
+            subForm();
+        }, subForm = () => {
+            formCreateInject.subForm([]);
+            nextTick(() => {
+                let allSubForm = [];
+                subForms.value.forEach(item => {
+                    Object.keys(item).forEach(itemKey => {
+                        allSubForm.push(item[itemKey]);
+                    })
+                })
+                formCreateInject.subForm(allSubForm);
+            })
+        };
 
         updateDataSource()
 
