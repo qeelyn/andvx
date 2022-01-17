@@ -26,6 +26,9 @@ export default {
             type: 'a-transfer',
             field: uniqueId(),
             title: label,
+            props: {
+                render: (item) => item.title
+            },
             options: generateData(),
             optionsTo: 'props.dataSource'
         };
