@@ -84,57 +84,17 @@ export default defineComponent({
         // ]
 
         // 测试 group-table
-        // cooyObj.value = [
-        //     {
-        //         "class": "group-table",
-        //         "realType": "group-table",
-        //         "type": "div",
-        //         "field": "4v45tjwjpse6",
-        //         "title": "表格",
-        //         "children": [
-        //             {
-        //                 "type": "input",
-        //                 "field": "bca5tjwjq9kb",
-        //                 "title": "输入框",
-        //                 "_fc_drag_tag": "input",
-        //                 "hidden": false,
-        //                 "display": true,
-        //                 "validate": [
-        //                     {
-        //                         "type": "string",
-        //                         "trigger": "change",
-        //                         "mode": "required",
-        //                         "message": "2323",
-        //                         "required": true
-        //                     }
-        //                 ]
-        //             }
-        //         ],
-        //         "_fc_drag_tag": "group-table",
-        //         "hidden": false,
-        //         "display": true
-        //     }
-        // ]
-
-
         cooyObj.value = [
             {
+                "class": "group-table",
+                "realType": "group-table",
                 "type": "div",
-                "realType": "group",
-                "field": "3xk5tl0evzfi",
-                "title": "数组",
-                "props": {
-                    "options": {
-                        "form": {
-                            "layout": "vertical"
-                        },
-                        "submitBtn": false
-                    }
-                },
+                "field": "4v45tjwjpse6",
+                "title": "表格",
                 "children": [
                     {
                         "type": "input",
-                        "field": "ke41m7u454qmf",
+                        "field": "bca5tjwjq9kb",
                         "title": "输入框",
                         "_fc_drag_tag": "input",
                         "hidden": false,
@@ -144,17 +104,20 @@ export default defineComponent({
                                 "type": "string",
                                 "trigger": "change",
                                 "mode": "required",
-                                "message": "12",
+                                "message": "2323",
                                 "required": true
                             }
                         ]
                     }
                 ],
-                "_fc_drag_tag": "group",
+                "_fc_drag_tag": "group-table",
                 "hidden": false,
                 "display": true
             }
         ]
+
+
+
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();

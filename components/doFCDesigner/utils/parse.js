@@ -31,7 +31,7 @@ export function initRules(rules, dictionary) {
                         if (!dataItem.props) {
                             dataItem.props = {}
                         }
-                        dataItem.props.childRule = [...dataItem.children];
+                        dataItem.props.rule = [...dataItem.children];
                         delete dataItem.realType
                         delete dataItem.children
                     } else if (dataItem.realType === 'group') {

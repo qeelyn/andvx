@@ -26,6 +26,7 @@
                         <FormCreate
                             :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
                             :option="fOption"
+                            @update:api="add$f"
                             @change="(field, value) => setValue(field, value, index)"
                         />
                     </template>
@@ -36,8 +37,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, nextTick, watch } from 'vue'
-import formCreate from "@form-create/ant-design-vue";
+import { defineComponent, ref, toRefs, nextTick, watch, inject } from 'vue'
 import { deepCopy } from "@form-create/utils/lib/deepextend";
 
 export default defineComponent({
@@ -47,16 +47,17 @@ export default defineComponent({
     name: 'group-table',
     props: {
         modelValue: { type: Array },
-        childRule: { type: Array },
+        rule: { type: Array },
         // 几个开放设置处理
         rowKey: { type: String, default: 'key' },
         bordered: { type: Boolean },
         showHeader: { type: Boolean, default: true },
         size: { type: String, default: 'default' },
     },
-    emits: ['update:modelValue'],
+    emits: ['update:modelValue', 'change'],
     setup(props, { emit }) {
-        const { childRule, modelValue } = toRefs(props),
+        const formCreateInject = inject('formCreateInject'),
+            { rule, modelValue } = toRefs(props),
             columns = ref([]),
             fOption = ref({ form: { layout: 'vertical' }, submitBtn: false }),
             // 在初始化、列变更的时候处理
@@ -66,7 +67,7 @@ export default defineComponent({
 
         columns.value = [
             { title: '序号', dataIndex: 'serialNumber', align: 'center', fixed: 'left', width: 80 },
-            ...childRule.value.map(item => {
+            ...rule.value.map(item => {
                 return {
                     title: item.title, dataIndex: item.field, width: 200,
                 }
@@ -75,10 +76,11 @@ export default defineComponent({
         ]
 
         const getRowRule = (field, value) => {
-            let rule = deepCopy(childRule.value.find(item => item.field === field));
-            rule.native = true;
-            rule.value = value
-            return rule ? [rule] : [];
+            const copyRule = deepCopy(rule.value.find(item => item.field === field));
+            // copyRule.native = true;
+            copyRule.title = null;
+            copyRule.value = value
+            return copyRule ? [copyRule] : [];
         }, addRow = () => {
             modelValueSource.value.push({})
             updateDataSource();
@@ -91,6 +93,8 @@ export default defineComponent({
             nextTick(() => {
                 dataSource.value = modelValue.value ? deepCopy(modelValue.value) : [];
             })
+        }, add$f = ($f) => {
+            formCreateInject.subForm($f);
         }
 
         updateDataSource()
@@ -103,6 +107,7 @@ export default defineComponent({
 
         watch(modelValueSource, () => {
             emit('update:modelValue', modelValueSource.value);
+            emit('change', modelValueSource.value);
         }, {
             deep: true
         })
@@ -115,7 +120,17 @@ export default defineComponent({
             addRow,
             delRow,
             setValue,
+            add$f,
         }
     },
 });
 </script>
+<style>
+.group-table .ant-form-item-explain {
+    position: absolute;
+    top: 100%;
+}
+.group-table .form-create .ant-form-item {
+    margin-bottom: 0;
+}
+</style>
