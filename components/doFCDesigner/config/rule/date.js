@@ -12,6 +12,9 @@ export default {
             type: name,
             field: uniqueId(),
             title: label,
+            props: {
+                valueFormat: 'YYYY-MM-DD'
+            },
             style: 'width:100%'
         };
     },
@@ -66,7 +69,8 @@ export default {
                 type: 'input',
                 field: 'valueFormat',
                 info: "YYYY-MM-DD HH:mm:ss",
-                title: '显示在输入框中的格式默认dayjs'
+                title: '显示在输入框中的格式默认dayjs',
+                value: 'YYYY-MM-DD'
             },
 
         ];

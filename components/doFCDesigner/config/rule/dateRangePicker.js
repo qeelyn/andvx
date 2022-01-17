@@ -12,12 +12,22 @@ export default {
             type: 'a-range-picker',
             field: uniqueId(),
             title: label,
+            props: {
+                valueFormat: 'YYYY-MM-DD'
+            },
             modelField: 'value',
             style: 'width:100%',
         };
     },
     props() {
         return [
+            {
+                type: 'input',
+                field: 'valueFormat',
+                info: "YYYY-MM-DD HH:mm:ss",
+                title: '显示在输入框中的格式默认dayjs',
+                value: 'YYYY-MM-DD'
+            },
             {
                 type: 'group', field: 'allowEmpty', title: '允许起始项部分为空',
                 value: [false, false],
@@ -50,17 +60,7 @@ export default {
                     },
                 }
             },
-            {
-                type: 'input',
-                field: 'format',
-                info: "YYYY-MM-DD HH:mm:ss",
-                value: 'YYYY-MM-DD HH:mm:ss'
-            },
-
             { type: 'switch', field: 'showTime', title: '增加时间选择功能', value: false },
-
-
-
             { type: 'switch', field: 'bordered', title: '是否有边框', value: true },
             { type: 'switch', field: 'inputReadOnly', title: '设置输入框为只读', info: '避免在移动设备上打开虚拟键盘' },
             {
