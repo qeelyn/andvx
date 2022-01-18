@@ -1,4 +1,4 @@
-#  andvx-qeelyn
+#  andvx
 基于 [ant design vue](https://next.antdv.com/docs/vue/introduce-cn) 扩展一些组件
 
 vue3 + antdv + vuex 
@@ -6,18 +6,18 @@ vue3 + antdv + vuex
 
 ## npm
 ```
-npm i andvx-qeelyn
+npm i andvx
 ```
 
 目前只做按需引入
 ```
-import xxx from "andvx-qeelyn/xxx";
+import xxx from "andvx/xxx";
 ```
 
 如需把组件全局引入请自行在main.js处理
 ```
 import { createApp } from 'vue'
-import DoTable from "andvx-qeelyn/components/doTable";
+import DoTable from "andvx/components/doTable";
 ...
 
 const app = createApp(App)
