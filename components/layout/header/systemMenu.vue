@@ -43,6 +43,7 @@ export default defineComponent({
   width: 600px;
   padding: 4px 16px;
   background: #ffffff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 
   .systemSwitch-item {
     float: left;
