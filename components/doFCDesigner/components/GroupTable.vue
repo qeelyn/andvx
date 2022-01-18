@@ -124,8 +124,6 @@ export default defineComponent({
                     allSubForm.push(item[itemKey]);
                 })
             })
-
-            console.log(subForms.value)
             formCreateInject.subForm(allSubForm);
         };
 
