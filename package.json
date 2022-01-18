@@ -1,6 +1,6 @@
 {
-  "name": "andvx-qeelyn",
-  "version": "0.0.2",
+  "name": "andvx",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "dev-f": "vite --force"
