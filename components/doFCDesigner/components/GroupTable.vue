@@ -1,46 +1,46 @@
 <template>
     <div style="width:100%">
-        <a-form-item-rest>
-            <a-table
-                :columns="columns"
-                :dataSource="dataSource"
-                :scroll="{ x: 100, y: 500 }"
-                :pagination="false"
-                :rowKey="rowKey"
-                :bordered="bordered"
-                :showHeader="showHeader"
-                :size="size"
-                :setting="false"
-            >
-                <template #headerCell="{ column }">
-                    <template v-if="column.dataIndex === 'actions'">
-                        <a @click="addRow">添加</a>
-                    </template>
+        <a-table
+            :columns="columns"
+            :dataSource="dataSource"
+            :scroll="{ x: 100, y: 500 }"
+            :pagination="false"
+            :rowKey="rowKey"
+            :bordered="bordered"
+            :showHeader="showHeader"
+            :size="size"
+            :setting="false"
+        >
+            <template #headerCell="{ column }">
+                <template v-if="column.dataIndex === 'actions'">
+                    <a @click="addRow">添加</a>
                 </template>
-                <template #bodyCell="{ column, record, index }">
-                    <template v-if="column.dataIndex === 'serialNumber'">{{ index + 1 }}</template>
-                    <template v-else-if="column.dataIndex === 'actions'">
-                        <a @click="delRow(index)">删除</a>
-                    </template>
-                    <template v-else-if="column.dataIndex">
-                        <FormCreate
-                            :key="`${column.dataIndex}-${index}`"
-                            :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
-                            :option="fOption"
-                            @update:api="($f) => add$f(column.dataIndex, index, $f)"
-                            @change="(field, value) => setValue(field, value, index)"
-                        />
-                    </template>
+            </template>
+            <template #bodyCell="{ column, record, index }">
+                <template v-if="column.dataIndex === 'serialNumber'">{{ index + 1 }}</template>
+                <template v-else-if="column.dataIndex === 'actions'">
+                    <a @click="delRow(index)">删除</a>
                 </template>
-            </a-table>
-        </a-form-item-rest>
+                <template v-else-if="column.dataIndex">
+                    <FormCreate
+                        :key="`${column.dataIndex}-${index}`"
+                        :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
+                        :option="fOption"
+                        @update:api="($f) => add$f(column.dataIndex, index, $f)"
+                        @change="(field, value) => setValue(field, value, index)"
+                    />
+                </template>
+                <template v-else>test{{ column.dataIndex }}</template>
+            </template>
+        </a-table>
     </div>
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, nextTick, watch, inject, h } from 'vue'
+import { defineComponent, ref, toRefs, nextTick, watch, inject } from 'vue'
 import { deepCopy } from "@form-create/utils/lib/deepextend";
 import formCreate from "@form-create/ant-design-vue";
+import uniqueId from '@form-create/utils/lib/unique';
 
 export default defineComponent({
     components: {
@@ -59,7 +59,7 @@ export default defineComponent({
     emits: ['update:modelValue'],
     setup(props, { emit }) {
         const formCreateInject = inject('formCreateInject'),
-            { rule, modelValue } = toRefs(props),
+            { rule, modelValue, rowKey } = toRefs(props),
             columns = ref([]),
             subForms = ref([]),
             fOption = ref({ form: { layout: 'vertical' }, submitBtn: false }),
@@ -87,23 +87,34 @@ export default defineComponent({
             modelValueSource.value.push({})
             updateDataSource();
         }, delRow = (index) => {
-            modelValueSource.value.splice(index, 1);
-            Object.keys(subForms.value[index]).forEach(item => {
-                delete subForms.value[index][item]
+            Object.keys(subForms.value[index]).forEach(key => {
+                delete subForms.value[index][key];
             })
             subForms.value.splice(index, 1);
             subForm();
+            modelValueSource.value.splice(index, 1);
             updateDataSource();
         }, setValue = (field, value, index) => {
             modelValueSource.value[index][field] = value;
         }, updateDataSource = () => {
             nextTick(() => {
-                dataSource.value = modelValue.value ? deepCopy(modelValue.value) : [];
+                if (modelValue.value) {
+                    dataSource.value = modelValue.value.map((item) => {
+                        const nItem = { ...item };
+                        if (!nItem[rowKey.value]) {
+                            nItem[rowKey.value] = uniqueId();
+                        }
+                        return nItem;
+                    })
+                } else {
+                    dataSource.value = [];
+                }
             })
         }, add$f = (field, index, $f) => {
             if (!subForms.value[index]) {
                 subForms.value[index] = {};
             }
+            $f.keyidx = `${field}-${index}`;
             subForms.value[index][field] = $f;
             subForm();
         }, subForm = () => {
@@ -113,6 +124,8 @@ export default defineComponent({
                     allSubForm.push(item[itemKey]);
                 })
             })
+
+            console.log(subForms.value)
             formCreateInject.subForm(allSubForm);
         };
 
