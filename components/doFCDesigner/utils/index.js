@@ -4,7 +4,7 @@ export function makeOptionsRule(to) {
         type: 'radio',
         title: '数据来源',
         field: 'formCreateDataSourceType',
-        value: 0,
+        value: 'options',
         options: [
             { 'label': '静态数据', 'value': 'options' },
             { 'label': '接口数据', 'value': 'fetch' },
