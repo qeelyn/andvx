@@ -1,30 +1,38 @@
 <template>
-  <div class="_fc_struct">
-    <ElButton @click="visible=true" style="width: 100%;">{{ title }}</ElButton>
-    <ElDialog :title="title" :visible.sync="visible" :close-on-click-modal="false" append-to-body>
-      <div ref="editor" v-if="visible"></div>
-      <span slot="footer" class="dialog-footer">
-                <span style="color: red;float:left;" v-if="err">输入内容格式有误!</span>
-                <ElButton @click="visible = false" size="small">取 消</ElButton>
-                <ElButton type="primary" @click="onOk" size="small">确 定</ElButton>
-            </span>
-    </ElDialog>
-  </div>
+    <div class="_fc_struct">
+        <a-button @click="onShowClick" block>{{ title }}</a-button>
+        <a-modal
+            :title="title"
+            v-model:visible="visible"
+            :maskClosable="false"
+            destroyOnClose
+            @ok="onOk"
+            @cancel="onCancel"
+        >
+            <div ref="editorRef"></div>
+            <div>
+                <span
+                    style="color: red;float:left;text-align: left;"
+                    v-if="err"
+                >输入内容格式有误{{ err !== true ? err : '' }}</span>
+            </div>
+        </a-modal>
+    </div>
 </template>
 
 <script>
-import jsonlint from 'jsonlint-mod';
+import { defineComponent, ref, toRefs, watch, onMounted, nextTick } from 'vue'
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/addon/lint/lint.css';
-import CodeMirror from 'codemirror/lib/codemirror';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/json-lint';
+import CodeMirror from 'codemirror';
 import 'codemirror/mode/javascript/javascript';
+import { deepCopy } from '@form-create/utils/lib/deepextend';
+import is, { hasProperty } from '@form-create/utils/lib/type';
+import { parseFn } from '@form-create/utils/lib/json';
 
-export default {
+export default defineComponent({
     name: 'Struct',
     props: {
-        value: [Object, Array],
+        modelValue: { type: Object || Array },
         title: {
             type: String,
             default: '编辑数据'
@@ -34,63 +42,71 @@ export default {
         },
         validate: Function,
     },
-    data() {
-        return {
-            editor: null,
-            visible: false,
-            err: false,
-            oldVal: null,
-        };
-    },
-    watch: {
-        value() {
-            this.load();
-        },
-        visible(n) {
-            if (n) {
-                this.load();
-            } else {
-                this.err = false;
-            }
-        }
-    },
-    methods: {
-        load() {
-            const val = JSON.stringify(this.value || this.defaultValue, null, 2);
-            this.oldVal = val;
-            this.$nextTick(() => {
-                this.editor = CodeMirror(this.$refs.editor, {
-                    lineNumbers: true,
-                    mode: 'application/json',
-                    gutters: ['CodeMirror-lint-markers'],
-                    lint: true,
-                    line: true,
-                    tabSize: 2,
-                    lineWrapping: true,
-                    value: val || ''
-                });
-                this.editor.on('blur', () => {
-                    this.err = this.editor.state.lint.marked.length > 0;
-                });
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
+        const { modelValue, defaultValue, validate } = toRefs(props),
+            editorRef = ref(),
+            cMirror = ref(),
+            visible = ref(false),
+            err = ref(false),
+            oldVal = ref();
+
+        const onShowClick = () => {
+            visible.value = true;
+            nextTick(() => {
+                load()
+            })
+        }, load = () => {
+            const val = toJson(modelValue.value ? modelValue.value : defaultValue.value);
+            oldVal.value = val;
+            cMirror.value = CodeMirror(editorRef.value, {
+                lineNumbers: true,
+                mode: 'javascript',
+                gutters: ['CodeMirror-lint-markers'],
+                lint: true,
+                line: true,
+                tabSize: 2,
+                lineWrapping: true,
+                value: val || ''
             });
-        },
-        onOk() {
-            if (this.err) return;
-            const val = JSON.parse(this.editor.getValue());
-            if (this.validate && false === this.validate(val)) {
-                this.err = true;
+        }, toJson = (v) => {
+            return JSON.stringify(v, null, 2);
+        }, onCancel = () => {
+            cMirror.value = null;
+            oldVal.value = null;
+            visible.value = false;
+        }, onOk = () => {
+            if (err.value) return;
+
+            const str = cMirror.value.getValue();
+            let val;
+            try {
+                val = eval('(function (){return ' + str + '}())');
+            } catch (e) {
+                err.value = ` (${e})`;
                 return;
             }
-            this.visible = false;
-            if (JSON.stringify(val, null, 2) !== this.oldVal) {
-                this.$emit('input', val);
+            if (validate.value && false === validate.value(val)) {
+                err.value = true;
+                return;
             }
-        },
+            onCancel();
+            if (toJson(val) !== oldVal.value) {
+                emit('update:modelValue', val);
+            }
+        };
+
+        return {
+            editorRef,
+            visible,
+            err,
+            onShowClick,
+            onOk,
+            onCancel,
+        };
+
     },
-    beforeCreate() {
-        window.jsonlint = jsonlint;
-    }
-};
+});
 </script>
 
 <style>

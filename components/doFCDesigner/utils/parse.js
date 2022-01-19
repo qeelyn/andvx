@@ -7,40 +7,51 @@
 export function initRules(rules, dictionary) {
     if (rules && typeof rules === 'object') {
         if (Array.isArray(rules)) {
-            rules.forEach((dataItem, dataIndex) => {
+            rules.forEach((ruleItem) => {
 
-                // 对标准的字典列表处理
-                if (dataItem.dataSourceType === 'dictionary') {
-                    const { code, label, value } = dataItem.typeCodes
-                    dataItem.options = dictionary[code].map(item => {
+                if (ruleItem.dataSourceType === 'dictionary') {
+                    // 对标准的字典列表处理
+                    const { code, label, value } = ruleItem.typeCodes
+                    ruleItem.options = dictionary[code].map(item => {
                         return {
                             label: item[label],
                             value: item[value],
                         }
                     })
+                    ruleItem.effect = null;
+                } else if (ruleItem.dataSourceType === 'fetch') {
+                    // 对api方式的处理
+                    ruleItem.options = [];
+                    ruleItem.typeCodes = null;
+                } else if (ruleItem.dataSourceType === 'options') {
+                    // 直接options处理
+                    ruleItem.typeCodes = null;
+                    ruleItem.effect = null;
+                }
 
-                } else if (dataItem.children && dataItem.children.length) {
-                    initRules(dataItem.children, dictionary)
+
+                if (ruleItem.children && ruleItem.children.length) {
+                    initRules(ruleItem.children, dictionary)
                 }
 
                 //对真实的类型进行处理
-                if (dataItem.realType) {
-                    dataItem.type = dataItem.realType
+                if (ruleItem.realType) {
+                    ruleItem.type = ruleItem.realType
 
-                    if (dataItem.realType === 'group-table') {
-                        if (!dataItem.props) {
-                            dataItem.props = {}
+                    if (ruleItem.realType === 'group-table') {
+                        if (!ruleItem.props) {
+                            ruleItem.props = {}
                         }
-                        dataItem.props.rule = [...dataItem.children];
-                        delete dataItem.realType
-                        delete dataItem.children
-                    } else if (dataItem.realType === 'group') {
-                        if (!dataItem.props) {
-                            dataItem.props = {}
+                        ruleItem.props.rule = [...ruleItem.children];
+                        delete ruleItem.realType
+                        delete ruleItem.children
+                    } else if (ruleItem.realType === 'group') {
+                        if (!ruleItem.props) {
+                            ruleItem.props = {}
                         }
-                        dataItem.props.rule = [...dataItem.children];
-                        delete dataItem.realType
-                        delete dataItem.children
+                        ruleItem.props.rule = [...ruleItem.children];
+                        delete ruleItem.realType
+                        delete ruleItem.children
                     }
                 }
             })

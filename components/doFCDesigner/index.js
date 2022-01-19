@@ -1,7 +1,8 @@
 import FcDesigner from './components/FcDesigner.vue';
 import DragTool from './components/DragTool.vue';
 import InputCustomResult from './components/InputCustomResult.vue';
-// import Fetch from './components/Fetch.vue';
+import Fetch from './components/Fetch.vue';
+import Struct from './components/Struct.vue';
 import Validate from './components/Validate.vue';
 import DragBox from './components/DragBox.vue';
 import formCreate from '@form-create/ant-design-vue';
@@ -16,7 +17,8 @@ formCreate.component(DragTool.name, DragTool);
 formCreate.component(DragBox.name, DragBox);
 formCreate.component(Validate.name, Validate);
 formCreate.component(InputCustomResult.name, InputCustomResult);
-// formCreate.component('Fetch', Fetch);
+formCreate.component(Fetch.name, Fetch);
+formCreate.component(Struct.name, Struct);
 // formCreate.component('FcEditor', FcEditor);
 formCreate.component(GroupTable.name, GroupTable);
 

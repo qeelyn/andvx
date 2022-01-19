@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import { dataSourceConfig } from '../../utils/index';
+import { makeOptionsRule } from '../../utils/index';
 
 const label = '多选框';
 const name = 'checkbox';
@@ -21,9 +21,9 @@ export default {
     },
     props() {
         return [
+            makeOptionsRule('options'),
             { type: 'switch', field: 'disabled', title: '是否禁用' },
             { type: 'input', field: 'name', title: '所有 input[type="checkbox"] 的 name 属性' },
-            ...dataSourceConfig(),
         ];
     }
 };

@@ -1,5 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
-import { dataSourceConfig } from '../../utils/index';
+import { makeOptionsRule } from '../../utils/index';
 
 const label = '单选框';
 const name = 'radio';
@@ -22,6 +22,7 @@ export default {
     },
     props() {
         return [
+            makeOptionsRule('options'),
             { type: 'switch', field: 'disabled', title: '禁用' },
             { type: 'input', field: 'name', title: '所有 input[type="radio"] 的 name 属性' },
             {
@@ -45,7 +46,6 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
-            ...dataSourceConfig(),
         ];
     }
 };

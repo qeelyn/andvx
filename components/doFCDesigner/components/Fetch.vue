@@ -1,123 +1,148 @@
 <template>
   <div class="_fc_fetch">
     <form-create
-      v-model:api="api"
-      :value="formValue"
+      v-model:api="fApi"
+      :modelValue="fValue"
       :rule="rule"
       :option="option"
-      @change="input"
+      @change="onChange"
     />
   </div>
 </template>
 
 <script>
-import debounce from "@form-create/utils/lib/debounce";
-import is from "@form-create/utils/lib/type";
+import { defineComponent, ref, toRefs, computed, onMounted } from 'vue'
+import is from '@form-create/utils/lib/type';
+import formCreate from "@form-create/ant-design-vue";
 
-export default {
-  name: "Fetch",
-  props: {
-    value: [Object, String],
-    to: String,
+export default defineComponent({
+  name: 'Fetch',
+  components: {
+    FormCreate: formCreate.$form(),
   },
-  computed: {
-    formValue() {
-      const val = this.value;
-      if (!val) return {};
-      if (is.String(val)) {
-        return {
-          action: val,
-        };
-      }
-      if (!val._parse && val.parse) {
-        return { ...val, _parse: "" + val.parse };
-      } else if (is.Function(val._parse)) {
-        return { ...val, _parse: "" + val._parse };
-      }
-      return val;
-    },
-  },
-  data() {
-    return {
-      api: {},
-      fetch: {},
-      option: {
+  props: ['modelValue', 'to'],
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    const { to, modelValue } = toRefs(props),
+      timeFn = ref(),
+      fApi = ref({}),
+      fValue = computed(() => {
+        if (modelValue.value) {
+          if (is.String(modelValue.value)) {
+            return {
+              action: modelValue.value
+            };
+          } else if (!modelValue.value._parse && modelValue.value.parse) {
+            return { ...modelValue.value, _parse: `${modelValue.value.parse}` };
+          } else if (is.Function(modelValue.value._parse)) {
+            return { ...modelValue.value, _parse: `${modelValue.value._parse}` };
+          }
+        } else {
+          return {};
+        }
+      }),
+      option = ref({
         form: {
-          labelPosition: "right",
-          size: "mini",
-          labelWidth: "90px",
+          layout: "vertical",
         },
         submitBtn: false,
-      },
-      rule: [
+      }),
+      rule = ref([
         {
-          type: "input",
-          field: "action",
-          title: "接口: ",
-          validate: [{ required: true, message: "请数据接口" }],
+          type: 'input',
+          field: 'action',
+          title: '接口: ',
+          // value: 'http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/areas/csv/100000_province.json',
+          validate: [{ required: true, message: '请数据接口' }]
         },
         {
-          type: "select",
-          field: "method",
-          title: "请求方式: ",
-          value: "GET",
+          type: 'select',
+          field: 'method',
+          title: '请求方式: ',
+          value: 'GET',
           options: [
-            { label: "GET", value: "GET" },
-            { label: "POST", value: "POST" },
-          ],
+            { label: 'GET', value: 'GET' },
+            { label: 'POST', value: 'POST' },
+          ]
         },
         {
-          type: "input",
-          field: "_parse",
-          title: "解析函数",
-          info: "解析接口数据，返回组件所需的数据结构",
-          value: "function (res){\n   return res.data;\n}",
+          type: 'Struct',
+          field: 'data',
+          title: '附带数据: ',
+          value: {},
           props: {
-            type: "textarea",
-            rows: 8,
-          },
-          validate: [
-            {
-              validator: (_, v, cb) => {
-                if (!v) return cb();
-                try {
-                  this.parseFn(v);
-                } catch (e) {
-                  return cb(false);
-                }
-                cb();
-              },
-              message: "请输入正确的解析函数",
-            },
-          ],
+            defaultValue: {},
+          }
         },
-      ],
-    };
-  },
-  methods: {
-    parseFn(v) {
-      return eval(`(function(){return ${v} })()`);
-    },
-    _input() {
-      this.api.submit((formData) => {
-        formData.to = this.to || "options";
-        if (formData._parse) formData.parse = this.parseFn(formData._parse);
-        this.$emit("input", formData);
-      });
-    },
-    input: debounce(function () {
-      this._input();
-    }, 1500),
-  },
-  mounted() {
-    this._input();
-  },
-};
+        {
+          type: 'Struct',
+          field: 'headers',
+          title: 'header信息: ',
+          value: {},
+          props: {
+            defaultValue: {},
+          }
+        },
+        {
+          type: 'a-textarea',
+          field: '_parse',
+          title: '解析函数',
+          info: '解析接口数据，返回组件所需的数据结构',
+          value: 'function (res){\n   return res.rows.map(item => {return {label:item.name,value:item.adcode}});\n}',
+          modelField: 'value',
+          props: {
+            rows: 8
+          },
+          validate: [{
+            validator: (_, v) => {
+              if (v) {
+                try {
+                  parseFn(v);
+                } catch (e) {
+                  return Promise.reject('请输入正确的解析函数');
+                }
+              }
+              return Promise.resolve();
+            }
+          }]
+        },
+      ])
+
+    const parseFn = (data) => {
+      return eval(`(function(){return ${data} })()`);
+    }, fApiSubmit = () => {
+      if (fApi.value) {
+        fApi.value.submit((formData) => {
+          formData.to = to.value || 'options';
+          if (formData._parse) {
+            formData.parse = parseFn(formData._parse);
+          }
+          emit('update:modelValue', formData);
+        })
+      }
+    }, onChange = () => {
+      clearTimeout(timeFn.value)
+      timeFn.value = setTimeout(() => {
+        fApiSubmit()
+      }, 1500);
+    }
+
+    onMounted(fApiSubmit)
+
+    return {
+      fApi,
+      fValue,
+      option,
+      rule,
+      onChange,
+    }
+  }
+});
 </script>
 <style>
 ._fc_fetch .el-form-item__label {
-  /* float: left; */
   display: inline-block;
+  /* float: left; */
   text-align: right;
   padding-right: 5px;
 }
