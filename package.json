@@ -1,6 +1,6 @@
 {
   "name": "andvx",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "vite",
     "dev-f": "vite --force"
@@ -23,5 +23,10 @@
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0"
+  },
+  "author": "xhyu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qeelyn/andvx.git"
   }
 }
