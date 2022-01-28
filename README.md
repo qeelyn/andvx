@@ -38,7 +38,7 @@ app.component('a-table', DoTable);
     - 依然支持官方对图形界面操作的[文档](http://designer.form-create.com/guide/)
     - 通过图形界面编辑生成需要的JSON配置
 
-- doTable 表格的表头设置组件
+- doTable 表格的表头设置组件   [使用说明](./components/doTable/doTable.md)
     - 基于vuex存储表头部设置结果
     - 可以进行表头列的移动、显隐
 
