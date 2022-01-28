@@ -28,7 +28,9 @@ app.component('a-table', DoTable);
 
 
 ## components
-
+- alertPop 带关闭的提示框  [使用说明](./components/alertPop/README.md)
+    - 利用alert的基础功能处理了一个带关闭的全局提示组件
+        
 - breadcrumb 面包屑组件
     - 基于vuex 在菜单路由页面进行数据读取与浏览器选项卡title设置
     - 同时也支持自住设置数据展示

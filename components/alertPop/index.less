@@ -1,0 +1,21 @@
+#alertPop {
+    position      : fixed;
+    top           : 0;
+    left          : 0;
+    width         : 100%;
+    height        : 0;
+    text-align    : center;
+    pointer-events: none;
+    z-index       : 1200;
+
+    .ant-alert {
+        display       : inline-flex;
+        margin-top    : 16px;
+        pointer-events: all;
+
+        .ant-alert-content {
+            min-width: 200px;
+            max-width: 90vw;
+        }
+    }
+}

@@ -10,7 +10,7 @@
                     />
                 </div>
                 <div>
-                    <a-button>xxx</a-button>
+                    <a-button @click="onClick">alertPop</a-button>
                 </div>
             </div>
         </div>
@@ -21,12 +21,23 @@
 import { defineComponent, ref, watch } from 'vue'
 import { useStore } from "vuex";
 import Breadcrumb from "../../components/breadcrumb";
+import AlertPop from "../../components/alertPop";
 
 export default defineComponent({
-    components: { Breadcrumb },
+    components: { Breadcrumb, AlertPop },
     setup() {
         const store = useStore();
-      
+
+        const onClick = () => {
+            AlertPop.info('info')
+            AlertPop.error('error')
+            AlertPop.success('success')
+            AlertPop.warning('warning')
+        }
+
+        return {
+            onClick
+        }
     }
 });
 </script>
