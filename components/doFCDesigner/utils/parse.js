@@ -44,16 +44,16 @@ export function initRules(rules, dictionary) {
                         ruleItem.props = {}
                     }
                     ruleItem.props.rule = [...ruleItem.children];
-                    delete ruleItem.realType
                     delete ruleItem.children
                 } else if (ruleItem.realType === 'group') {
                     if (!ruleItem.props) {
                         ruleItem.props = {}
                     }
                     ruleItem.props.rule = [...ruleItem.children];
-                    delete ruleItem.realType
                     delete ruleItem.children
                 }
+                
+                delete ruleItem.realType
             }
         })
     }
