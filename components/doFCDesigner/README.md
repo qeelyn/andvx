@@ -10,13 +10,19 @@ npm i andvx
 
 组件方法依然支持官方，[可点击查看](http://designer.form-create.com/guide/api.html#getrule)
 
+扩充 - 表单组件
+- 隐藏域
+
+扩充 - 辅助组件
+- 进度条
+
 扩充 - 布局组件
 - 数组
 - 表格
 - 卡片
-- 标签页  （*此组件存在问题）
+- 标签页  （*此组件存在问题目前注释掉不处理）
 
-*使用数组和表格组件或自定义字典获取数据需引入 initRules 解析
+*使用【数组、表格组件、自定义字典、隐藏域替换type属性配置】时需引入 initRules 解析
 ```
 <template>
     <div style="height: 80vh;">

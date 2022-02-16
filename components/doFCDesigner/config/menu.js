@@ -24,6 +24,8 @@ import span from './rule/span';
 import space from './rule/space';
 import button from './rule/button';
 // import editor from './rule/editor';
+import progress from './rule/progress';
+import hidden from './rule/hidden';
 import tab from './rule/tab';
 import group from './rule/group';
 import table from './rule/table';
@@ -39,21 +41,21 @@ export default function createMenu() {
                 date, dateRangePicker, select,
                 time, timeRangePicker, _switch,
                 slider, rate, cascader,
-                transfer, tree
+                transfer, tree, hidden
             ]
         },
         {
             name: 'aide',
             title: '辅助组件',
             list: [
-                alert, button, span, divider,
+                alert, button, span, divider, progress
             ]
         },
         {
             name: 'layout',
             title: '布局组件',
             list: [
-                row, space, group, table, card, tab
+                row, space, group, table, card, //tab
             ]
         },
     ];

@@ -29,6 +29,8 @@ import space from './space';
 import tab from './tab';
 import button from './button';
 import editor from './editor';
+import progress from './progress';
+import hidden from './hidden';
 
 
 const ruleList = {
@@ -63,6 +65,8 @@ const ruleList = {
     [space.name]: space,
     [button.name]: button,
     [editor.name]: editor,
+    [progress.name]: progress,
+    [hidden.name]: hidden,
 };
 
 export default ruleList;
