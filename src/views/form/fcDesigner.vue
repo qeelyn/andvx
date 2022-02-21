@@ -9,7 +9,7 @@
                     <template #btns>
                         <a-space>
                             <a-button type="primary" @click="viewer($refs.fcDesignerRef)">预览</a-button>
-                            <a-button @click="addRuleRule($refs.fcDesignerRef)">添加默认值</a-button>
+                            <a-button @click="modal.addShow = true">添加默认值</a-button>
                             <a-button @click="consoleLog($refs.fcDesignerRef)">控制台打印</a-button>
                             <a-button @click="clear($refs.fcDesignerRef)">清空</a-button>
                         </a-space>
@@ -24,6 +24,19 @@
                     :rule="form.rule"
                     :option="form.options"
                     @submit="getResult"
+                />
+            </a-modal>
+
+            <a-modal
+                v-model:visible="modal.addShow"
+                :width="800"
+                title="添加默认值"
+                @ok="addRuleRule($refs.fcDesignerRef)"
+            >
+                <a-textarea
+                    v-model:value="cooyObj"
+                    placeholder="Autosize height with minimum and maximum number of lines"
+                    :auto-size="{ minRows: 2, maxRows: 5 }"
                 />
             </a-modal>
         </div>
@@ -42,6 +55,7 @@ export default defineComponent({
     setup() {
         const modal = ref({
             show: false,
+            addShow: false,
             data: null
         }), form = ref({
             api: {},
@@ -62,7 +76,7 @@ export default defineComponent({
         }), cooyObj = ref();
 
         // 测试 a-tabs  a-tabs存在无法渲染问题
-        // cooyObj.value = [
+        // cooyObj.value = JSON.stringify([
         //     {
         //         "type": "a-tabs",
         //         "children": [
@@ -81,10 +95,10 @@ export default defineComponent({
         //         "hidden": false,
         //         "display": true
         //     }
-        // ]
+        // ])
 
         // 测试 group-table
-        cooyObj.value = [
+        cooyObj.value = JSON.stringify([
             {
                 "class": "group-table",
                 "realType": "group-table",
@@ -131,7 +145,7 @@ export default defineComponent({
                 "hidden": false,
                 "display": true
             }
-        ]
+        ])
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();
@@ -144,7 +158,8 @@ export default defineComponent({
             modal.value.show = true;
             form.value.rule = rule
         }, addRuleRule = (ref) => {
-            ref.setRule(cooyObj.value)
+            ref.setRule(JSON.parse(cooyObj.value))
+            modal.value.addShow = false;
         }, clear = (ref) => {
             ref.setRule([])
         }, getResult = (formData) => {
@@ -152,6 +167,7 @@ export default defineComponent({
         };
 
         return {
+            cooyObj,
             modal,
             form,
             viewer,

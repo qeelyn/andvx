@@ -16,6 +16,7 @@ export default {
     },
     props() {
         return [
+            { type: 'input', field: 'formCreateStyle', title: '样式Style' },
             {
                 type: 'select',
                 field: 'type',
