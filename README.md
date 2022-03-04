@@ -65,6 +65,12 @@ app.component('a-table', DoTable);
 
 本组件是基于vuex处理的因此需要引入 store/modules/andvx.js
 
+## vitePlugin
+
+基于vite插件规范开发，处理打包时候遇到的一些问题
+
+- vite-plugin-html [使用说明](./vitePlugin/vite-plugin-html/README.md)
+
 ## demo运行
 ```
 npm i

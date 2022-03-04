@@ -1,8 +1,10 @@
 {
   "name": "andvx",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
     "dev-f": "vite --force"
   },
   "description": "基于 ant design vue 扩展一些组件",
