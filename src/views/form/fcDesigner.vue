@@ -18,7 +18,7 @@
             </div>
 
             <a-modal v-model:visible="modal.show" :width="800" title="预览">
-                <FormCreate
+                <form-create
                     v-model:api="form.api"
                     v-model="form.value"
                     :rule="form.rule"
@@ -48,7 +48,6 @@ import Breadcrumb from "../../../components/breadcrumb";
 import DoFCDesigner from "../../../components/doFCDesigner";
 import { initRules } from "../../../components/doFCDesigner/utils/parse";
 import formCreate from '@form-create/ant-design-vue';
-
 
 export default defineComponent({
     components: { Breadcrumb, DoFCDesigner, FormCreate: formCreate.$form(), },
