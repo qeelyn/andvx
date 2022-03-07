@@ -23,13 +23,13 @@ npm i andvx
 
 vite.config.js
 ```
-import pluginHtml from 'andvx/vitePlugin/vite-plugin-html'
+import htmlPlugin from 'andvx/vitePlugin/vite-plugin-html'
 
 export default defineConfig({
     ...
     plugins: [
         ..., 
-        pluginHtml({})
+        htmlPlugin({})
     ],
     ...
 })
