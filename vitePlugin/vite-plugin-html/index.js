@@ -1,4 +1,4 @@
-export default (options) => {
+module.exports = function htmlPlugin(options) {
     const config = {
         prefix: 'base64::',
         rules: ['<link ', '{{'],
