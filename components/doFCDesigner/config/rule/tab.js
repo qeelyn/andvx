@@ -5,11 +5,11 @@ export default {
     icon: 'icon-tab',
     label,
     name,
-    drag: true,
     rule() {
         return {
             type: 'a-tabs',
             props: {},
+            style: "width:100%",
             children: []
         };
     },

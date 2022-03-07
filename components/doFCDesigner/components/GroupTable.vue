@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, nextTick, watch, inject } from 'vue'
+import { defineComponent, ref, toRefs, nextTick, watch } from 'vue'
 import { deepCopy } from "@form-create/utils/lib/deepextend";
 import formCreate from "@form-create/ant-design-vue";
 import uniqueId from '@form-create/utils/lib/unique';
@@ -55,11 +55,11 @@ export default defineComponent({
         bordered: { type: Boolean },
         showHeader: { type: Boolean, default: true },
         size: { type: String, default: 'default' },
+        formCreateInject: { type: Object }
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-        const formCreateInject = inject('formCreateInject'),
-            { rule, modelValue, rowKey } = toRefs(props),
+        const { rule, modelValue, rowKey, formCreateInject } = toRefs(props),
             columns = ref([]),
             subForms = ref([]),
             fOption = ref({ form: { layout: 'vertical' }, submitBtn: false }),
@@ -124,7 +124,7 @@ export default defineComponent({
                     allSubForm.push(item[itemKey]);
                 })
             })
-            formCreateInject.subForm(allSubForm);
+            formCreateInject.value.subForm(allSubForm);
         };
 
         updateDataSource()

@@ -34,7 +34,7 @@ import { defineComponent, ref, toRefs, inject, onBeforeUnmount } from 'vue'
 let cid = 1;
 export default defineComponent({
   name: 'DragTool',
-  props: ['dragBtn', 'children', 'unique'],
+  props: ['dragBtn', 'children', 'unique', 'formCreateInject'],
   setup(props, { emit }) {
     const { unique } = toRefs(props),
       id = ref(unique.value || cid++),
