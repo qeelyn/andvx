@@ -20,7 +20,7 @@ export default (options) => {
                     config.rules.forEach(proof => {
                         execute = execute || item.indexOf(proof) > -1;
                     })
-                    return execute ? `${config.prefix}${btoa(item)}` : item
+                    return execute ? `${config.prefix}${Buffer(item).toString('base64')}` : item
                 })
                 return codeAry.join('\n')
             }
@@ -29,7 +29,7 @@ export default (options) => {
             let htmlAry = html.split('\n');
             htmlAry = htmlAry.map(item => {
                 if (item.indexOf(config.prefix) === 0) {
-                    return atob(item.replace(config.prefix, ''))
+                    return Buffer(item.replace(config.prefix, ''), 'base64').toString()
                 } else {
                     return item;
                 }
