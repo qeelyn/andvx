@@ -6,23 +6,38 @@ vue3  ant版本 表单设计器 基于 [form-create](http://form-create.com/) �
 npm i andvx
 ```
 
+## 扩充
+
+1. 表单组件
+    - 隐藏域
+
+2. 辅助组件
+    - 进度条
+
+3.  布局组件
+    - 数组
+    - 表格
+    - 卡片
+    - 标签页
+
+*使用【数组、表格组件、自定义字典、隐藏域替换type属性配置】时需引入 initRules 解析
 ## 使用
 
 组件方法依然支持官方，[可点击查看](http://designer.form-create.com/guide/api.html#getrule)
 
-扩充 - 表单组件
-- 隐藏域
+必须全局注册 formCreate
 
-扩充 - 辅助组件
-- 进度条
+main.js
+```
+import { createApp } from 'vue'
+import formCreate from "@form-create/ant-design-vue";
+const app = createApp(App)
 
-扩充 - 布局组件
-- 数组
-- 表格
-- 卡片
-- 标签页
+app.component(formCreate.name, formCreate);
 
-*使用【数组、表格组件、自定义字典、隐藏域替换type属性配置】时需引入 initRules 解析
+```
+
+xxx.vue
 ```
 <template>
     <div style="height: 80vh;">

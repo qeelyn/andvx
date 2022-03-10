@@ -1,6 +1,6 @@
 <script>
 import { defineComponent, ref, toRefs, h, watch } from 'vue'
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable/src/vuedraggable';
 
 export default defineComponent({
     name: 'DragBox',

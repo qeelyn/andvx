@@ -8,7 +8,7 @@ import DragBox from './components/DragBox.vue';
 import formCreate from '@form-create/ant-design-vue';
 // import FcEditor from '@form-create/component-wangeditor';
 import './style/index.css';
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable/src/vuedraggable';
 import unique from '@form-create/utils/lib/unique';
 import GroupTable from './components/GroupTable.vue';
 
@@ -40,7 +40,7 @@ formCreate.register('_fc_tool', {
 });
 
 FcDesigner.install = function (Vue) {
-    Vue.component('FcDesigner', FcDesigner);
+    Vue.component(FcDesigner.name, FcDesigner);
 };
 
 

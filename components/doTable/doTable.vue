@@ -52,7 +52,7 @@
 </style>
 <script>
 import { Table } from "ant-design-vue";
-import draggable from "vuedraggable";
+import draggable from "vuedraggable/src/vuedraggable";
 import { defineComponent, toRefs, ref, nextTick, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { SettingOutlined, DragOutlined } from "@ant-design/icons-vue";

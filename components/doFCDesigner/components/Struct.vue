@@ -22,8 +22,8 @@
 
 <script>
 import { defineComponent, ref, toRefs, watch, onMounted, nextTick } from 'vue'
+import * as CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/lib/codemirror.css';
-import CodeMirror from 'codemirror';
 import 'codemirror/mode/javascript/javascript';
 import { deepCopy } from '@form-create/utils/lib/deepextend';
 import is, { hasProperty } from '@form-create/utils/lib/type';

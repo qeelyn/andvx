@@ -252,7 +252,7 @@ import { deepCopy } from "@form-create/utils/lib/deepextend";
 import is from "@form-create/utils/lib/type";
 import { lower } from "@form-create/utils/lib/tocase";
 import ruleList from "../config/rule";
-import draggable from "vuedraggable";
+import draggable from "vuedraggable/src/vuedraggable";
 import formCreate from "@form-create/ant-design-vue";
 import createMenu from "../config/menu";
 import { upper } from "../utils/index";
