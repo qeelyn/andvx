@@ -9,7 +9,7 @@
                     <template #btns>
                         <a-space>
                             <a-button type="primary" @click="viewer($refs.fcDesignerRef)">预览</a-button>
-                            <a-button @click="modal.addShow = true">添加默认值</a-button>
+                            <a-button @click="onAddValue($refs.fcDesignerRef)">添加默认值</a-button>
                             <a-button @click="consoleLog($refs.fcDesignerRef)">控制台打印</a-button>
                             <a-button @click="clear($refs.fcDesignerRef)">清空</a-button>
                         </a-space>
@@ -30,122 +30,53 @@
             <a-modal
                 v-model:visible="modal.addShow"
                 :width="800"
-                title="添加默认值"
+                title="添加rule"
                 @ok="addRuleRule($refs.fcDesignerRef)"
             >
-                <a-textarea
-                    v-model:value="cooyObj"
-                    placeholder="Autosize height with minimum and maximum number of lines"
-                    :auto-size="{ minRows: 2, maxRows: 5 }"
-                />
+                <div v-if="modal.addShow" ref="editorRef"></div>
             </a-modal>
         </div>
     </div>
 </template>
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted, nextTick } from "vue";
 import { Modal, Textarea, Space, Button } from 'ant-design-vue';
 import Breadcrumb from "../../../components/breadcrumb";
 import DoFcDesigner from "../../../components/doFcDesigner";
 import { initRules } from "../../../components/doFcDesigner/utils/parse";
 import formCreate from '@form-create/ant-design-vue';
+import * as CodeMirror from 'codemirror/lib/codemirror';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/javascript/javascript';
 
 export default defineComponent({
     components: { Breadcrumb, DoFcDesigner, FormCreate: formCreate.$form(), AModal: Modal, ATextarea: Textarea, ASpace: Space, AButton: Button },
     setup() {
-        const modal = ref({
-            show: false,
-            addShow: false,
-            data: null
-        }), form = ref({
-            api: {},
-            value: null,
-            rule: [],
-            options: {
-                form: {
-                    layout: "vertical",
-                },
-                // submitBtn: false,
-            }
-        }), dictionary = ref({
-            'XYG': [
-                { name: 'XYG1', code: '1' },
-                { name: 'XYG2', code: '2' },
-                { name: 'XYG3', code: '3' },
-            ]
-        }), cooyObj = ref();
-
-        // 测试 a-tabs  a-tabs存在无法渲染问题
-        // cooyObj.value = JSON.stringify([
-        //     {
-        //         "type": "a-tabs",
-        //         "children": [
-        //             {
-        //                 "type": "a-tab-pane",
-        //                 "props": {
-        //                     "tab": "新标签页",
-        //                     "key": "q2f5tjvv7qmb"
-        //                 },
-        //                 "_fc_drag_tag": "tab-pane",
-        //                 "hidden": false,
-        //                 "display": true
-        //             }
-        //         ],
-        //         "_fc_drag_tag": "tabs",
-        //         "hidden": false,
-        //         "display": true
-        //     }
-        // ])
-
-        // 测试 group-table
-        cooyObj.value = JSON.stringify([
-            {
-                "class": "group-table",
-                "realType": "group-table",
-                "type": "div",
-                "field": "4v45tjwjpse6",
-                "title": "表格",
-                "children": [
-                    {
-                        "type": "input",
-                        "field": "bca5tjwjq9kb",
-                        "title": "输入框",
-                        "_fc_drag_tag": "input",
-                        "hidden": false,
-                        "display": true,
-                        "validate": [
-                            {
-                                "type": "string",
-                                "trigger": "change",
-                                "mode": "required",
-                                "message": "1111",
-                                "required": true
-                            }
-                        ]
+        const editorRef = ref(),
+            cMirror = ref(),
+            modal = ref({
+                show: false,
+                addShow: false,
+                data: null
+            }),
+            form = ref({
+                api: {},
+                value: null,
+                rule: [],
+                options: {
+                    form: {
+                        layout: "vertical",
                     },
-                    {
-                        "type": "input",
-                        "field": "cct",
-                        "title": "输入框",
-                        "_fc_drag_tag": "input",
-                        "hidden": false,
-                        "display": true,
-                        "validate": [
-                            {
-                                "type": "string",
-                                "trigger": "change",
-                                "mode": "required",
-                                "message": "ccct",
-                                "required": true
-                            }
-                        ]
-                    }
-                ],
-                "_fc_drag_tag": "group-table",
-                "hidden": false,
-                "display": true
-            }
-        ])
+                    // submitBtn: false,
+                }
+            }),
+            dictionary = ref({
+                'XYG': [
+                    { name: 'XYG1', code: '1' },
+                    { name: 'XYG2', code: '2' },
+                    { name: 'XYG3', code: '3' },
+                ]
+            });
 
         const consoleLog = (ref) => {
             let rule = ref.getRule();
@@ -158,8 +89,31 @@ export default defineComponent({
             modal.value.show = true;
             form.value.rule = rule
         }, addRuleRule = (ref) => {
-            ref.setRule(JSON.parse(cooyObj.value))
-            modal.value.addShow = false;
+            try {
+                modal.value.data = cMirror.value.getValue()
+                // TODO:json内有函数的目前还无法有效处理 如果是eval()可以转换但性能堪忧
+                ref.setRule(formCreate.parseJson(modal.value.data, true))
+                modal.value.addShow = false;
+            } catch (e) {
+                console.error(e);
+            }
+        }, loadCMirror = () => {
+            cMirror.value = CodeMirror(editorRef.value, {
+                lineNumbers: true,
+                mode: 'javascript',
+                gutters: ['CodeMirror-lint-markers'],
+                lint: true,
+                line: true,
+                tabSize: 2,
+                lineWrapping: true,
+                value: modal.value.data || ''
+            });
+        }, onAddValue = (ref) => {
+            modal.value.addShow = true;
+            modal.value.data = formCreate.toJson(ref.getRule(), 2);
+            nextTick(() => {
+                loadCMirror()
+            })
         }, clear = (ref) => {
             ref.setRule([])
         }, getResult = (formData) => {
@@ -167,13 +121,14 @@ export default defineComponent({
         };
 
         return {
-            cooyObj,
+            editorRef,
             modal,
             form,
             viewer,
             addRuleRule,
             consoleLog,
             clear,
+            onAddValue,
             getResult,
         };
     },
