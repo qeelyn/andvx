@@ -1,7 +1,7 @@
 <template>
   <div class="deoTable">
     <a class="deoTable-setting" v-if="setting" @click="visible = true">
-      <SettingOutlined />
+      <setting-outlined />
     </a>
     <slot></slot>
 
@@ -21,7 +21,7 @@
             <li class="ant-list-item">
               <a-checkbox v-model:checked="element.checked">{{ element.title }}</a-checkbox>
               <a v-if="element.isMove !== false" class="handle">
-                <DragOutlined />
+                <drag-outlined />
               </a>
             </li>
           </template>
@@ -51,14 +51,14 @@
 }
 </style>
 <script>
-import { Table } from "ant-design-vue";
+import { Modal, Button, Checkbox } from "ant-design-vue";
 import draggable from "vuedraggable/src/vuedraggable";
 import { defineComponent, toRefs, ref, nextTick, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { SettingOutlined, DragOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
-  components: { Table, SettingOutlined, DragOutlined, draggable },
+  components: { AModal: Modal, AButton: Button, ACheckbox: Checkbox, SettingOutlined, DragOutlined, draggable },
   props: {
     setting: { type: Boolean },
     columns: { type: Array },

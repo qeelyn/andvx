@@ -24,10 +24,11 @@
 </template>
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import DoTable from "../../../components/doTable";
 import Breadcrumb from "../../../components/breadcrumb";
 
 export default defineComponent({
-  components: { Breadcrumb },
+  components: { Breadcrumb, ATable: DoTable },
   setup() {
     const dataSource = ref([]),
       loading = ref(false),

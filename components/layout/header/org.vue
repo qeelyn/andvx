@@ -30,7 +30,10 @@
 </template>
 <script>
 import { defineComponent, ref, toRefs, computed, watch } from "vue";
+import { Cascader, Dropdown, Menu, MenuItem } from "ant-design-vue";
+
 export default defineComponent({
+    components: { ACascader: Cascader, ADropdown: Dropdown, AMenu: Menu, AMenuItem: MenuItem },
     props: {
         orgId: { type: String },
         loginOrgId: { type: String },

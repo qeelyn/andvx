@@ -16,10 +16,11 @@
 </template>
 <script>
 import { defineComponent } from "vue";
+import { LayoutHeader as ALayoutHeader } from "ant-design-vue";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
-  components: { MenuUnfoldOutlined, MenuFoldOutlined },
+  components: { MenuUnfoldOutlined, MenuFoldOutlined, ALayoutHeader },
   props: {
     collapsed: { type: Boolean, default: null }
   },

@@ -181,7 +181,7 @@
       </div>
       <div class="_fc-dragBox">
         <div class="_fc-m-drag">
-          <FormCreate :rule="dragForm.rule" :option="form.value" v-model:api="dragForm.api" />
+          <form-create :rule="dragForm.rule" :option="form.value" v-model:api="dragForm.api" />
         </div>
       </div>
     </a-layout-content>
@@ -201,7 +201,7 @@
           >表单配置</div>
         </div>
         <div v-show="activeTab === 'form'" style="padding: 20px">
-          <FormCreate :rule="form.rule" :option="form.option" v-model="form.value.form" />
+          <form-create :rule="form.rule" :option="form.option" v-model="form.value.form" />
         </div>
         <div
           v-show="activeTab === 'props'"
@@ -210,7 +210,7 @@
         >
           <div>
             <a-divider v-if="showBaseRule">基础配置</a-divider>
-            <FormCreate
+            <form-create
               v-if="showBaseRule"
               v-model:api="baseForm.api"
               v-model="baseForm.value"
@@ -219,7 +219,7 @@
               @change="baseChange"
             />
             <a-divider>属性配置</a-divider>
-            <FormCreate
+            <form-create
               v-model:api="propsForm.api"
               v-model="propsForm.value"
               :rule="propsForm.rule"
@@ -228,7 +228,7 @@
             />
             <!-- @removeField="propRemoveField" -->
             <a-divider v-if="showBaseRule">验证规则</a-divider>
-            <FormCreate
+            <form-create
               v-if="showBaseRule"
               v-model:api="validateForm.api"
               v-model="validateForm.value"
@@ -257,7 +257,6 @@ import formCreate from "@form-create/ant-design-vue";
 import createMenu from "../config/menu";
 import { upper } from "../utils/index";
 import uniqueId from '@form-create/utils/lib/unique';
-
 
 export default defineComponent({
   name: "FcDesigner",
@@ -566,7 +565,7 @@ export default defineComponent({
                 makeRule(self.children[0].config.config)
               );
             },
-            addChild: ({ self }) => {                
+            addChild: ({ self }) => {
               const config = self.children[0].config.config;
               const item = ruleList[config.children];
               if (!item) return;

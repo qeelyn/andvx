@@ -54,8 +54,10 @@
 </template>
 <script>
 import { defineComponent, ref, watch, nextTick } from "vue";
+import { Form, FormItem, Badge, Select, SelectOption, Space, Input, Button, RangePicker } from 'ant-design-vue';
 
 export default defineComponent({
+    components: { AForm: Form, AFormItem: FormItem, ABadge: Badge, ASelect: Select, ASelectOption: SelectOption, ASpace: Space, AInput: Input, AButton: Button, ARangePicker: RangePicker },
     setup() {
         const formRef = ref(),
             model = ref({

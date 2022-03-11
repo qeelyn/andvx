@@ -35,7 +35,7 @@ app.component('a-table', DoTable);
     - 基于vuex 在菜单路由页面进行数据读取与浏览器选项卡title设置
     - 同时也支持自住设置数据展示
 
-- doFCDesigner 动态表单ui编辑组件 [使用说明](./components/doFCDesigner/README.md)
+- doFcDesigner 动态表单ui编辑组件 [使用说明](./components/doFcDesigner/README.md)
     - 基于[form-create](http://www.form-create.com/v3/guide/)进行自主定制处理
     - 依然支持官方对图形界面操作的[文档](http://designer.form-create.com/guide/)
     - 通过图形界面编辑生成需要的JSON配置

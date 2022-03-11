@@ -6,3 +6,6 @@
     </template>
   </a-result>
 </template>
+<script setup>
+import { Result as AResult, Button as AButton } from 'ant-design-vue';
+</script>

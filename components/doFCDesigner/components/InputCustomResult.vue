@@ -5,11 +5,13 @@
 </template>
 <script>
 import { defineComponent, ref, toRefs, watch } from 'vue'
+import { Input } from 'ant-design-vue';
 /**
  * 用来处理特殊结果
  */
 export default defineComponent({
-    name: 'input-custom-result',
+    components: { AInput: Input },
+    name: 'inputCustomResult',
     props: {
         // 输入的值
         modelValue: { default: null },

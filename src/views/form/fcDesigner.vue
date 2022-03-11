@@ -1,11 +1,11 @@
 <template>
     <div class="qlContent">
         <div class="qlContent-head">
-            <Breadcrumb />
+            <breadcrumb />
         </div>
         <div class="qlContent-body">
             <div style="height: 80vh;">
-                <DoFCDesigner ref="fcDesignerRef">
+                <do-fc-designer ref="fcDesignerRef">
                     <template #btns>
                         <a-space>
                             <a-button type="primary" @click="viewer($refs.fcDesignerRef)">预览</a-button>
@@ -14,7 +14,7 @@
                             <a-button @click="clear($refs.fcDesignerRef)">清空</a-button>
                         </a-space>
                     </template>
-                </DoFCDesigner>
+                </do-fc-designer>
             </div>
 
             <a-modal v-model:visible="modal.show" :width="800" title="预览">
@@ -44,13 +44,14 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+import { Modal, Textarea, Space, Button } from 'ant-design-vue';
 import Breadcrumb from "../../../components/breadcrumb";
-import DoFCDesigner from "../../../components/doFCDesigner";
-import { initRules } from "../../../components/doFCDesigner/utils/parse";
+import DoFcDesigner from "../../../components/doFcDesigner";
+import { initRules } from "../../../components/doFcDesigner/utils/parse";
 import formCreate from '@form-create/ant-design-vue';
 
 export default defineComponent({
-    components: { Breadcrumb, DoFCDesigner, FormCreate: formCreate.$form(), },
+    components: { Breadcrumb, DoFcDesigner, FormCreate: formCreate.$form(), AModal: Modal, ATextarea: Textarea, ASpace: Space, AButton: Button },
     setup() {
         const modal = ref({
             show: false,

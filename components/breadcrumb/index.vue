@@ -9,6 +9,7 @@
 </template>
 <script>
 import { defineComponent, ref, toRefs, watch, computed, onMounted } from "vue";
+import { Breadcrumb, BreadcrumbItem } from 'ant-design-vue';
 import { useStore } from "vuex";
 
 /**
@@ -18,6 +19,7 @@ import { useStore } from "vuex";
  * }]
  */
 export default defineComponent({
+  components: { ABreadcrumb: Breadcrumb, ABreadcrumbItem: BreadcrumbItem },
   props: {
     separator: { type: String, default: "/" },
     datas: { type: Array },

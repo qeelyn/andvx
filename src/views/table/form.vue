@@ -85,11 +85,13 @@
 <script>
 import { defineComponent, ref, nextTick, watch } from "vue";
 import Breadcrumb from "../../../components/breadcrumb";
+import { Form, FormItem, Badge, Select, SelectOption, Switch, InputNumber, Input, Divider, Popconfirm } from 'ant-design-vue';
+import DoTable from "../../../components/doTable";
 import TableFormItem from "../../../components/doTable/tableFormItem.vue";
 import { LoadingOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
-  components: { Breadcrumb, TableFormItem, LoadingOutlined },
+  components: { Breadcrumb, TableFormItem, LoadingOutlined, ATable: DoTable, AForm: Form, AFormItem: FormItem, ABadge: Badge, ASelect: Select, ASelectOption: SelectOption, ASwitch: Switch, AInputNumber: InputNumber, AInput: Input, ADivider: Divider, APopconfirm: Popconfirm },
   setup() {
     const formRef = ref(),
       columns = [

@@ -6,7 +6,7 @@
     <template #title>
       <span>{{ value.name }}</span>
     </template>
-    <MenuItem
+    <menu-item
       v-for="(item, index) in value.children"
       :value="item"
       :key="`${keyValue}-${index}`"
@@ -30,9 +30,11 @@
 </template>
 <script >
 import { defineComponent } from "vue";
+import { SubMenu as ASubMenu, MenuItem as AMenuItem } from "ant-design-vue";
 
 export default defineComponent({
   name: "menuItem",
+  components: { ASubMenu, AMenuItem },
   props: {
     value: { type: Object },
     keyValue: { type: String },

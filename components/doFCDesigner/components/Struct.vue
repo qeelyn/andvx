@@ -22,6 +22,7 @@
 
 <script>
 import { defineComponent, ref, toRefs, watch, onMounted, nextTick } from 'vue'
+import { Button, Modal } from "ant-design-vue";
 import * as CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
@@ -30,6 +31,7 @@ import is, { hasProperty } from '@form-create/utils/lib/type';
 import { parseFn } from '@form-create/utils/lib/json';
 
 export default defineComponent({
+    components: { AButton: Button, AModal: Modal },
     name: 'Struct',
     props: {
         modelValue: { type: Object || Array },

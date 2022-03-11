@@ -24,8 +24,11 @@
     </a-dropdown>
 </template>
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent } from "vue";
+import { Dropdown, Avatar, Menu, MenuItem, MenuDivider } from "ant-design-vue";
+
 export default defineComponent({
+    components: { ADropdown: Dropdown, AAvatar: Avatar, AMenu: Menu, AMenuItem: MenuItem, AMenuDivider: MenuDivider },
     props: {
         user: { type: Object }
     },

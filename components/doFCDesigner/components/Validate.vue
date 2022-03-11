@@ -1,5 +1,5 @@
 <template>
-    <FormCreate class="_fc-validate" :rule="rule" :option="option" v-model="formValue" />
+    <form-create class="_fc-validate" :rule="rule" :option="option" v-model="formValue" />
 </template>
 
 <script>

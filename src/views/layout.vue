@@ -57,6 +57,7 @@
 </template>
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import { Layout as ALayout, LayoutSider as ALayoutSider, LayoutContent as ALayoutContent, Space, BackTop } from "ant-design-vue";
 import { useStore } from "vuex";
 import LayoutHeader from "../../components/layout/header.vue";
 import HeaderUser from "../../components/layout/header/user.vue";
@@ -66,7 +67,7 @@ import LayoutMenu from "../../components/layout/menu.vue";
 import menuJson from "./menu.json";
 
 export default defineComponent({
-    components: { LayoutHeader, LayoutMenu, HeaderSystem, HeaderUser, HeaderOrg },
+    components: { LayoutHeader, LayoutMenu, HeaderSystem, HeaderUser, HeaderOrg, ALayout, ALayoutSider, ALayoutContent, ASpace: Space, ABackTop: BackTop },
     setup() {
         const store = useStore(),
             collapsed = ref(false),

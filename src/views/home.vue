@@ -19,12 +19,13 @@
 </template>
 <script >
 import { defineComponent, ref, watch } from 'vue'
+import { Button as AButton } from 'ant-design-vue';
 import { useStore } from "vuex";
 import Breadcrumb from "../../components/breadcrumb";
 import AlertPop from "../../components/alertPop";
 
 export default defineComponent({
-    components: { Breadcrumb, AlertPop },
+    components: { Breadcrumb, AlertPop, AButton },
     setup() {
         const store = useStore();
 

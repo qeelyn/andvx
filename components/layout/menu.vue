@@ -10,7 +10,7 @@
       }
     "
   >
-    <MenuItem
+    <menu-item
       v-for="(item, index) in menuList"
       :keyValue="`${keyPrefix}-${index}`"
       :key="`${keyPrefix}-${index}`"
@@ -26,12 +26,13 @@
 
 <script>
 import { defineComponent, ref, toRefs, computed, onMounted, watch } from "vue";
+import { Menu as AMenu } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import MenuItem from "./menuItem.vue";
 
 export default defineComponent({
-  components: { MenuItem },
+  components: { MenuItem, AMenu },
   props: {
     theme: { type: String, default: "dark" },
     keyPrefix: { type: String, default: "menu" },

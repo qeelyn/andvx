@@ -22,7 +22,7 @@
                     <a @click="delRow(index)">删除</a>
                 </template>
                 <template v-else-if="column.dataIndex">
-                    <FormCreate
+                    <form-create
                         :key="`${column.dataIndex}-${index}`"
                         :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
                         :option="fOption"
@@ -38,15 +38,17 @@
 
 <script>
 import { defineComponent, ref, toRefs, nextTick, watch } from 'vue'
+import { Table } from "ant-design-vue";
 import { deepCopy } from "@form-create/utils/lib/deepextend";
 import formCreate from "@form-create/ant-design-vue";
 import uniqueId from '@form-create/utils/lib/unique';
 
 export default defineComponent({
     components: {
+        ATable: Table,
         FormCreate: formCreate.$form(),
     },
-    name: 'group-table',
+    name: 'groupTable',
     props: {
         modelValue: { type: Array },
         rule: { type: Array },

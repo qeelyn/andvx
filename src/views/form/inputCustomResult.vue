@@ -1,14 +1,14 @@
 <template>
     <div class="qlContent">
         <div class="qlContent-head">
-            <Breadcrumb />
+            <breadcrumb />
         </div>
         <div class="qlContent-body">
             <p>自定义结果处理:</p>
             <a-select ref="select" v-model:value="typeValue">
                 <a-select-option v-for="item in typeList" :value="item">{{ item }}</a-select-option>
             </a-select>
-            <InputCustomResult v-model="testValue" :valueType="typeValue" />
+            <input-custom-result v-model="testValue" :valueType="typeValue" />
             <div>
                 值
                 {{ testValue }}
@@ -19,11 +19,12 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+import { Select, SelectOption } from 'ant-design-vue';
 import Breadcrumb from "../../../components/breadcrumb";
-import InputCustomResult from "../../../components/doFCDesigner/components/InputCustomResult.vue";
+import InputCustomResult from "../../../components/doFcDesigner/components/InputCustomResult.vue";
 
 export default defineComponent({
-    components: { Breadcrumb, InputCustomResult },
+    components: { Breadcrumb, InputCustomResult, ASelect: Select, ASelectOption: SelectOption },
     setup() {
         const testValue = ref({ a: 1 }),
             typeValue = ref('object'),

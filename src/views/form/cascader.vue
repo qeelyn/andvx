@@ -17,10 +17,11 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
+import { Cascader } from 'ant-design-vue';
 import Breadcrumb from "../../../components/breadcrumb";
 
 export default defineComponent({
-    components: { Breadcrumb },
+    components: { Breadcrumb, ACascader: Cascader },
     setup() {
         const data = ref(["1", "1-1", "1-1-1"]),
             options = ref([

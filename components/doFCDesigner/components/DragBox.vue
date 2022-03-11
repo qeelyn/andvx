@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, toRefs, h, watch } from 'vue'
+import { defineComponent, ref, toRefs, h } from 'vue'
 import draggable from 'vuedraggable/src/vuedraggable';
 
 export default defineComponent({
