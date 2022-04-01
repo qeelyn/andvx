@@ -23,7 +23,6 @@ import DoTable from "andvx/components/doTable";
 const app = createApp(App)
 app.component('a-table', DoTable);
 ...
-
 ```
 
 
@@ -57,9 +56,9 @@ app.component('a-table', DoTable);
 
 ## mixins
 
-- leavePageDetection.js 编辑状态离开时处理
-    - 在表单有编辑未保存时离开ui将会弹出拦截提醒
-    - 使用时必须根据本功能判断规则设置好所需项  具体可以参考dome菜单“表单示例”
+- leavePageDetection.js 编辑状态离开时处理  [使用说明](./mixins/leavePageDetection.md)
+- dragModal.js 针对Modal可拖动处理  [使用说明](./mixins/dragModal.md)
+    
 
 ## store
 

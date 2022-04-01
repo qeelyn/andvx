@@ -32,6 +32,10 @@
             {
                 "name": "Cascader 级联选择",
                 "router": "/form/cascader"
+            },
+            {
+                "name": "Modal 弹出框拖动",
+                "router": "/modal/index"
             }
         ]
     }

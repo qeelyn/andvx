@@ -60,6 +60,15 @@ const route = createRouter({
                     }]
                 },
                 {
+                    path: 'modal',
+                    component: Layout,
+                    children: [{
+                        path: 'index',
+                        meta: { title: 'Modal 测试', },
+                        component: () => import('./views/modal/index.vue')
+                    }]
+                },
+                {
                     path: '404',
                     meta: { authentication: false, title: '404' },
                     component: () => import("./views/404.vue")
