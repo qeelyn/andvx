@@ -47,7 +47,7 @@ export default defineComponent({
             editorRef = ref(),
             cMirror = ref(),
             visible = ref(false),
-            err = ref(false),
+            err = ref(),
             oldVal = ref();
 
         const onShowClick = () => {
@@ -81,6 +81,7 @@ export default defineComponent({
             oldVal.value = null;
             visible.value = false;
         }, onOk = () => {
+            err.value = null;
             const str = cMirror.value.getValue();
             let val;
             try {
