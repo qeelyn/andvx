@@ -1,18 +1,11 @@
 <template>
   <div class="_fc_fetch">
-    <form-create
-      v-model:api="fApi"
-      :modelValue="fValue"
-      :rule="rule"
-      :option="option"
-      @change="onChange"
-    />
+    <form-create v-model:api="fApi" v-model="fValue" :rule="rule" :option="option" />
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, computed, onMounted } from 'vue'
-import is from '@form-create/utils/lib/type';
+import { defineComponent, ref, toRefs, watch, onMounted } from 'vue'
 import formCreate from "@form-create/ant-design-vue";
 
 export default defineComponent({
@@ -20,27 +13,17 @@ export default defineComponent({
   components: {
     FormCreate: formCreate.$form(),
   },
-  props: ['modelValue', 'to'],
+  props: {
+    modelValue: { type: Object },
+    to: { type: String },
+    formcreateinject: { type: Object },
+  },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const { to, modelValue } = toRefs(props),
       timeFn = ref(),
       fApi = ref({}),
-      fValue = computed(() => {
-        if (modelValue.value) {
-          if (is.String(modelValue.value)) {
-            return {
-              action: modelValue.value
-            };
-          } else if (!modelValue.value._parse && modelValue.value.parse) {
-            return { ...modelValue.value, _parse: `${modelValue.value.parse}` };
-          } else if (is.Function(modelValue.value._parse)) {
-            return { ...modelValue.value, _parse: `${modelValue.value._parse}` };
-          }
-        } else {
-          return {};
-        }
-      }),
+      fValue = ref(modelValue.value ? modelValue.value : {}),
       option = ref({
         form: {
           layout: "vertical",
@@ -51,14 +34,14 @@ export default defineComponent({
         {
           type: 'input',
           field: 'action',
-          title: '接口: ',
+          title: '接口地址',
           // value: 'http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/areas/csv/100000_province.json',
-          validate: [{ required: true, message: '请数据接口' }]
+          validate: [{ required: true, message: '请输入接口地址' }]
         },
         {
           type: 'select',
           field: 'method',
-          title: '请求方式: ',
+          title: '请求方式',
           value: 'GET',
           options: [
             { label: 'GET', value: 'GET' },
@@ -66,75 +49,74 @@ export default defineComponent({
           ]
         },
         {
-          type: 'Struct',
-          field: 'data',
-          title: '附带数据: ',
-          value: {},
-          props: {
-            defaultValue: {},
-          }
+          type: 'select',
+          field: 'dataType',
+          title: '接口附带数据的提交方式',
+          value: 'formData',
+          options: [
+            { label: 'json', value: 'json' },
+            { label: 'formData', value: 'formData' },
+            { label: 'text', value: 'text' },
+            { label: 'xml', value: 'xml' },
+          ]
         },
         {
           type: 'Struct',
           field: 'headers',
-          title: 'header信息: ',
+          title: 'header信息',
           value: {},
           props: {
-            defaultValue: {},
+            title: 'header信息'
           }
         },
         {
-          type: 'a-textarea',
-          field: '_parse',
-          title: '解析函数',
-          info: '解析接口数据，返回组件所需的数据结构',
-          value: 'function (res){\n   return res.rows.map(item => {return {label:item.name,value:item.adcode}});\n}',
-          modelField: 'value',
+          type: 'Struct',
+          field: 'data',
+          title: '接口附带数据',
+          value: {},
           props: {
-            rows: 8
-          },
-          validate: [{
-            validator: (_, v) => {
-              if (v) {
-                try {
-                  parseFn(v);
-                } catch (e) {
-                  return Promise.reject('请输入正确的解析函数');
-                }
-              }
-              return Promise.resolve();
-            }
-          }]
+            title: '接口附带数据'
+          }
+        },
+        {
+          type: 'Struct',
+          field: 'parse',
+          title: '结果解析函数 ',
+          value: (res, rule, fapi) => res.rows.map(item => { return { label: item.name, value: item.adcode } }),
+          props: {
+            title: '结果解析函数'
+          }
+        },
+        {
+          type: 'input',
+          field: 'to',
+          title: '异步数据插入的位置',
+          info: `例如:'options', 'props.options'`,
+          value: to.value,
+          validate: [{ required: true, message: '请输入异步数据插入的位置' }]
         },
       ])
 
-    const parseFn = (data) => {
-      return eval(`(function(){return ${data} })()`);
-    }, fApiSubmit = () => {
+    const fApiSubmit = () => {
       if (fApi.value) {
         fApi.value.submit((formData) => {
-          formData.to = to.value || 'options';
-          if (formData._parse) {
-            formData.parse = parseFn(formData._parse);
-          }
           emit('update:modelValue', formData);
         })
       }
-    }, onChange = () => {
+    }
+
+    watch(fValue, () => {
       clearTimeout(timeFn.value)
       timeFn.value = setTimeout(() => {
         fApiSubmit()
       }, 1500);
-    }
-
-    onMounted(fApiSubmit)
+    })
 
     return {
       fApi,
       fValue,
       option,
       rule,
-      onChange,
     }
   }
 });
