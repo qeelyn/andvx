@@ -14,7 +14,7 @@ export default defineComponent({
     FormCreate: formCreate.$form(),
   },
   props: {
-    modelValue: { type: Object },
+    modelValue: { type: Object || String },
     to: { type: String },
     formcreateinject: { type: Object },
   },
