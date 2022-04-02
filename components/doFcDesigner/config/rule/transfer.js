@@ -75,6 +75,12 @@ export default {
                     field: 'field1',
                 }
             },
+            {
+                type: 'struct', field: 'filterOption', title: '筛选条件', props: {
+                    title: `筛选条件`,
+                    defaultValue: (inputValue, option) => true
+                }
+            },
         ];
     }
 };

@@ -194,6 +194,12 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
+            {
+                type: 'struct', field: 'getPopupContainer', title: '菜单渲染父节点', props: {
+                    title: `菜单渲染父节点`,
+                    defaultValue: (triggerNode) => document.body
+                }
+            },
         ];
     }
 };

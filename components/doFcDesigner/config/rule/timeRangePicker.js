@@ -34,6 +34,12 @@ export default {
             { type: 'input', field: 'popupClassName', title: '弹出层类名' },
             { type: 'switch', field: 'showNow', title: '面板是否显示“此刻”按钮' },
             { type: 'switch', field: 'use12Hours', title: '使用 12 小时制，为 true 时 format 默认为 h:mm:ss a' },
+            {
+                type: 'struct', field: 'getPopupContainer', title: '定义浮层的容器，默认为 body', props: {
+                    title: `定义浮层的容器`,
+                    defaultValue: (trigger) => document.body
+                }
+            },           
         ];
     }
 };

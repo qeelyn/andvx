@@ -26,15 +26,12 @@ import { Button, Modal } from "ant-design-vue";
 import * as CodeMirror from 'codemirror/lib/codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
-import { deepCopy } from '@form-create/utils/lib/deepextend';
-import is, { hasProperty } from '@form-create/utils/lib/type';
-import { parseFn } from '@form-create/utils/lib/json';
 
 export default defineComponent({
     components: { AButton: Button, AModal: Modal },
     name: 'Struct',
     props: {
-        modelValue: { type: Object || Array },
+        modelValue: [Object, Array, Function],
         title: {
             type: String,
             default: '编辑数据'
@@ -72,14 +69,18 @@ export default defineComponent({
                 value: val || ''
             });
         }, toJson = (v) => {
-            return JSON.stringify(v, null, 2);
+            if (typeof v === 'function') {
+                return `${v}`;
+            } else if (typeof v === 'object') {
+                return JSON.stringify(v, null, 2);
+            } else {
+                return v;
+            }
         }, onCancel = () => {
             cMirror.value = null;
             oldVal.value = null;
             visible.value = false;
         }, onOk = () => {
-            if (err.value) return;
-
             const str = cMirror.value.getValue();
             let val;
             try {

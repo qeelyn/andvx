@@ -80,6 +80,18 @@ export default {
             { type: 'switch', field: 'selectable', title: '是否可选中', value: true },
             { type: 'switch', field: 'showIcon', title: 'title 前的图标' },
             { type: 'switch', field: 'showLine', title: '是否展示连接线' },
+            {
+                type: 'struct', field: 'filterTreeNode', title: '按需筛选树节点（高亮）', props: {
+                    title: `按需筛选树节点`,
+                    defaultValue: (node) => { }
+                }
+            },
+            {
+                type: 'struct', field: 'loadData', title: '异步加载数据', props: {
+                    title: `按需筛选树节点`,
+                    defaultValue: (node) => { }
+                }
+            },
         ];
     }
 };

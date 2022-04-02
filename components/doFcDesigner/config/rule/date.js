@@ -72,7 +72,18 @@ export default {
                 title: '显示在输入框中的格式默认dayjs',
                 value: 'YYYY-MM-DD'
             },
-
+            {
+                type: 'struct', field: 'disabledDate', title: '不可选择的日期', props: {
+                    title: `不可选择的日期`,
+                    defaultValue: (currentDate) => false
+                }
+            },
+            {
+                type: 'struct', field: 'getPopupContainer', title: '定义浮层的容器，默认为 body', props: {
+                    title: `定义浮层的容器`,
+                    defaultValue: (trigger) => document.body
+                }
+            },
         ];
     }
 };

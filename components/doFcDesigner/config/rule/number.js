@@ -41,8 +41,18 @@ export default {
             { type: 'switch', field: 'controls', title: '是否显示增减按钮', value: true },
             { type: 'switch', field: 'keyboard', title: '是否启用键盘快捷行为', value: true },
             { type: 'switch', field: 'stringMode', title: '开启后支持高精度小数', info: '同时 change 事件将返回 string 类型' },
-
-
+            {
+                type: 'struct', field: 'formatter', title: '指定输入框展示值的格式', props: {
+                    title: `输入框展示值的格式`,
+                    defaultValue: (value) => `${value}`
+                }
+            },
+            {
+                type: 'struct', field: 'parser', title: '转换回数字的方式', props: {
+                    title: `转换回数字的方式`,
+                    defaultValue: (value) => value === '' ? null : Number(value)
+                }
+            },
         ];
     }
 };

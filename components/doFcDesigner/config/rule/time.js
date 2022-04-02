@@ -35,6 +35,30 @@ export default {
             { type: 'switch', field: 'showNow', title: '面板是否显示“此刻”按钮' },
             { type: 'switch', field: 'use12Hours', title: '使用 12 小时制，为 true 时 format 默认为 h:mm:ss a' },
             { type: 'input', field: 'valueFormat', title: '时分秒格式化', info: '默认dayjs对象，可填写HH:mm:ss', value: 'HH:mm:ss' },
+            {
+                type: 'struct', field: 'getPopupContainer', title: '定义浮层的容器，默认为 body', props: {
+                    title: `定义浮层的容器`,
+                    defaultValue: (trigger) => document.body
+                }
+            },
+            {
+                type: 'struct', field: 'disabledHours', title: '禁止选择部分小时选项', props: {
+                    title: `禁止选择部分小时选项`,
+                    defaultValue: () => { }
+                }
+            },
+            {
+                type: 'struct', field: 'disabledMinutes', title: '禁止选择部分分钟选项', props: {
+                    title: `禁止选择部分小时选项`,
+                    defaultValue: (selectedHour) => { }
+                }
+            },
+            {
+                type: 'struct', field: 'disabledSeconds', title: '禁止选择部分秒选项', props: {
+                    title: `禁止选择部分秒选项`,
+                    defaultValue: (selectedHour, selectedMinute) => { }
+                }
+            },
         ];
     }
 };

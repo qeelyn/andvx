@@ -46,6 +46,24 @@ export default {
                     { label: 'default', value: 'default' },
                 ]
             },
+            {
+                type: 'struct', field: 'getPopupContainer', title: '定义浮层的容器，默认为 body', props: {
+                    title: `定义浮层的容器`,
+                    defaultValue: (triggerNode) => document.body
+                }
+            },
+            {
+                type: 'struct', field: 'filterOption', title: '搜索时对筛选结果项的排序', props: {
+                    title: `搜索时对筛选结果项的排序`,
+                    defaultValue: (optionA, optionB) => 0
+                }
+            },
+            {
+                type: 'struct', field: 'filterSort', title: '根据输入项进行筛选', props: {
+                    title: `根据输入项进行筛选`,
+                    defaultValue: (inputValue, option) => true
+                }
+            },
         ];
     }
 };

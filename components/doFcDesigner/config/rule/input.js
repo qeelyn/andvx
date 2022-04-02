@@ -1,4 +1,5 @@
 import uniqueId from '@form-create/utils/lib/unique';
+import { makeEventRule } from '../../utils/index';
 
 const label = '输入框';
 const name = 'input';
@@ -47,7 +48,7 @@ export default {
                     { label: 'hidden', value: 'hidden' },
                 ],
             },
-
+            // makeEventRule(['change', 'pressEnter'])
         ];
     }
 };

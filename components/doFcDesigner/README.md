@@ -20,8 +20,6 @@ npm i andvx
     - 卡片
     - 标签页
 
-*使用【数组、表格组件、自定义字典、隐藏域替换type属性配置】时需引入 initRules 解析
-
 ## 使用
 
 使用建议: 全局注册 ant-design-vue 
@@ -106,6 +104,11 @@ dictionary = {
 | code  | key   |
 | key   | code  |
 | label | name  |
+
+## 注意
+
+- 使用【数组、表格组件、自定义字典、隐藏域替换type属性配置】时需引入 initRules 解析
+- 建议使用  formCreate.parseJson(ArrayObjcetRule, true) 
 
 ## demo 
 

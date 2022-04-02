@@ -18,7 +18,7 @@ export function makeOptionsRule(to) {
                 value: 'options',
                 rule: [
                     {
-                        type: 'Struct',
+                        type: 'struct',
                         field: 'formCreate' + upper(to).replace('.', '>'),
                         props: { defaultValue: [] }
                     },
@@ -28,7 +28,7 @@ export function makeOptionsRule(to) {
                 value: 'fetch',
                 rule: [
                     {
-                        type: 'Fetch',
+                        type: 'fetch',
                         field: 'formCreateEffect>fetch',
                         props: {
                             to
@@ -72,6 +72,31 @@ export function makeOptionsRule(to) {
             }
         ]
 
+    };
+}
+
+// 增加事件设置  但感觉事件没啥用
+export function makeEventRule(events = []) {
+    return {
+        type: 'object',
+        title: '事件',
+        field: 'formCreateOn',
+        props: {
+            rule: [{
+                type: 'a-space',
+                children: events.map(item => {
+                    return {
+                        type: 'struct',
+                        field: item,
+                        native: true,
+                        props: {
+                            title: `事件:${item}`,
+                            defaultValue: () => { }
+                        }
+                    }
+                })
+            }]
+        },
     };
 }
 
