@@ -14,10 +14,17 @@
                 <a-button @click="onShowModal">事件弹出Modal</a-button>
             </a-space>
 
-            <a-modal v-model:visible="show" title="tc">
+            <do-modal
+                v-model:visible="show"
+                @cancel="eventConsole('t1:cancel')"
+                @ok="eventConsole('t1:ok')"
+            >
+                <template #title>123</template>
                 <a-button @click="show1 = true">弹出1</a-button>
+            </do-modal>
+            <a-modal v-model:visible="show1" title="show1">
+                <template #title>#title</template>
             </a-modal>
-            <a-modal v-model:visible="show1" title="tc1">xxx</a-modal>
         </div>
     </div>
 </template>
@@ -25,11 +32,12 @@
 import { defineComponent, ref } from 'vue'
 import { Button, Modal } from 'ant-design-vue';
 import Breadcrumb from "../../../components/breadcrumb";
-import dragModal from "../../../mixins/dragModal";
+import DoModal from "../../../components/doModal";
+// import dragModal from "../../../mixins/dragModal";
 
 export default defineComponent({
-    components: { Breadcrumb, AButton: Button, AModal: Modal },
-    mixins: [dragModal],
+    components: { Breadcrumb, AButton: Button, AModal: Modal, DoModal },
+    // mixins: [dragModal],
     setup() {
         const show = ref(false),
             show1 = ref(false);
@@ -38,12 +46,15 @@ export default defineComponent({
             Modal.confirm({
                 title: '事件弹出Modal'
             })
+        }, eventConsole = (str) => {
+            console.log(str)
         }
 
         return {
             show,
             show1,
             onShowModal,
+            eventConsole,
         }
     }
 });

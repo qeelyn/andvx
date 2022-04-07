@@ -47,6 +47,9 @@ app.component('a-table', DoTable);
     - 配合框架的表单规则验证进行处理
     - 更友好的展示异常
 
+- doModal a-modal组件扩展   [使用说明](./components/doModal/README.md)
+    - a-modal组件扩展了拖拽功能 不支持Modal.info(xxx)弹出的拖动
+
 - layout 外壳布局相关组件
     - layout/menu.vue 左侧菜单
     - layout/header.vue 右侧头部
@@ -57,7 +60,7 @@ app.component('a-table', DoTable);
 ## mixins
 
 - leavePageDetection.js 编辑状态离开时处理  [使用说明](./mixins/leavePageDetection.md)
-- dragModal.js 针对Modal可拖动处理  [使用说明](./mixins/dragModal.md)
+- dragModal.js 针对Modal可拖动处理 支持a-modal与Modal.info(xxx)的方式  [使用说明](./mixins/dragModal.md)
     
 
 ## store
