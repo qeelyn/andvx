@@ -1,16 +1,7 @@
 <template>
     <div style="width:100%">
-        <a-table
-            :columns="columns"
-            :dataSource="dataSource"
-            :scroll="{ x: 100, y: 500 }"
-            :pagination="false"
-            :rowKey="rowKey"
-            :bordered="bordered"
-            :showHeader="showHeader"
-            :size="size"
-            :setting="false"
-        >
+        <a-table :columns="columns" :dataSource="dataSource" :scroll="{ x: 100, y: 500 }" :pagination="false"
+            :rowKey="rowKey" :bordered="bordered" :showHeader="showHeader" :size="size" :setting="false">
             <template #headerCell="{ column }">
                 <template v-if="column.dataIndex === 'actions'">
                     <a @click="addRow" title="添加">
@@ -18,22 +9,14 @@
                     </a>
                 </template>
             </template>
-            <template #bodyCell="{ column, record, index }">
+            <template #bodyCell="{ column, index }">
                 <template v-if="column.dataIndex === 'serialNumber'">{{ index + 1 }}</template>
                 <template v-else-if="column.dataIndex === 'actions'">
                     <a-space>
-                        <a
-                            :disabled="dataSource.length < 2 ? true : null"
-                            @click="moveRow(index, 'up')"
-                            title="上移"
-                        >
+                        <a :disabled="dataSource.length < 2 ? true : null" @click="moveRow(index, 'up')" title="上移">
                             <arrow-up-outlined />
                         </a>
-                        <a
-                            :disabled="dataSource.length < 2 ? true : null"
-                            @click="moveRow(index, 'down')"
-                            title="下移"
-                        >
+                        <a :disabled="dataSource.length < 2 ? true : null" @click="moveRow(index, 'down')" title="下移">
                             <arrow-down-outlined />
                         </a>
                         <a @click="delRow(index)" title="删除">
@@ -42,17 +25,12 @@
                     </a-space>
                 </template>
                 <template v-else-if="column.dataIndex">
-                    <form-create
-                        :key="`${column.dataIndex}-${index}`"
-                        :rule="getRowRule(column.dataIndex, record[column.dataIndex])"
-                        :option="fOption"
-                        @update:api="($f) => add$f(column.dataIndex, index, $f)"
-                        @change="(field, value) => setValue(field, value, index)"
-                    />
+                    <form-create :key="`${column.dataIndex}-${index}`" inFor :rule="cacheRules[index][column.dataIndex]"
+                        :option="fOption" @change="(field, value) => setValue(field, value, index)" />
                 </template>
-                <template v-else>test{{ column.dataIndex }}</template>
+                <template v-else>{{ column.dataIndex }}</template>
             </template>
-        </a-table>
+        </a-table>  
     </div>
 </template>
 
@@ -84,8 +62,8 @@ export default defineComponent({
     emits: ['update:modelValue'],
     setup(props, { emit }) {
         const { rule, modelValue, isSerialNumber, rowKey, formCreateInject } = toRefs(props),
+            cacheRules = ref([]),
             columns = ref([]),
-            subForms = ref([]),
             fOption = ref({ form: { layout: 'vertical' }, submitBtn: false }),
             // 在初始化、列变更的时候处理
             dataSource = ref([]),
@@ -108,14 +86,24 @@ export default defineComponent({
             columnAry.push({ title: '操作', dataIndex: 'actions', align: 'center', fixed: 'right', width: 96 })
             columns.value = columnAry;
         }, getRowRule = (field, value) => {
-            // 获取当前行的相应规则
-            const copyRule = deepCopy(rule.value.find(item => item.field === field));
-            copyRule.title = null;
-            copyRule.value = value
-            return copyRule ? [copyRule] : [];
+            // 获取当前字段的相应规则
+            const getRule = rule.value.find(item => item.field === field)
+            let copyRule = [];
+            if (getRule) {
+                copyRule = deepCopy(getRule)
+                copyRule.title = null;
+                copyRule.value = value
+                return [copyRule];
+            } else {
+                return null;
+            }
         }, addRow = () => {
             // 添加
-            modelValueSource.value.push({})
+            let data = {};
+            rule.value.forEach(item => {
+                data[item.field] = null
+            })
+            modelValueSource.value.push(data)
             updateDataSource();
         }, moveRow = (index, direction) => {
             // 上下移动
@@ -139,11 +127,6 @@ export default defineComponent({
             }
         }, delRow = (index) => {
             // 删除行
-            Object.keys(subForms.value[index]).forEach(key => {
-                delete subForms.value[index][key];
-            })
-            subForms.value.splice(index, 1);
-            subForm();
             modelValueSource.value.splice(index, 1);
             updateDataSource();
         }, setValue = (field, value, index) => {
@@ -153,34 +136,29 @@ export default defineComponent({
             // 更新表格数据源
             nextTick(() => {
                 if (modelValue.value) {
-                    dataSource.value = modelValue.value.map((item) => {
-                        const nItem = { ...item };
+                    let sourceData = [], cacheData = [];
+                    modelValue.value.forEach((item, index) => {
+                        const nItem = { ...item }, nCache = {};
                         if (!nItem[rowKey.value]) {
                             nItem[rowKey.value] = uniqueId();
                         }
-                        return nItem;
+
+                        for (let k in nItem) {
+                            let getRule = getRowRule(k, nItem[k]);
+                            if (getRule) {
+                                nCache[k] = getRule
+                            }
+                        }
+                        cacheData.push(nCache);
+                        sourceData.push(nItem);
                     })
+                    cacheRules.value = cacheData
+                    dataSource.value = sourceData
                 } else {
                     dataSource.value = [];
+                    cacheRules.value = [];
                 }
             })
-        }, add$f = (field, index, $f) => {
-            // 添加子表单
-            if (!subForms.value[index]) {
-                subForms.value[index] = {};
-            }
-            $f.keyidx = `${field}-${index}`;
-            subForms.value[index][field] = $f;
-            subForm();
-        }, subForm = () => {
-            // 更新所有子表单
-            let allSubForm = [];
-            subForms.value.forEach(item => {
-                Object.keys(item).forEach(itemKey => {
-                    allSubForm.push(item[itemKey]);
-                })
-            })
-            formCreateInject.value.subForm(allSubForm);
         };
 
         tidyColumns()
@@ -202,12 +180,11 @@ export default defineComponent({
             fOption,
             columns,
             dataSource,
-            getRowRule,
+            cacheRules,
             addRow,
             delRow,
             moveRow,
             setValue,
-            add$f,
         }
     },
 });
@@ -217,6 +194,7 @@ export default defineComponent({
     position: absolute;
     top: 100%;
 }
+
 .group-table .form-create .ant-form-item {
     margin-bottom: 0;
 }

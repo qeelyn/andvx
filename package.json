@@ -1,6 +1,6 @@
 {
   "name": "andvx",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,8 +10,8 @@
   "description": "基于 ant design vue 扩展一些组件",
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
-    "ant-design-vue": "3.0.0-beta.13",
-    "@form-create/ant-design-vue": "3.1.2",
+    "@form-create/ant-design-vue": "3.1.5",
+    "ant-design-vue": "^3.1.1",
     "codemirror": "5.65.0",
     "vuedraggable": "4.1.0"
   },
