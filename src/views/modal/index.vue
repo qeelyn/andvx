@@ -14,16 +14,13 @@
                 <a-button @click="onShowModal">事件弹出Modal</a-button>
             </a-space>
 
-            <do-modal
-                v-model:visible="show"
-                @cancel="eventConsole('t1:cancel')"
-                @ok="eventConsole('t1:ok')"
-            >
+            <a-modal v-model:visible="show" @cancel="eventConsole('t1:cancel')" @ok="eventConsole('t1:ok')">
                 <template #title>123</template>
                 <a-button @click="show1 = true">弹出1</a-button>
-            </do-modal>
+            </a-modal>
             <a-modal v-model:visible="show1" title="show1">
-                <template #title>#title</template>
+                <template #title>title1</template>
+                show1
             </a-modal>
         </div>
     </div>
@@ -36,7 +33,7 @@ import DoModal from "../../../components/doModal";
 // import dragModal from "../../../mixins/dragModal";
 
 export default defineComponent({
-    components: { Breadcrumb, AButton: Button, AModal: Modal, DoModal },
+    components: { Breadcrumb, AButton: Button, AModal: Modal, DoModal, },
     // mixins: [dragModal],
     setup() {
         const show = ref(false),
