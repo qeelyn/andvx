@@ -1,4 +1,7 @@
-src/
+dist
+node_modules
+src
 index.html
+*-lock.json
 vite.config.js
 .env.local

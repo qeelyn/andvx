@@ -1,6 +1,6 @@
 {
   "name": "andvx",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "@form-create/ant-design-vue": "3.1.5",
-    "ant-design-vue": "^3.1.1",
+    "ant-design-vue": "^3.2.0",
     "codemirror": "5.65.0",
     "vuedraggable": "4.1.0"
   },

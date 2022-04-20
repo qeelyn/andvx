@@ -2,8 +2,8 @@
   <a-layout-header class="layoutHeader">
     <div class="flexBox">
       <template v-if="collapsed !== null">
-        <MenuUnfoldOutlined v-if="collapsed" class="trigger" @click="onChangeCollapsed(false)" />
-        <MenuFoldOutlined v-else class="trigger" @click="onChangeCollapsed(true)" />
+        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="onChangeCollapsed(false)" />
+        <menu-fold-outlined v-else class="trigger" @click="onChangeCollapsed(true)" />
       </template>
       <div class="flexAuto">
         <slot name="left"></slot>
