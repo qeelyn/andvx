@@ -8,9 +8,11 @@ npm i andvx
 
 ## 增加props
 
-|  参数  | 类型  | 默认值 |
-| ----  | ---- | ---- |
-| isDrag  | Boolean | true |
+|  参数  | 类型  | 默认值 | 说明 |
+| ----  | ---- | ---- | ---- |
+| useDrag  | Boolean | true |  是否启用拖拽 |
+| useFullScreen  | Boolean | true |  是否启用全屏 |
+| defaultFullScreen  | Boolean | false |  全屏默认值 |
 
 ## 使用
 使用方法与官方一致可以直接覆盖a-modal进行使用

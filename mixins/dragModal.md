@@ -1,6 +1,8 @@
-# dragModal.js
+# dragModal.js  
 
-针对 Modal 组件无法拖动导致ui呗遮挡问题提供了一个混入处理
+[建议直接使用do-modal](../components/doModal/README.md)
+
+针对 Modal 组件无法拖动导致ui呗遮挡问题提供了一个混入处理   
 
 ## npm
 ```

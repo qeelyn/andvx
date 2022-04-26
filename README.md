@@ -60,8 +60,6 @@ app.component('a-table', DoTable);
 ## mixins
 
 - leavePageDetection.js 编辑状态离开时处理  [使用说明](./mixins/leavePageDetection.md)
-- dragModal.js 针对Modal可拖动处理 支持a-modal与Modal.info(xxx)的方式  [使用说明](./mixins/dragModal.md)
-    
 
 ## store
 
