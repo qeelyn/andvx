@@ -7,30 +7,73 @@
 @warning-color: #ff8030;
 @error-color  : #ff3030;
 
+html {
+    font-family: sans-serif;
+}
+
+body {
+    overflow   : overlay;
+    font-family: "Barlow", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
+}
+
 #qLayout {
 
     // 主题调整-黑色 
     .ant-layout-sider-dark {
+        background: #2c3040;
 
         .deo-menu {
             .ant-menu {
-                background: #001529;
-                box-shadow: none
+                background: #2c3040;
+                box-shadow: none;
+            }
+
+            .ant-menu-submenu-selected .ant-menu-submenu-title span,
+            .ant-menu-submenu-active .ant-menu-submenu-title span,
+            .ant-menu-item.ant-menu-item-selected span,
+            .ant-menu-item.ant-menu-item-active span {
+                color: #ffffff;
+
+                i {
+                    color: #ffffff;
+                }
+            }
+
+            i {
+                color: #6c7080;
+            }
+
+            .ant-menu-submenu-title span,
+            .ant-menu-item span {
+                color: #888c95;
             }
         }
     }
 
     .ant-layout-dark {
-        background: #001529;
+        background: #2c3040;
         height    : 100vh;
         overflow  : auto;
 
         .layoutHeader {
             background: transparent;
-            color     : rgba(255, 255, 255, 0.65);
+            color     : #6c7080;
 
             .ant-badge {
                 color: rgba(255, 255, 255, 0.65);
+            }
+
+            .ant-dropdown-open {
+                color: #ffffff;
+
+                i {
+                    color: #ffffff;
+
+                }
+            }
+
+            .trigger:hover {
+                color: #ffffff;
             }
         }
 
@@ -78,7 +121,28 @@
 
             .ant-menu {
                 background: #f8f8fa;
+            }
 
+            .ant-menu-submenu-title span,
+            .ant-menu-item span {
+                color: #586070;
+            }
+
+            .ant-menu-submenu-active .ant-menu-submenu-title span,
+            .ant-menu-item.ant-menu-item-active span {
+                color: @primary-color;
+            }
+
+            .ant-menu-item.ant-menu-item-selected span {
+                color: #ffffff;
+
+                i {
+                    color: #ffffff;
+                }
+            }
+
+            i {
+                color: #a0a0a8;
             }
         }
     }
@@ -91,6 +155,20 @@
 
         .layoutHeader {
             background-color: transparent;
+            color           : #a0a0a8;
+
+            .ant-dropdown-open {
+                color: @primary-color;
+
+                i {
+                    color: @primary-color;
+
+                }
+            }
+
+            .trigger:hover {
+                color: @primary-color;
+            }
         }
 
         .ant-layout-content {
@@ -124,8 +202,7 @@
         margin-bottom: 6px;
 
         .trigger {
-            font-size  : 18px;
-            line-height: 50px;
+            line-height: 4;
             padding    : 0 24px;
             cursor     : pointer;
             transition : color 0.3s;
@@ -136,7 +213,7 @@
         }
 
         i {
-            color: #a0a0a8;
+            color: #6c7080;
 
             &:hover {
                 color: @primary-color;
@@ -160,14 +237,15 @@
             height: 0;
         }
 
-        .ant-menu-item-icon {
-            font-size: 16px;
+        .ant-menu-item {
+            height     : 48px;
+            line-height: 48px;
+
+            .ant-menu-item-icon {
+                font-size: 16px;
+            }
         }
 
-        i {
-            color: #a0a0a8;
-
-        }
 
     }
 
@@ -304,6 +382,10 @@
 
     &.ant-collapse {
         overflow: hidden;
+    }
+
+    .ant-breadcrumb-separator {
+        color: #dcdee2;
     }
 }
 

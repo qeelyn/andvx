@@ -2,8 +2,11 @@
   <a-layout-header class="layoutHeader">
     <div class="flexBox">
       <template v-if="collapsed !== null">
-        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="onChangeCollapsed(false)" />
-        <menu-fold-outlined v-else class="trigger" @click="onChangeCollapsed(true)" />
+        <menu-outlined
+          class="trigger"
+          :style="collapsed ? 'rotate(90deg)' : 'rotate(0)'"
+          @click="onChangeCollapsed(!collapsed)"
+        />
       </template>
       <div class="flexAuto">
         <slot name="left"></slot>
@@ -17,22 +20,21 @@
 <script>
 import { defineComponent } from "vue";
 import { LayoutHeader as ALayoutHeader } from "ant-design-vue";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
+import { MenuOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
-  components: { MenuUnfoldOutlined, MenuFoldOutlined, ALayoutHeader },
+  components: { MenuOutlined, ALayoutHeader },
   props: {
-    collapsed: { type: Boolean, default: null }
+    collapsed: { type: Boolean, default: null },
   },
-  emits: ['update:collapsed'],
+  emits: ["update:collapsed"],
   setup(props, { emit }) {
-
     const onChangeCollapsed = (isBool) => {
-      emit('update:collapsed', isBool)
+      emit("update:collapsed", isBool);
     };
 
     return {
-      onChangeCollapsed
+      onChangeCollapsed,
     };
   },
 });
