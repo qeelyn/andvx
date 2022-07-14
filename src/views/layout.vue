@@ -71,8 +71,8 @@ export default defineComponent({
     setup() {
         const store = useStore(),
             collapsed = ref(false),
-            // theme = ref('dark'),
-            theme = ref('gray'),
+            theme = ref('dark'),
+            // theme = ref('gray'),
             backTopTarget = ref(window),
             orgList = ref();
 

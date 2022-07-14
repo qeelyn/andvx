@@ -28,10 +28,24 @@ body {
                 box-shadow: none;
             }
 
+            .ant-menu-submenu-title,
+            .ant-menu-item {
+                &:hover {
+                    .ant-menu-title-content {
+                        span {
+                            color: #ffffff;
+                        }
+
+                        i {
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+
+
             .ant-menu-submenu-selected .ant-menu-submenu-title span,
-            .ant-menu-submenu-active .ant-menu-submenu-title span,
-            .ant-menu-item.ant-menu-item-selected span,
-            .ant-menu-item.ant-menu-item-active span {
+            .ant-menu-item.ant-menu-item-selected span {
                 color: #ffffff;
 
                 i {
@@ -74,6 +88,10 @@ body {
 
             .trigger:hover {
                 color: #ffffff;
+
+                i {
+                    color: #ffffff;
+                }
             }
         }
 
@@ -123,22 +141,36 @@ body {
                 background: #f8f8fa;
             }
 
-            .ant-menu-submenu-title span,
-            .ant-menu-item span {
+            .ant-menu-title-content span {
                 color: #586070;
             }
 
-            .ant-menu-submenu-active .ant-menu-submenu-title span,
-            .ant-menu-item.ant-menu-item-active span {
-                color: @primary-color;
+            .ant-menu-submenu-title,
+            .ant-menu-item {
+                &:hover {
+                    .ant-menu-title-content {
+                        span {
+                            color: @primary-color;
+                        }
+
+                        i {
+                            color: @primary-color;
+                        }
+                    }
+                }
             }
 
-            .ant-menu-item.ant-menu-item-selected span {
-                color: #ffffff;
+            .ant-menu-item.ant-menu-item-selected {
+                .ant-menu-title-content {
+                    span {
+                        color: #ffffff;
+                    }
 
-                i {
-                    color: #ffffff;
+                    i {
+                        color: #ffffff;
+                    }
                 }
+
             }
 
             i {
@@ -205,7 +237,7 @@ body {
         margin-bottom: 6px;
 
         .trigger {
-            padding   : 0 24px;
+            padding   : 0 20px;
             cursor    : pointer;
             transition: color 0.3s;
         }
@@ -242,6 +274,7 @@ body {
         .ant-menu-item {
             height     : 48px;
             line-height: 48px;
+            margin     : 0;
 
             .ant-menu-item-icon {
                 font-size: 16px;
