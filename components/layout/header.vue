@@ -1,17 +1,18 @@
 <template>
   <a-layout-header class="layoutHeader">
     <div class="flexBox">
-      <template v-if="collapsed !== null">
-        <menu-outlined
-          class="trigger"
-          :style="collapsed ? 'rotate(90deg)' : 'rotate(0)'"
-          @click="onChangeCollapsed(!collapsed)"
-        />
-      </template>
-      <div class="flexAuto">
+      <span
+        v-if="collapsed !== null"
+        class="trigger"
+        @click="onChangeCollapsed(!collapsed)"
+      >
+        <i class="iconfont icon-icon_liebiao3" v-if="collapsed" />
+        <i class="iconfont icon-icon_liebiao2" v-else />
+      </span>
+      <div class="flexAuto layoutHeader-left">
         <slot name="left"></slot>
       </div>
-      <div>
+      <div class="layoutHeader-right">
         <slot name="right"></slot>
       </div>
     </div>
