@@ -38,5 +38,29 @@
                 "router": "/modal/index"
             }
         ]
+    },
+    {
+        "name": "菜单层级测试1",
+        "icon": "iconfont icon-icon_kehuzhanghu2",
+        "children": [
+            {
+                "name": "层级1-1",
+                "router": "/form/cascader"
+            },
+            {
+                "name": "层级1-2",
+                "children": [
+                    {
+                        "name": "层级1-2-1",
+                        "router": "/form/cascader"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "菜单层级测试2",
+        "icon": "iconfont icon-icon_kehuzhanghu2",
+        "router": "/form/cascader"
     }
 ]

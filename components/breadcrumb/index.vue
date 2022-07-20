@@ -1,15 +1,13 @@
 <template>
   <a-breadcrumb :separator="separator" v-if="list && list.length">
     <a-breadcrumb-item v-for="(item, index) in list" :key="index">
-      {{
-        item
-      }}
+      {{ item }}
     </a-breadcrumb-item>
   </a-breadcrumb>
 </template>
 <script>
 import { defineComponent, ref, toRefs, watch, computed, onMounted } from "vue";
-import { Breadcrumb, BreadcrumbItem } from 'ant-design-vue';
+import { Breadcrumb, BreadcrumbItem } from "ant-design-vue";
 import { useStore } from "vuex";
 
 /**
@@ -39,12 +37,13 @@ export default defineComponent({
         ary = menuList.value;
       }
       ary.forEach((item, index) => {
+        const keyStr = idxStr ? `${idxStr}-${index}` : `${index}`;
         if (item.router && item.router === location.pathname) {
-          menuIndexs.value = `${idxStr}-${index}`
+          menuIndexs.value = keyStr;
         } else if (item.children && item.children.length) {
-          getMenuListData(item.children, idxStr ? `${idxStr}-${index}` : `${index}`)
+          getMenuListData(item.children, keyStr);
         }
-      })
+      });
     };
 
     onMounted(() => {
@@ -53,38 +52,47 @@ export default defineComponent({
       } else if (menuList.value && menuList.value.length) {
         getMenuListData();
       }
-    })
+    });
 
     watch(menuIndexs, () => {
       if (menuIndexs.value) {
-        let listValue = [], menuItem = null;
-        menuIndexs.value.split('-').forEach((idx, index) => {
+        let listValue = [],
+          menuItem = null;
+        menuIndexs.value.split("-").forEach((idx, index) => {
           if (index === 0) {
             menuItem = menuList.value[idx];
           } else {
             menuItem = menuItem.children[idx];
           }
-          listValue.push(menuItem.name)
-        })
+          listValue.push(menuItem.name);
+        });
         list.value = listValue;
       }
-    })
+    });
 
-    watch(menuList, () => {
-      if (!datas.value && menuList.value && menuList.value.length) {
-        getMenuListData();
+    watch(
+      menuList,
+      () => {
+        if (!datas.value && menuList.value && menuList.value.length) {
+          getMenuListData();
+        }
+      },
+      {
+        deep: true,
       }
-    }, {
-      deep: true
-    })
+    );
 
-    watch(list, () => {
-      if (list.value.length) {
-        document.title = list.value.slice(-1);
+    watch(
+      list,
+      () => {
+        if (list.value.length) {
+          document.title = list.value.slice(-1);
+        }
+      },
+      {
+        deep: true,
       }
-    }, {
-      deep: true
-    })
+    );
 
     return {
       list,

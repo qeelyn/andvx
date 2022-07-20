@@ -21,7 +21,7 @@
       </template>
       <span>{{ value.name }}</span>
       <i
-        class="iconfont icon-icon_xinchuangkoudakai"
+        class="iconMore iconfont icon-icon_xinchuangkoudakai"
         style="position: absolute; right: 16px"
         @click.stop="$emit('onMoreIconClick', keyValue)"
       />
