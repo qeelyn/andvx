@@ -1,6 +1,6 @@
 <template>
   <a-menu
-    v-show="!collapsed"
+    v-if="!collapsed"
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
     mode="inline"
@@ -22,7 +22,7 @@
       "
     />
   </a-menu>
-  <div v-show="collapsed" class="menuCollapsed">
+  <div v-else class="menuCollapsed">
     <template v-for="(item, index) in menuList">
       <MenuCollapsed
         v-if="item.children && item.children.length"
