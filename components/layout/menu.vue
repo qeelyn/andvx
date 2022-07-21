@@ -31,12 +31,12 @@
         isTop
         @moreIconClick="
           (key) => {
-            handleClick(key);
+            handleClick(key, true);
           }
         "
         @click="
           (key) => {
-            handleClick(key, true);
+            handleClick(key);
           }
         "
       />
