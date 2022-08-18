@@ -69,6 +69,15 @@ const route = createRouter({
                     }]
                 },
                 {
+                    path: 'tree',
+                    component: Layout,
+                    children: [{
+                        path: 'index',
+                        meta: { title: 'tree 测试', },
+                        component: () => import('./views/tree/index.vue')
+                    }]
+                },
+                {
                     path: '404',
                     meta: { authentication: false, title: '404' },
                     component: () => import("./views/404.vue")

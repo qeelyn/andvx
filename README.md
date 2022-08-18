@@ -50,6 +50,13 @@ app.component('a-table', DoTable);
 - doModal a-modal组件扩展   [使用说明](./components/doModal/README.md)
     - a-modal组件扩展了拖拽功能 不支持Modal.info(xxx)弹出的拖动
 
+- doTree 整合tree操作 [使用说明](./components/doTree/README.md)
+    - 列表结构转换成tree结构
+    - 排序功能
+    - 节点的数据操作 【增、删、改、查】
+    - 节点的移动 【上、下、左、右】
+    - 快速定位到选中节点
+
 - layout 外壳布局相关组件
     - layout/menu.vue 左侧菜单
     - layout/header.vue 右侧头部

@@ -22,6 +22,10 @@
             {
                 "name": "自定义结果输入框",
                 "router": "/form/input-custom-result"
+            },
+            {
+                "name": "tree示例",
+                "router": "/tree/index"
             }
         ]
     },
