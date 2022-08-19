@@ -198,11 +198,16 @@ export default defineComponent({
       },
       _arySortTidy = (ary, index, value) => {
         // 整理顺序
-        ary.forEach((item, itemIndex) => {
-          if (itemIndex >= index) {
-            item[field.sort] = value + (itemIndex - index) + 1;
+        if (sort.value === "desc") {
+          for (let i = index; i >= 0; i--) {
+            ary[i][field.sort] = value + (index - i) + 1;
           }
-        });
+        } else {
+          const alength = ary.length;
+          for (let i = index; i < alength; i++) {
+            ary[i][field.sort] = value + (i - index) + 1;
+          }
+        }
       },
       _loop = (ary, value, callback) => {
         // 循环检索
@@ -378,27 +383,37 @@ export default defineComponent({
           const { index, ary } = searchData(target[field.key]);
           switch (targetLocation) {
             case "up":
-              const upSort = target[field.sort];
               source[field.parentId] = target[field.parentId];
-
-              for (let i = index; i < ary.length; i++) {
-                ary[i][field.sort] = i - index + 1 + upSort;
+              let upSort = null;
+              if (sort.value === "desc") {
+                upSort = target[field.sort] + 1;
+                for (let i = index - 1; i >= 0; i--) {
+                  ary[i][field.sort] = index - i + upSort;
+                }
+              } else {
+                upSort = target[field.sort];
+                for (let i = index; i < ary.length; i++) {
+                  ary[i][field.sort] = i - index + 1 + upSort;
+                }
               }
-
               source[field.sort] = upSort;
               updateNode(source);
               break;
             case "down":
-              const downSort = target[field.sort] + 1;
-
               source[field.parentId] = target[field.parentId];
-
-              for (let i = index + 1; i < ary.length; i++) {
-                ary[i][field.sort] = i - index + 2 + downSort;
+              let downSort = null;
+              if (sort.value === "desc") {
+                downSort = target[field.sort];
+                for (let i = index; i >= 0; i--) {
+                  ary[i][field.sort] = index - i + 1 + downSort;
+                }
+              } else {
+                downSort = target[field.sort] + 1;
+                for (let i = index + 1; i < ary.length; i++) {
+                  ary[i][field.sort] = i - index + 2 + downSort;
+                }
               }
-
               source[field.sort] = downSort;
-
               updateNode(source);
               break;
             case "child":

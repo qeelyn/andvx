@@ -13,6 +13,7 @@
       </div>
       <br />
       <div ref="doTreeScrollRef" style="overflow: auto; height: 200px">
+        <!-- sort="desc" -->
         <DoTree
           ref="doTreeRef"
           :treeData="treeData"
