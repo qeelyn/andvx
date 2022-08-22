@@ -32,16 +32,20 @@ npm i andvx
 | ------------------------------- | ---------------------------- | ------------------------------------------------------------- | ---------------- |
 | rapidPositioningNode            | -                            | 快速定位到选中节点，必须是有滚动条的容器且必填scrollContainer | void             |
 | searchData                      | id                           | 通过唯一key快速查询对象                                       | {item,index,ary} |
-| selectedNode                    | id                           | 通过唯一key快速选中                                           | void             |
+| selectedNode                    | id                           | 通过唯一key快速选中                                           | nodeData         |
 | getSelectedNode                 | -                            | 获取选中节点数据                                              | {item,index,ary} |
 | clearSelectNode                 | -                            | 清理所有选中                                                  | void             |
 | delNode                         | data                         | 通过传入节点数据删除节点                                      | void             |
-| addNode                         | data                         | 通过传入节点数据添加节点                                      | void             |
+| addNode                         | data,isSortAdd               | 通过传入节点数据添加节点,是否添加在排序值的位置               | void             |
 | updateNode                      | data                         | 通过传入节点数据更新节点                                      | void             |
 | [getMoveTarget](#getmovetarget) | data,code                    | 通过传入节点数据和操作方向获取目标节点数据                    | {error,target}   |
 | [execMove](#execmove)           | source,target,targetLocation | 执行操作节点对目标节点的位置移动                              | void             |
 
- 
+ ## 事件
+
+ | 名称         | 参数     | 说明         |
+ | ------------ | -------- | ------------ |
+ | selectedNode | nodeData | 选中当前节点 |
    
 **getMoveTarget**
 
@@ -87,6 +91,8 @@ export default defineComponent({
 })
 </script>
 ```
+
+
 
 ## demo 
 

@@ -10,6 +10,7 @@
       @select="
         (_keys, { node }) => {
           selectedKeys = [node[field.key]];
+          $emit('selectedNode', node);
         }
       "
     >
@@ -163,38 +164,41 @@ export default defineComponent({
           }
         }
       },
-      _sortIndex = (ary, value) => {
-        // 通过排序检测插入顺序序号
-        let index = ary.findIndex((item) => item[field.sort] == value),
-          isEqual = true;
-        if (!(value === null || value === undefined)) {
-          if (index === -1) {
-            isEqual = false;
+      _sortData = (ary, sortValue) => {
+        // 通过排序检测插入顺序序号和值
+        let index = null,
+          value = null;
+
+        if (sortValue) {
+          index = ary.findIndex((item) => {
             if (sort.value === "desc") {
-              index = ary.findIndex((item) => item[field.sort] < value);
+              return item[field.sort] <= sortValue;
             } else {
-              index = ary.findIndex((item) => item[field.sort] > value);
+              return item[field.sort] >= sortValue;
+            }
+          });
+
+          if (index === -1) {
+            sortValue = false;
+          } else {
+            value = sortValue;
+          }
+        }
+
+        if (!sortValue) {
+          index = ary.length;
+          if (sort.value === "desc") {
+            value = 1;
+          } else {
+            if (ary.length) {
+              value = ary[ary.length - 1][field.sort] + 1;
+            } else {
+              value = 1;
             }
           }
-
-          if (index === -1) {
-            isEqual = false;
-            index = ary.length;
-          }
-        } else {
-          isEqual = false;
-          index = ary.length;
         }
 
-        return { index, isEqual };
-      },
-      _sortEndIndex = (ary) => {
-        // 根据排序获取最大值
-        if (sort.value === "desc") {
-          return 1;
-        } else {
-          return ary.length + 1;
-        }
+        return { index, value };
       },
       _arySortTidy = (ary, index, value) => {
         // 整理顺序
@@ -260,6 +264,9 @@ export default defineComponent({
         const { item } = searchData(id);
         if (item) {
           selectedKeys.value = [item[field.key]];
+          return item;
+        } else {
+          return null;
         }
       },
       getSelectedNode = () => {
@@ -284,35 +291,36 @@ export default defineComponent({
           }
         }
       },
-      addNode = (data) => {
+      addNode = (data, isSortAdd) => {
         // 添加节点
         clearSelectNode();
         if (data[field.parentId] == topParentId.value) {
-          if (!Object.keys(data).includes(field.sort)) {
-            // 如果无值默认添加到最后
-            data[field.sort] = _sortEndIndex(list.value);
-          }
-          const { index, isEqual } = _sortIndex(list.value, data[field.sort]);
+          const { index: topIndex, value: topSortValue } = _sortData(
+            list.value,
+            isSortAdd ? data[field.sort] : null
+          );
+
+          list.value.splice(topIndex, 0, data);
+
           if (!isInputEditorSort.value) {
-            _arySortTidy(list.value, index, data[field.sort]);
+            _arySortTidy(list.value, topIndex, topSortValue);
           }
-          list.value.splice(index, 0, data);
         } else {
           const { item } = searchData(data[field.parentId]);
           if (item) {
             if (!item[field.children]) {
               item[field.children] = [];
             }
+            const { index, value: sortValue } = _sortData(
+              item[field.children],
+              isSortAdd ? data[field.sort] : null
+            );
 
-            if (!Object.keys(data).includes(field.sort)) {
-              // 如果无值默认添加到最后
-              data[field.sort] = _sortEndIndex(item[field.children]);
-            }
-            const { index, isEqual } = _sortIndex(item[field.children], data[field.sort]);
-            if (!isInputEditorSort.value) {
-              _arySortTidy(item[field.children], index, data[field.sort]);
-            }
             item[field.children].splice(index, 0, data);
+
+            if (!isInputEditorSort.value) {
+              _arySortTidy(item[field.children], index, sortValue);
+            }
           }
         }
         selectedNode(data[field.key]);
@@ -328,7 +336,7 @@ export default defineComponent({
               item[key] = data[key];
             }
           }
-          addNode(item);
+          addNode(item, true);
         }
       },
       getMoveTarget = (data, code) => {
