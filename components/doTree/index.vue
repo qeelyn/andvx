@@ -297,7 +297,7 @@ export default defineComponent({
         if (data[field.parentId] == topParentId.value) {
           const { index: topIndex, value: topSortValue } = _sortData(
             list.value,
-            isSortAdd ? data[field.sort] : null
+            isSortAdd || isInputEditorSort.value ? data[field.sort] : null
           );
 
           list.value.splice(topIndex, 0, data);
@@ -313,7 +313,7 @@ export default defineComponent({
             }
             const { index, value: sortValue } = _sortData(
               item[field.children],
-              isSortAdd ? data[field.sort] : null
+              isSortAdd || isInputEditorSort.value ? data[field.sort] : null
             );
 
             item[field.children].splice(index, 0, data);
@@ -392,41 +392,47 @@ export default defineComponent({
           switch (targetLocation) {
             case "up":
               source[field.parentId] = target[field.parentId];
-              let upSort = null;
-              if (sort.value === "desc") {
-                upSort = target[field.sort] + 1;
-                for (let i = index - 1; i >= 0; i--) {
-                  ary[i][field.sort] = index - i + upSort;
+              if (!isInputEditorSort.value) {
+                let upSort = null;
+                if (sort.value === "desc") {
+                  upSort = target[field.sort] + 1;
+                  for (let i = index - 1; i >= 0; i--) {
+                    ary[i][field.sort] = index - i + upSort;
+                  }
+                } else {
+                  upSort = target[field.sort];
+                  for (let i = index; i < ary.length; i++) {
+                    ary[i][field.sort] = i - index + 1 + upSort;
+                  }
                 }
-              } else {
-                upSort = target[field.sort];
-                for (let i = index; i < ary.length; i++) {
-                  ary[i][field.sort] = i - index + 1 + upSort;
-                }
+                source[field.sort] = upSort;
               }
-              source[field.sort] = upSort;
               updateNode(source);
               break;
             case "down":
               source[field.parentId] = target[field.parentId];
-              let downSort = null;
-              if (sort.value === "desc") {
-                downSort = target[field.sort];
-                for (let i = index; i >= 0; i--) {
-                  ary[i][field.sort] = index - i + 1 + downSort;
+              if (!isInputEditorSort.value) {
+                let downSort = null;
+                if (sort.value === "desc") {
+                  downSort = target[field.sort];
+                  for (let i = index; i >= 0; i--) {
+                    ary[i][field.sort] = index - i + 1 + downSort;
+                  }
+                } else {
+                  downSort = target[field.sort] + 1;
+                  for (let i = index + 1; i < ary.length; i++) {
+                    ary[i][field.sort] = i - index + 2 + downSort;
+                  }
                 }
-              } else {
-                downSort = target[field.sort] + 1;
-                for (let i = index + 1; i < ary.length; i++) {
-                  ary[i][field.sort] = i - index + 2 + downSort;
-                }
+                source[field.sort] = downSort;
               }
-              source[field.sort] = downSort;
               updateNode(source);
               break;
             case "child":
               source[field.parentId] = target[field.key];
-              source[field.sort] = null;
+              if (!isInputEditorSort.value) {
+                source[field.sort] = null;
+              }
               updateNode(source);
               break;
             default:
