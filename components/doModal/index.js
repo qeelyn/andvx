@@ -34,6 +34,7 @@ export default defineComponent({
         }
 
         modalAttrs.value.onCancel = (e) => {
+            let isDestroyOnClose = Object.keys(modalAttrs.value).includes('destroyOnClose') && modalAttrs.value.destroyOnClose !== false
             if (onCancel.value) {
                 onCancel.value(e);
             }
@@ -42,10 +43,20 @@ export default defineComponent({
                 setTimeout(() => {
                     dragModalDom.style.left = null
                     dragModalDom.style.top = null
+                    if (isDestroyOnClose) {
+                        dragModalDom = null;
+                    }
                 }, 500)
+            }
+            if (isDestroyOnClose) {
+                x = 0;
+                y = 0;
+                left = 0;
+                top = 0;
             }
         }
 
+        // 获取设置处理
         const getAntModalDom = (e) => {
             const ePath = e.path || (e.composedPath && e.composedPath()),
                 antModalDom = ePath.find(item => item.className && typeof item.className === 'string' ? item.className.split(' ').includes('ant-modal') : false);
@@ -64,7 +75,6 @@ export default defineComponent({
                 y = e.clientY;
                 left = Number(dragModalDom.style.left.replace('px', ''));
                 top = dragModalDom.offsetTop;
-
                 // 鼠标移动
                 document.body.onmousemove = (e) => {
                     dragModalDom.style.left = `${e.clientX - x + left}px`
