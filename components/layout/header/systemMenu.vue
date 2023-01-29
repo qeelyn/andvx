@@ -48,7 +48,7 @@ export default defineComponent({
 
   .systemSwitch-item {
     float: left;
-    width: 200px;
+    width: 180px;
   }
 
   .systemSwitch-title {

@@ -73,6 +73,18 @@ body {
             background: transparent;
             color     : #6c7080;
 
+            .layoutHeader-more i {
+                cursor: pointer;
+
+                &:hover {
+                    color: #ffffff;
+                }
+            }
+
+            .layoutHeader-box {
+                background: #2c3040;
+            }
+
             .ant-badge {
                 color: rgba(255, 255, 255, 0.65);
             }
@@ -189,6 +201,10 @@ body {
             background-color: transparent;
             color           : #a0a0a8;
 
+            .layoutHeader-box {
+                background: #f8f8fa;
+            }
+
             .ant-dropdown-open {
                 color: @primary-color;
 
@@ -235,6 +251,12 @@ body {
         line-height  : 50px;
         padding      : 0;
         margin-bottom: 6px;
+
+        .layoutHeader-more {
+            display      : none;
+            text-align   : right;
+            padding-right: 10px;
+        }
 
         .trigger {
             padding   : 0 20px;
@@ -289,6 +311,51 @@ body {
 
 }
 
+// header的伸缩 
+@media (max-width: 768px) {
+    #qLayout {
+        .layoutHeader {
+            position: relative;
+
+            .layoutHeader-more {
+                display: block;
+            }
+
+            .layoutHeader-box {
+                position    : absolute;
+                top         : 50px;
+                left        : 0;
+                width       : 100%;
+                z-index     : 10;
+                padding-left: 10px;
+
+                &.flexBox {
+                    display: block;
+                }
+
+            }
+
+            .layoutHeader-right {
+                .ant-space {
+                    flex-direction: column-reverse;
+                    gap           : 0px !important;
+                }
+            }
+        }
+
+    }
+
+    .systemSwitch {
+        width     : auto;
+        max-height: 300px;
+        overflow  : auto;
+        padding   : 4px 10px;
+
+        .systemSwitch-item {
+            float: none;
+        }
+    }
+}
 
 // 根据框架情况调整css
 

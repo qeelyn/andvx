@@ -1,6 +1,6 @@
 {
   "name": "andvx",
-  "version": "0.2.20",
+  "version": "0.3.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

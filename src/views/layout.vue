@@ -41,7 +41,6 @@
               @menuClick="orgMenuClick"
             />
             <HeaderUser :user="{ id: 1, nickname: 'xxxx' }" @menuClick="userMenuClick" />
-            <span></span>
           </a-space>
         </template>
       </LayoutHeader>

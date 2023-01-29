@@ -1,6 +1,6 @@
 <template>
     <a-dropdown v-if="user && user.id">
-        <span style="display: inline-block;">
+        <span style="display: inline-block;margin-right:18px;">
             <a-avatar :src="user.avatar" style="vertical-align: middle;" />
             <span style="margin-left: 6px">{{ user.nickname }}</span>
         </span>
