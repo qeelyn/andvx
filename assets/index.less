@@ -1,18 +1,18 @@
 @import 'ant-design-vue/dist/antd.less';
 
 @primary-color: #1f5fff;
-@link-color   : #1f5fff;
-@info-color   : #00c8ff;
+@link-color : #1f5fff;
+@info-color : #00c8ff;
 @success-color: #30c080;
 @warning-color: #ff8030;
-@error-color  : #ff3030;
+@error-color : #ff3030;
 
 html {
     font-family: sans-serif;
 }
 
 body {
-    overflow   : overlay;
+    overflow: overlay;
     font-family: "Barlow", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
 }
 
@@ -66,12 +66,12 @@ body {
 
     .ant-layout-dark {
         background: #2c3040;
-        height    : 100vh;
-        overflow  : auto;
+        height: 100vh;
+        overflow: auto;
 
         .layoutHeader {
             background: transparent;
-            color     : #6c7080;
+            color: #6c7080;
 
             .layoutHeader-more i {
                 cursor: pointer;
@@ -129,7 +129,7 @@ body {
     }
 
     .ant-layout-light {
-        height  : 100vh;
+        height: 100vh;
         overflow: auto;
 
         .layoutHeader {
@@ -147,7 +147,7 @@ body {
 
         .deo-menu {
             border-color: #f8f8fa;
-            background  : #f8f8fa;
+            background: #f8f8fa;
 
             .ant-menu {
                 background: #f8f8fa;
@@ -194,12 +194,12 @@ body {
 
     .ant-layout-gray {
         background: #f8f8fa;
-        height    : 100vh;
-        overflow  : auto;
+        height: 100vh;
+        overflow: auto;
 
         .layoutHeader {
             background-color: transparent;
-            color           : #a0a0a8;
+            color: #a0a0a8;
 
             .layoutHeader-box {
                 background: #f8f8fa;
@@ -238,29 +238,29 @@ body {
 
     // 主题以外
     .logo {
-        position   : absolute;
-        width      : 100%;
-        height     : 64px;
+        position: absolute;
+        width: 100%;
+        height: 64px;
         line-height: 64px;
-        text-align : center;
-        z-index    : 10;
+        text-align: center;
+        z-index: 10;
     }
 
     .layoutHeader {
-        height       : 50px;
-        line-height  : 50px;
-        padding      : 0;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
         margin-bottom: 6px;
 
         .layoutHeader-more {
-            display      : none;
-            text-align   : right;
+            display: none;
+            text-align: right;
             padding-right: 10px;
         }
 
         .trigger {
-            padding   : 0 20px;
-            cursor    : pointer;
+            padding: 0 20px;
+            cursor: pointer;
             transition: color 0.3s;
         }
 
@@ -278,25 +278,25 @@ body {
     }
 
     .layoutContent {
-        margin    : 24px 16px;
-        padding   : 0;
+        margin: 24px 16px;
+        padding: 0;
         min-height: 280px;
     }
 
     .deo-menu {
         padding-top: 50px;
-        height     : 100vh;
-        overflow-y : overlay;
+        height: 100vh;
+        overflow-y: overlay;
 
         &::-webkit-scrollbar {
-            width : 0;
+            width: 0;
             height: 0;
         }
 
         .ant-menu-item {
-            height     : 48px;
+            height: 48px;
             line-height: 48px;
-            margin     : 0;
+            margin: 0;
 
             .ant-menu-item-icon {
                 font-size: 16px;
@@ -322,11 +322,11 @@ body {
             }
 
             .layoutHeader-box {
-                position    : absolute;
-                top         : 50px;
-                left        : 0;
-                width       : 100%;
-                z-index     : 10;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                z-index: 10;
                 padding-left: 10px;
 
                 &.flexBox {
@@ -338,7 +338,7 @@ body {
             .layoutHeader-right {
                 .ant-space {
                     flex-direction: column-reverse;
-                    gap           : 0px !important;
+                    gap: 0px !important;
                 }
             }
         }
@@ -346,10 +346,10 @@ body {
     }
 
     .systemSwitch {
-        width     : auto;
+        width: auto;
         max-height: 300px;
-        overflow  : auto;
-        padding   : 4px 10px;
+        overflow: auto;
+        padding: 4px 10px;
 
         .systemSwitch-item {
             float: none;
@@ -376,7 +376,7 @@ body {
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: @primary-color;
-    color           : #ffffff;
+    color: #ffffff;
 }
 
 .ant-menu-item-active {
@@ -406,7 +406,7 @@ body {
 // 缩小菜单样式
 .menuCollapsed {
     .menuCollapsed-item {
-        height     : 44.02px;
+        height: 44.02px;
         line-height: 44.02px;
 
         i {
@@ -427,30 +427,30 @@ body {
 
 
     .menuCollapsed-menuTitle {
-        font-weight  : bold;
-        padding      : 0 0 5px 16px;
-        line-height  : 34px;
+        font-weight: bold;
+        padding: 0 0 5px 16px;
+        line-height: 34px;
         border-bottom: 1px solid #edeef0;
     }
 
     .menuCollapsed-item,
     .menuCollapsed-menuItem {
-        position   : relative;
-        padding    : 7px 16px;
+        position: relative;
+        padding: 7px 16px;
         line-height: 34px;
-        cursor     : pointer;
-        transition : background-color .2s ease-in-out;
+        cursor: pointer;
+        transition: background-color .2s ease-in-out;
 
         .iconMore {
             position: absolute;
-            right   : 20px;
-            top     : 6px;
-            margin  : 0;
-            display : none;
+            right: 20px;
+            top: 6px;
+            margin: 0;
+            display: none;
         }
 
         &:hover {
-            color           : #ffffff;
+            color: #ffffff;
             background-color: @primary-color;
 
             .iconMore {
@@ -505,23 +505,23 @@ body {
 
 .qlContent {
     border-radius: 10px;
-    background   : #ffffff;
-    box-shadow   : 0 0 12px #1e202c;
+    background: #ffffff;
+    box-shadow: 0 0 12px #1e202c;
 
     .qlContent-head {
         border-bottom: solid 1px #e0e0e8;
-        padding      : 0 16px;
-        height       : 46px;
-        line-height  : 46px;
+        padding: 0 16px;
+        height: 46px;
+        line-height: 46px;
 
         .ant-breadcrumb {
-            font-size  : 16px;
-            height     : 46px;
+            font-size: 16px;
+            height: 46px;
             line-height: 46px;
 
             &>span:last-child {
                 font-weight: 700;
-                color      : #515a6e;
+                color: #515a6e;
             }
         }
     }
@@ -547,12 +547,51 @@ body {
 
 .qlContent-tabsHeader {
     position: relative;
-    top     : -46px;
+    top: -46px;
 
     .ant-tabs-nav {
-        margin-left : 16px;
+        margin-left: 16px;
         margin-right: 16px;
     }
 }
 
 // 提供一些布局
+
+
+
+// ant-modal
+.ant-modal-svg-fullscreen {
+    position: absolute;
+    right: 56px;
+    top: 0;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    line-height: 56px;
+    color: @modal-close-color;
+
+    &:hover {
+        color: @icon-color-hover
+    }
+}
+
+.full-modal {
+    .ant-modal {
+        max-width: 100%;
+        top: 0;
+        padding-bottom: 0;
+        margin: 0;
+    }
+
+    .ant-modal-content {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh);
+    }
+
+    .ant-modal-body {
+        flex: 1;
+    }
+}
+
+// ant-modal  end

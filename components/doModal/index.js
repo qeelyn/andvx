@@ -1,7 +1,6 @@
 import { defineComponent, ref, toRefs, h } from "vue";
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue'
 import { Modal } from 'ant-design-vue';
-import './index.less'
 
 // 不能同时设置title 和 #title 否则会有问题
 
