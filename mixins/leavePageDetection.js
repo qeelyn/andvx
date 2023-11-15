@@ -37,8 +37,8 @@ export default {
 
     methods: {
         _beforeunloadFn(event) {
-            event.preventDefault();
             if (!this._detectionBtnIsSave()) {
+                event.preventDefault();
                 event.returnValue = tipStr;
                 return tipStr
             }
